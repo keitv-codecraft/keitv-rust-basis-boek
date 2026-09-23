@@ -1,4 +1,4 @@
-# 2. Cargo: Rust-projecten maken en dependencies gebruiken
+﻿# 2. Cargo: Rust-projecten maken en dependencies gebruiken
 
 ## Wat gaan we leren?
 
@@ -8,16 +8,19 @@ Nu gaan we leren hoe we van zo'n programma een echt Rust-project maken.
 
 Daarvoor gebruiken we **Cargo**.
 
+> [!TIP]
+> Werk vanuit de map van je project. Cargo zoekt daar naar `Cargo.toml`.
+
 Na dit artikel kun je:
 
-- uitleggen wat Cargo is;
-- een nieuw Rust-project maken;
-- de belangrijkste bestanden en mappen van een project herkennen;
-- een programma uitvoeren met `cargo run`;
-- een project bouwen met `cargo build`;
-- begrijpen wat `Cargo.toml` is;
-- een dependency toevoegen;
-- een dependency in een programma gebruiken;
+- uitleggen wat Cargo is
+- een nieuw Rust-project maken
+- de belangrijkste bestanden en mappen van een project herkennen
+- een programma uitvoeren met `cargo run`
+- een project bouwen met `cargo build`
+- begrijpen wat `Cargo.toml` is
+- een dependency toevoegen
+- een dependency in een programma gebruiken
 - begrijpen waarom dependencies handig zijn.
 
 ---
@@ -28,11 +31,11 @@ Een Rust-programma bestaat al snel uit meerdere bestanden.
 
 We willen bijvoorbeeld een game maken met:
 
-- spelers;
-- vijanden;
-- levels;
-- geluid;
-- afbeeldingen;
+- spelers
+- vijanden
+- levels
+- geluid
+- afbeeldingen
 - instellingen.
 
 Dan wordt het onhandig om alles in één bestand te zetten.
@@ -45,11 +48,11 @@ Cargo is het standaard hulpmiddel voor het maken en beheren van Rust-projecten.
 
 Cargo kan onder andere:
 
-- nieuwe projecten maken;
-- onze code compileren;
-- programma's uitvoeren;
-- dependencies beheren;
-- testen uitvoeren;
+- nieuwe projecten maken
+- onze code compileren
+- programma's uitvoeren
+- dependencies beheren
+- testen uitvoeren
 - informatie over een project bijhouden.
 
 Je kunt Cargo zien als de **projectmanager van een Rust-programma**.
@@ -140,15 +143,22 @@ Cargo doet dan een aantal dingen voor ons.
 In eenvoudige vorm gebeurt dit:
 
 ```text
-Rust-code
-   ↓
-Cargo
-   ↓
-Rust compiler
-   ↓
-programma
-   ↓
-uitvoeren
+┌──────────────────┐
+│    Rust-code     │
+└────────┬─────────┘
+         ▼
+┌──────────────────┐
+│      Cargo       │
+└────────┬─────────┘
+         ▼
+┌──────────────────┐
+│  Rust compiler   │
+└────────┬─────────┘
+         ▼
+┌──────────────────┐
+│    Programma     │
+│   (uitvoeren)    │
+└──────────────────┘
 ```
 
 Als alles goed gaat, zien we bijvoorbeeld:
@@ -289,11 +299,11 @@ Zo'n externe bibliotheek noemen we in Rust meestal een **crate**.
 
 Een crate kan bijvoorbeeld code bevatten voor:
 
-- willekeurige getallen;
-- afbeeldingen;
-- geluid;
-- netwerkverbindingen;
-- gameontwikkeling;
+- willekeurige getallen
+- afbeeldingen
+- geluid
+- netwerkverbindingen
+- gameontwikkeling
 - databases.
 
 Wanneer ons project zo'n crate gebruikt, noemen we die crate een **dependency**.
@@ -439,9 +449,9 @@ Ons programma wordt afhankelijk van externe code.
 
 Daarom moeten we nadenken over:
 
-- welke dependencies we gebruiken;
-- welke versies we gebruiken;
-- of een dependency betrouwbaar is;
+- welke dependencies we gebruiken
+- welke versies we gebruiken
+- of een dependency betrouwbaar is
 - of een dependency nog onderhouden wordt.
 
 Voor kleine oefeningen hoef je je daar nog niet druk over te maken.
@@ -665,17 +675,17 @@ Voor grote projecten kan dat sneller zijn dan `cargo build`.
 
 Je weet nu:
 
-- wat Cargo is;
-- hoe je een Rust-project maakt;
-- waar `main.rs` staat;
-- waar `Cargo.toml` voor dient;
-- wat een dependency is;
-- wat een crate is;
-- hoe je een dependency toevoegt;
-- hoe je een programma uitvoert met `cargo run`;
-- hoe je een project bouwt met `cargo build`;
-- hoe je de code controleert met `cargo check`;
-- wat `Cargo.lock` ongeveer doet;
+- wat Cargo is
+- hoe je een Rust-project maakt
+- waar `main.rs` staat
+- waar `Cargo.toml` voor dient
+- wat een dependency is
+- wat een crate is
+- hoe je een dependency toevoegt
+- hoe je een programma uitvoert met `cargo run`
+- hoe je een project bouwt met `cargo build`
+- hoe je de code controleert met `cargo check`
+- wat `Cargo.lock` ongeveer doet
 - waarom dependencies handig kunnen zijn.
 
 Je hebt bovendien een klein stukje gamefunctionaliteit gemaakt: een dobbelsteen.
@@ -725,7 +735,7 @@ Open je project in je editor.
 
 Zoek:
 
-- `Cargo.toml`;
+- `Cargo.toml`
 - `src/main.rs`.
 
 Controleer wat er in beide bestanden staat.
@@ -841,8 +851,8 @@ Dat leren we later met `if`.
 
 Maak een klein programma dat bij het starten van een game:
 
-1. een titel laat zien;
-2. een spelernaam laat zien;
+1. een titel laat zien
+2. een spelernaam laat zien
 3. een willekeurig startaantal goudstukken geeft.
 
 Bijvoorbeeld:
@@ -917,4 +927,10 @@ Als je iets nog niet begrijpt, probeer dan vooral opnieuw een kleine oefening te
 
 Het belangrijkste is dat je weet:
 
+> [!TIP]
 > **Cargo helpt ons om van losse Rust-code een echt Rust-project te maken.**
+
+## Rustlings-oefeningen
+
+Maak daarna de oefeningen uit de [Rustlings-map van Artikel 2](https://github.com/keitv-codecraft/keitv-rust-basis-rustlings/tree/master/exercises/artikel_2/).
+

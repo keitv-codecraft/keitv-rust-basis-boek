@@ -1,4 +1,4 @@
-# 3. Variabelen en muteerbaarheid
+﻿# 3. Variabelen en muteerbaarheid
 
 ## Wat gaan we leren?
 
@@ -6,21 +6,21 @@ Een programma moet informatie kunnen onthouden.
 
 Een game moet bijvoorbeeld kunnen onthouden:
 
-- hoeveel levens een speler heeft;
-- hoeveel punten een speler heeft;
-- hoe snel een speler beweegt;
+- hoeveel levens een speler heeft
+- hoeveel punten een speler heeft
+- hoe snel een speler beweegt
 - hoeveel goud een speler heeft.
 
 Daarvoor gebruiken we **variabelen**.
 
 In dit artikel leren we:
 
-- wat een variabele is;
-- hoe je een variabele maakt;
-- hoe je een waarde in een variabele bewaart;
-- waarom Rust variabelen standaard niet laat veranderen;
-- wat `mut` betekent;
-- hoe je variabelen gebruikt in een game;
+- wat een variabele is
+- hoe je een variabele maakt
+- hoe je een waarde in een variabele bewaart
+- waarom Rust variabelen standaard niet laat veranderen
+- wat `mut` betekent
+- hoe je variabelen gebruikt in een game
 - wat het verschil is tussen een variabele veranderen en een nieuwe variabele maken.
 
 ---
@@ -701,11 +701,11 @@ We hebben nu al een klein stukje game-logica.
 
 De speler:
 
-1. begint met gezondheid;
-2. wordt aangevallen;
-3. verliest gezondheid;
-4. verslaat een vijand;
-5. krijgt punten;
+1. begint met gezondheid
+2. wordt aangevallen
+3. verliest gezondheid
+4. verslaat een vijand
+5. krijgt punten
 6. krijgt goud.
 
 Er is nog geen `if` en er is nog geen echte keuze.
@@ -718,13 +718,13 @@ Dat komt later.
 
 Je weet nu:
 
-- wat een variabele is;
-- hoe `let` werkt;
-- waarom variabelen standaard niet muteerbaar zijn;
-- wat `mut` betekent;
-- hoe je een variabele verandert;
-- hoe `+=` en `-=` werken;
-- hoe variabelen kunnen worden gebruikt in berekeningen;
+- wat een variabele is
+- hoe `let` werkt
+- waarom variabelen standaard niet muteerbaar zijn
+- wat `mut` betekent
+- hoe je een variabele verandert
+- hoe `+=` en `-=` werken
+- hoe variabelen kunnen worden gebruikt in berekeningen
 - waarom goede variabelenamen belangrijk zijn.
 
 Het belangrijkste verschil om te onthouden is:
@@ -849,3 +849,8 @@ Je bent klaar met dit artikel als je zonder hulp:
 - [ ] variabelen kunt gebruiken in berekeningen
 - [ ] goede namen voor variabelen kunt kiezen
 - [ ] een klein stukje game-status met variabelen kunt programmeren.
+
+## Rustlings-oefeningen
+
+Maak daarna de oefeningen uit de [Rustlings-map van Artikel 3](https://github.com/keitv-codecraft/keitv-rust-basis-rustlings/tree/master/exercises/artikel_3/).
+

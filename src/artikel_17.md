@@ -1,11 +1,680 @@
-# Automatische tests
+﻿# Rust 17 — Automatische tests
 
-Tot nu toe controleerden we programma's vooral door ze uit te voeren. Rust kan
-ook automatisch controleren of een functie het juiste resultaat geeft.
+Tot nu toe hebben we onze programma's vooral getest door ze uit te voeren en te kijken wat er gebeurt.
 
-## 1. Een test schrijven
+Bijvoorbeeld:
 
-```rust
+```rust,ignore
+fn main() {
+    let schade = bereken_schade(10, 5);
+    println!("Schade: {schade}");
+}
+```
+
+We kijken dan zelf of er `15` op het scherm verschijnt.
+
+Dat werkt prima voor kleine programma's.
+
+Maar grotere programma's bevatten steeds meer onderdelen. Dan willen we liever dat Rust automatisch controleert of onze code doet wat we verwachten.
+
+Daarvoor hebben we **tests**.
+
+---
+
+## 1. Onze eerste test
+
+Stel dat we deze functie hebben:
+
+```rust,ignore
+fn verdubbel(getal: i32) -> i32 {
+    getal * 2
+}
+```
+
+We verwachten bijvoorbeeld:
+
+```text
+verdubbel(5) → 10
+```
+
+We kunnen dat automatisch testen:
+
+```rust,ignore
+#[test]
+fn verdubbel_werkt() {
+    assert_eq!(verdubbel(5), 10);
+}
+```
+
+Het belangrijke onderdeel is:
+
+```rust,ignore
+#[test]
+```
+
+Daarmee vertellen we Rust:
+
+> Dit is een test die automatisch uitgevoerd moet kunnen worden.
+
+---
+
+## 2. Tests uitvoeren
+
+Tests worden uitgevoerd met:
+
+```text id="5f6h2x"
+cargo test
+```
+
+Cargo zoekt vervolgens naar functies met:
+
+```rust,ignore
+#[test]
+```
+
+en voert die uit.
+
+Een geslaagde test ziet er ongeveer zo uit:
+
+```text id="k5yq3a"
+running 1 test
+test tests::verdubbel_werkt ... ok
+
+test result: ok. 1 passed; 0 failed
+```
+
+De precieze uitvoer kan per Rust-versie verschillen.
+
+Het belangrijkste is:
+
+```text id="l2b6a0"
+1 passed
+0 failed
+```
+
+---
+
+## 3. Een test is een controle
+
+Deze test:
+
+```rust,ignore
+#[test]
+fn verdubbel_werkt() {
+    assert_eq!(verdubbel(5), 10);
+}
+```
+
+zegt eigenlijk:
+
+> Ik verwacht dat `verdubbel(5)` gelijk is aan `10`.
+
+Als dat waar is, slaagt de test.
+
+Als het niet waar is, faalt de test.
+
+---
+
+## 4. Een test mag falen
+
+Dit is belangrijk.
+
+Een falende test betekent niet automatisch dat er iets verschrikkelijks is gebeurd.
+
+Bijvoorbeeld:
+
+```rust,ignore
+#[test]
+fn verdubbel_werkt() {
+    assert_eq!(verdubbel(5), 11);
+}
+```
+
+Onze functie geeft nog steeds `10` terug.
+
+De test verwacht `11`.
+
+De test zal dus falen.
+
+Rust vertelt ons ongeveer:
+
+```text
+expected: 11
+actual:   10
+```
+
+Dat is nuttige informatie.
+
+We hebben ontdekt:
+
+> Onze verwachting en het gedrag van het programma komen niet overeen.
+
+Dat kan betekenen dat:
+
+- de test verkeerd is
+- de code verkeerd is
+- we de bedoeling van het programma moeten aanpassen.
+
+---
+
+## 5. `assert_eq!`
+
+De meest gebruikte test die we voorlopig nodig hebben is:
+
+```rust,ignore
+assert_eq!(links, rechts);
+```
+
+Dit betekent:
+
+> Verwacht dat links en rechts gelijk zijn.
+
+Bijvoorbeeld:
+
+```rust,ignore
+assert_eq!(2 + 3, 5);
+```
+
+Of:
+
+```rust,ignore
+assert_eq!(verdubbel(10), 20);
+```
+
+---
+
+## 6. `assert_ne!`
+
+We kunnen ook testen dat twee waarden **niet** gelijk zijn.
+
+```rust,ignore
+assert_ne!(verdubbel(5), 11);
+```
+
+Dit betekent:
+
+> Verwacht dat `verdubbel(5)` niet gelijk is aan `11`.
+
+---
+
+## 7. `assert!`
+
+Met `assert!` testen we of iets `true` is.
+
+Bijvoorbeeld:
+
+```rust,ignore
+fn is_levend(gezondheid: i32) -> bool {
+    gezondheid > 0
+}
+```
+
+We kunnen schrijven:
+
+```rust,ignore
+#[test]
+fn speler_met_gezondheid_leeft() {
+    assert!(is_levend(100));
+}
+```
+
+En:
+
+```rust,ignore
+#[test]
+fn speler_met_nul_gezondheid_is_dood() {
+    assert!(!is_levend(0));
+}
+```
+
+Hier betekent:
+
+```rust,ignore
+assert!(...)
+```
+
+dat de waarde `true` moet zijn.
+
+En:
+
+```rust,ignore
+assert!(!...)
+```
+
+betekent dat de waarde `false` moet zijn.
+
+---
+
+## 8. Meerdere tests
+
+Een programma kan veel tests hebben.
+
+```rust,ignore
+fn verdubbel(getal: i32) -> i32 {
+    getal * 2
+}
+
+#[test]
+fn verdubbel_vijf() {
+    assert_eq!(verdubbel(5), 10);
+}
+
+#[test]
+fn verdubbel_tien() {
+    assert_eq!(verdubbel(10), 20);
+}
+
+#[test]
+fn verdubbel_nul() {
+    assert_eq!(verdubbel(0), 0);
+}
+```
+
+`cargo test` voert alle drie uit.
+
+---
+
+## 9. Tests met verschillende situaties
+
+Een goede test kijkt niet alleen naar één normaal voorbeeld.
+
+Stel:
+
+```rust,ignore
+fn bereken_schade(kracht: i32, wapenschade: i32) -> i32 {
+    kracht + wapenschade
+}
+```
+
+We kunnen testen:
+
+```rust,ignore
+#[test]
+fn normale_schade() {
+    assert_eq!(bereken_schade(10, 5), 15);
+}
+
+#[test]
+fn geen_wapenschade() {
+    assert_eq!(bereken_schade(10, 0), 10);
+}
+
+#[test]
+fn geen_kracht() {
+    assert_eq!(bereken_schade(0, 10), 10);
+}
+```
+
+Iedere test controleert een andere situatie.
+
+---
+
+## 10. Tests voor onze RPG
+
+We kunnen nu onze eigen gamecode testen.
+
+Bijvoorbeeld:
+
+```rust,ignore
+fn genees(gezondheid: i32, hoeveelheid: i32) -> i32 {
+    gezondheid + hoeveelheid
+}
+```
+
+Daarbij horen tests:
+
+```rust,ignore
+#[test]
+fn genezing_werkt() {
+    assert_eq!(genees(50, 20), 70);
+}
+```
+
+En:
+
+```rust,ignore
+#[test]
+fn genezing_met_nul() {
+    assert_eq!(genees(50, 0), 50);
+}
+```
+
+---
+
+## 11. Een test voor schade
+
+```rust,ignore
+fn neem_schade(gezondheid: i32, schade: i32) -> i32 {
+    gezondheid - schade
+}
+```
+
+Tests:
+
+```rust,ignore
+#[test]
+fn schade_werkt() {
+    assert_eq!(neem_schade(100, 25), 75);
+}
+
+#[test]
+fn zware_schade() {
+    assert_eq!(neem_schade(100, 100), 0);
+}
+```
+
+---
+
+## 12. Tests voor een struct
+
+We kunnen ook onze `Vijand` testen.
+
+```rust,ignore
+struct Vijand {
+    naam: String,
+    gezondheid: i32,
+}
+```
+
+We maken bijvoorbeeld een functie:
+
+```rust,ignore
+fn neem_schade(vijand: &mut Vijand, schade: i32) {
+    vijand.gezondheid -= schade;
+}
+```
+
+Daarbij kunnen we schrijven:
+
+```rust,ignore
+#[test]
+fn vijand_krijgt_schade() {
+    let mut vijand = Vijand {
+        naam: String::from("Goblin"),
+        gezondheid: 50,
+    };
+
+    neem_schade(&mut vijand, 20);
+
+    assert_eq!(vijand.gezondheid, 30);
+}
+```
+
+De test doet eigenlijk precies wat een speler zou doen:
+
+1. maak een Goblin
+2. geef hem schade
+3. kijk hoeveel gezondheid hij nog heeft.
+
+---
+
+## 13. Tests voor methods
+
+Onze eerdere `impl`-kennis kunnen we hier ook gebruiken.
+
+Bijvoorbeeld:
+
+```rust,ignore
+struct Speler {
+    naam: String,
+    gezondheid: i32,
+}
+
+impl Speler {
+    fn neem_schade(&mut self, schade: i32) {
+        self.gezondheid -= schade;
+    }
+
+    fn is_levend(&self) -> bool {
+        self.gezondheid > 0
+    }
+}
+```
+
+We kunnen beide methods testen:
+
+```rust,ignore
+#[test]
+fn speler_krijgt_schade() {
+    let mut speler = Speler {
+        naam: String::from("Arin"),
+        gezondheid: 100,
+    };
+
+    speler.neem_schade(30);
+
+    assert_eq!(speler.gezondheid, 70);
+}
+```
+
+En:
+
+```rust,ignore
+#[test]
+fn speler_is_levend() {
+    let speler = Speler {
+        naam: String::from("Arin"),
+        gezondheid: 100,
+    };
+
+    assert!(speler.is_levend());
+}
+```
+
+---
+
+## 14. De test voor een dode speler
+
+We kunnen ook de andere situatie testen:
+
+```rust,ignore
+#[test]
+fn speler_is_dood() {
+    let speler = Speler {
+        naam: String::from("Arin"),
+        gezondheid: 0,
+    };
+
+    assert!(!speler.is_levend());
+}
+```
+
+Het is vaak verstandig om beide kanten van een regel te testen.
+
+Bij:
+
+```rust,ignore
+gezondheid > 0
+```
+
+testen we dus zowel:
+
+```text
+gezondheid = 100
+```
+
+als:
+
+```text
+gezondheid = 0
+```
+
+---
+
+## 15. Een belangrijke gewoonte
+
+Stel dat we deze regel hebben:
+
+```rust,ignore
+if speler.gezondheid > 0 {
+    // leeft
+}
+```
+
+Dan is het verstandig om niet alleen een test voor `100` te maken.
+
+Test ook de grens:
+
+```text id="s4e7kb"
+1
+0
+```
+
+Want juist rond grenzen ontstaan vaak fouten.
+
+Bijvoorbeeld:
+
+```rust,ignore
+#[test]
+fn een_gezondheid_is_levend() {
+    let speler = Speler {
+        naam: String::from("Arin"),
+        gezondheid: 1,
+    };
+
+    assert!(speler.is_levend());
+}
+```
+
+En:
+
+```rust,ignore
+#[test]
+fn nul_gezondheid_is_dood() {
+    let speler = Speler {
+        naam: String::from("Arin"),
+        gezondheid: 0,
+    };
+
+    assert!(!speler.is_levend());
+}
+```
+
+---
+
+## 16. Tests voor Vecs
+
+Nu kunnen we ons recente werk met `Vec` testen.
+
+Stel:
+
+```rust,ignore
+fn aoe_schade(vijanden: &mut Vec<Vijand>, schade: i32) {
+    for vijand in vijanden {
+        vijand.gezondheid -= schade;
+    }
+}
+```
+
+We kunnen dit testen.
+
+```rust,ignore
+#[test]
+fn aoe_schade_raakt_alle_vijanden() {
+    let mut vijanden = vec![
+        Vijand {
+            naam: String::from("Goblin"),
+            gezondheid: 50,
+        },
+        Vijand {
+            naam: String::from("Ork"),
+            gezondheid: 70,
+        },
+        Vijand {
+            naam: String::from("Trol"),
+            gezondheid: 100,
+        },
+    ];
+
+    aoe_schade(&mut vijanden, 20);
+
+    assert_eq!(vijanden[0].gezondheid, 30);
+    assert_eq!(vijanden[1].gezondheid, 50);
+    assert_eq!(vijanden[2].gezondheid, 80);
+}
+```
+
+Dit is al een behoorlijk serieuze test.
+
+We controleren namelijk dat **ieder doel** geraakt wordt.
+
+---
+
+## 17. Een test mag ook falen
+
+Stel dat we per ongeluk dit schrijven:
+
+```rust,ignore
+fn aoe_schade(vijanden: &mut Vec<Vijand>, schade: i32) {
+    if let Some(vijand) = vijanden.get_mut(0) {
+        vijand.gezondheid -= schade;
+    }
+}
+```
+
+Deze code raakt alleen de eerste vijand.
+
+Onze test:
+
+```rust,ignore
+assert_eq!(vijanden[1].gezondheid, 50);
+```
+
+zal dan falen.
+
+Dat is precies wat we willen.
+
+De test heeft een bug gevonden.
+
+---
+
+## 18. Tests zijn een vangnet
+
+Stel dat ons spel steeds groter wordt.
+
+We veranderen later iets aan `aoe_schade`.
+
+Zonder test moeten we onthouden:
+
+> Ik moet controleren of alle vijanden nog steeds schade krijgen.
+
+Met de test kunnen we gewoon:
+
+```text id="m6z7aa"
+cargo test
+```
+
+uitvoeren.
+
+Als alle tests slagen, weten we dat de situaties die onze tests controleren nog steeds goed werken.
+
+Dat betekent niet dat het hele programma gegarandeerd foutloos is.
+
+Het betekent:
+
+> De code voldoet nog steeds aan de verwachtingen die we in onze tests hebben vastgelegd.
+
+---
+
+## 19. Waar zet je tests?
+
+Rust ondersteunt verschillende manieren om tests te organiseren.
+
+Voor deze cursus gebruiken we eerst de eenvoudige vorm:
+
+```rust,ignore
+#[cfg(test)]
+mod tests {
+    #[test]
+    fn mijn_test() {
+        // ...
+    }
+}
+```
+
+Bijvoorbeeld:
+
+```rust,ignore
 fn verdubbel(getal: i32) -> i32 {
     getal * 2
 }
@@ -19,42 +688,443 @@ mod tests {
         assert_eq!(verdubbel(5), 10);
     }
 }
-
-fn main() {}
 ```
 
-`#[test]` markeert een testfunctie. `assert_eq!` controleert of twee waarden
-gelijk zijn.
+---
 
-## 2. Tests uitvoeren
+## 20. Wat doet `#[cfg(test)]`?
 
-In een Cargo-project voer je tests uit met:
+Dit vertelt Rust dat dit gedeelte bedoeld is voor tests.
 
-```text
-cargo test
-```
-
-Cargo zoekt functies met `#[test]` en voert ze automatisch uit. Een test die
-faalt geeft informatie over de verwachte en werkelijke waarde.
-
-Andere handige controles zijn:
-
-```rust
-fn main() {
-    let gezondheid = 10;
-    let eerste = 1;
-    let tweede = 2;
-
-    assert!(gezondheid > 0);
-    assert_ne!(eerste, tweede);
+```rust,ignore
+#[cfg(test)]
+mod tests {
+    // tests
 }
 ```
 
-Gebruik meerdere kleine tests. Dan zie je sneller welk onderdeel niet werkt.
+De tests staan dus bij elkaar in een aparte `tests`-module.
 
-## Oefeningen
+Voorlopig hoef je alleen te onthouden:
 
-1. [Een functie testen](https://github.com/keitv-codecraft/keitv-rust-basis-rustlings/blob/main/exercises/artikel_17/1_test.rs)
-2. [Schade testen](https://github.com/keitv-codecraft/keitv-rust-basis-rustlings/blob/main/exercises/artikel_17/2_schade_test.rs)
-3. [Een bool testen](https://github.com/keitv-codecraft/keitv-rust-basis-rustlings/blob/main/exercises/artikel_17/3_assert.rs)
-4. [Meerdere tests schrijven](https://github.com/keitv-codecraft/keitv-rust-basis-rustlings/blob/main/exercises/artikel_17/4_meerdere_tests.rs)
+> Zet gewone unit tests in een `tests`-module met `#[cfg(test)]`.
+
+We hoeven de precieze werking van `cfg` nog niet uitgebreid te behandelen.
+
+---
+
+## 21. Wat doet `use super::*`?
+
+Binnen de `tests`-module willen we functies en structs gebruiken die buiten de module staan.
+
+Daarom zien we vaak:
+
+```rust,ignore
+use super::*;
+```
+
+Voorlopig kun je dit lezen als:
+
+> Maak de dingen uit de bovenliggende module beschikbaar in deze testmodule.
+
+Ook hier hoeven we de precieze regels van modules en visibility nog niet volledig te behandelen.
+
+---
+
+## 22. Een compleet voorbeeld
+
+Hier staat alles bij elkaar:
+
+```rust,ignore
+struct Speler {
+    naam: String,
+    gezondheid: i32,
+}
+
+impl Speler {
+    fn neem_schade(&mut self, schade: i32) {
+        self.gezondheid -= schade;
+    }
+
+    fn is_levend(&self) -> bool {
+        self.gezondheid > 0
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn speler_krijgt_schade() {
+        let mut speler = Speler {
+            naam: String::from("Arin"),
+            gezondheid: 100,
+        };
+
+        speler.neem_schade(25);
+
+        assert_eq!(speler.gezondheid, 75);
+    }
+
+    #[test]
+    fn speler_leeft() {
+        let speler = Speler {
+            naam: String::from("Arin"),
+            gezondheid: 100,
+        };
+
+        assert!(speler.is_levend());
+    }
+
+    #[test]
+    fn speler_is_dood() {
+        let speler = Speler {
+            naam: String::from("Arin"),
+            gezondheid: 0,
+        };
+
+        assert!(!speler.is_levend());
+    }
+}
+```
+
+Voer uit:
+
+```text id="c8q2zr"
+cargo test
+```
+
+Alle drie de tests zouden moeten slagen.
+
+---
+
+## 23. Rustlings
+
+Maak:
+
+```text id="q3j7vn"
+exercises/tests/
+```
+
+met bijvoorbeeld:
+
+```text id="z7r2cx"
+01_first_test.rs
+02_assert_eq.rs
+03_assert_ne.rs
+04_assert.rs
+05_multiple_tests.rs
+06_damage_test.rs
+07_heal_test.rs
+08_alive_test.rs
+09_dead_test.rs
+10_player_test.rs
+11_enemy_test.rs
+12_vec_test.rs
+13_aoe_test.rs
+14_boundary_test.rs
+15_debug_test.rs
+16_fix_bug.rs
+17_regression.rs
+18_game_tests.rs
+```
+
+### `01_first_test.rs`
+
+Maak een functie:
+
+```rust,ignore
+fn dubbel(x: i32) -> i32 {
+    x * 2
+}
+```
+
+Schrijf een test die controleert dat:
+
+```text id="y2v6da"
+dubbel(5) == 10
+```
+
+---
+
+### `02_assert_eq.rs`
+
+Test meerdere waarden met `assert_eq!`.
+
+---
+
+### `03_assert_ne.rs`
+
+Test dat twee verschillende waarden niet gelijk zijn.
+
+---
+
+### `04_assert.rs`
+
+Maak een functie:
+
+```rust,ignore
+fn is_positief(x: i32) -> bool {
+    x > 0
+}
+```
+
+Test zowel positieve als niet-positieve waarden.
+
+---
+
+### `05_multiple_tests.rs`
+
+Maak minimaal drie tests voor dezelfde functie.
+
+---
+
+### `06_damage_test.rs`
+
+Test:
+
+```text id="8k5m1x"
+100 gezondheid
+25 schade
+75 over
+```
+
+---
+
+### `07_heal_test.rs`
+
+Test een genezingsfunctie.
+
+---
+
+### `08_alive_test.rs`
+
+Test dat een speler met gezondheid `1` leeft.
+
+---
+
+### `09_dead_test.rs`
+
+Test dat een speler met gezondheid `0` dood is.
+
+---
+
+### `10_player_test.rs`
+
+Maak een `Speler` en test één van zijn methods.
+
+---
+
+### `11_enemy_test.rs`
+
+Maak een `Vijand` en test `neem_schade`.
+
+---
+
+### `12_vec_test.rs`
+
+Maak een `Vec<Vijand>` en test dat de groep het juiste aantal vijanden bevat.
+
+---
+
+### `13_aoe_test.rs`
+
+Test dat een AoE-aanval alle vijanden raakt.
+
+Controleer de gezondheid van iedere vijand.
+
+---
+
+### `14_boundary_test.rs`
+
+Test de grenswaarden:
+
+```text id="d6k9se"
+1 gezondheid
+0 gezondheid
+```
+
+---
+
+### `15_debug_test.rs`
+
+Hier zit expres een fout in de test:
+
+```rust,ignore
+#[test]
+fn schade() {
+    assert_eq!(bereken_schade(10, 5), 20);
+}
+```
+
+De functie geeft volgens de bestaande regels iets anders terug.
+
+Gebruik de testuitvoer om te ontdekken wat er aan de hand is.
+
+---
+
+### `16_fix_bug.rs`
+
+De test klopt.
+
+De functie bevat een bug.
+
+Gebruik `cargo test` om de bug te vinden en pas vervolgens de functie aan.
+
+---
+
+### `17_regression.rs`
+
+Maak eerst een functie en een test.
+
+Verander daarna de functie bewust zodat de test faalt.
+
+Herstel de functie.
+
+Het doel is ervaren hoe een test voorkomt dat een oude functionaliteit per ongeluk kapotgaat.
+
+---
+
+### `18_game_tests.rs`
+
+Maak een kleine RPG-testset.
+
+Test minimaal:
+
+- schade
+- genezing
+- leven/dood
+- AoE-schade.
+
+---
+
+## 24. Eindopdracht — Test je RPG
+
+Maak een klein RPG-programma met:
+
+```rust,ignore
+struct Speler {
+    naam: String,
+    gezondheid: i32,
+}
+
+struct Vijand {
+    naam: String,
+    gezondheid: i32,
+}
+```
+
+Gebruik methods voor bijvoorbeeld:
+
+```text id="f7n2kc"
+neem_schade
+genees
+is_levend
+```
+
+Maak vervolgens tests voor:
+
+1. normale schade
+2. zware schade
+3. genezing
+4. een speler die leeft
+5. een speler die dood is
+6. één vijand
+7. meerdere vijanden
+8. AoE-schade.
+
+Probeer minimaal één test bewust te laten falen.
+
+Bekijk de foutmelding.
+
+Herstel daarna de test of de code.
+
+---
+
+## 25. Een belangrijke nieuwe manier van werken
+
+Tot nu toe was onze werkwijze vaak:
+
+```text
+Code schrijven
+      ↓
+Programma uitvoeren
+      ↓
+Kijken wat er gebeurt
+```
+
+Met tests kunnen we werken als:
+
+```text
+Verwachting bedenken
+      ↓
+Test schrijven
+      ↓
+Code schrijven
+      ↓
+cargo test
+      ↓
+Geslaagd?
+   ↙       ↘
+ ja         nee
+ ↓           ↓
+verder     fout zoeken
+```
+
+Een test is daarmee niet alleen iets dat je **achteraf** toevoegt.
+
+Een test kan je helpen bepalen wat je programma eigenlijk moet doen.
+
+---
+
+## 26. Wat moet je onthouden?
+
+Een test begint met:
+
+```rust,ignore
+#[test]
+```
+
+Een gelijkheidstest:
+
+```rust,ignore
+assert_eq!(werkelijk, verwacht);
+```
+
+Een ongelijkheidstest:
+
+```rust,ignore
+assert_ne!(werkelijk, verwacht);
+```
+
+Een booleaanse test:
+
+```rust,ignore
+assert!(voorwaarde);
+```
+
+Een negatieve booleaanse test:
+
+```rust,ignore
+assert!(!voorwaarde);
+```
+
+Tests voer je uit met:
+
+```text id="w3f7pn"
+cargo test
+```
+
+En misschien wel het belangrijkste:
+
+> **Een falende test is nuttige informatie.**
+
+De compiler vertelt ons of onze code technisch klopt.
+
+Een test vertelt ons of onze code doet wat wij verwachten.
+
+## Rustlings-oefeningen
+
+Maak daarna de oefeningen uit de [Rustlings-map van Artikel 17](https://github.com/keitv-codecraft/keitv-rust-basis-rustlings/tree/master/exercises/artikel_17/).
+

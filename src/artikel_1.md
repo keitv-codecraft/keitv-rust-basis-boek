@@ -1,4 +1,4 @@
-# 1. Kennismaken met programmeren en Rust
+﻿# 1. Kennismaken met programmeren en Rust
 
 ## Wat gaan we leren?
 
@@ -6,12 +6,12 @@ In dit artikel maken we voor het eerst kennis met programmeren en met de program
 
 Na dit artikel kun je:
 
-- uitleggen wat een programma is;
-- een eenvoudig Rust-programma herkennen;
-- een Rust-programma uitvoeren;
-- tekst op het scherm laten zien;
-- eenvoudige veranderingen in een programma maken;
-- begrijpen wat de compiler doet;
+- uitleggen wat een programma is
+- een eenvoudig Rust-programma herkennen
+- een Rust-programma uitvoeren
+- tekst op het scherm laten zien
+- eenvoudige veranderingen in een programma maken
+- begrijpen wat de compiler doet
 - een eenvoudige compilerfout herkennen en proberen op te lossen.
 
 Je hoeft nog geen ervaring met programmeren te hebben.
@@ -22,11 +22,11 @@ Je hoeft nog geen ervaring met programmeren te hebben.
 
 Een computer is heel goed in het uitvoeren van opdrachten. Hij kan bijvoorbeeld:
 
-- getallen optellen;
-- tekst laten zien;
-- bestanden opslaan;
-- afbeeldingen tekenen;
-- geluid afspelen;
+- getallen optellen
+- tekst laten zien
+- bestanden opslaan
+- afbeeldingen tekenen
+- geluid afspelen
 - een spel uitvoeren.
 
 Maar een computer bedenkt meestal niet zelf welke opdrachten hij moet uitvoeren.
@@ -35,10 +35,16 @@ Wij moeten hem vertellen wat hij moet doen.
 
 Een **programma** is een verzameling opdrachten voor een computer.
 
+> [!NOTE]
+> Je hoeft nog niet alles te begrijpen. In deze cursus bouwen we stap voor stap
+> verder en gebruiken we compilerfouten om te leren.
+
 Bijvoorbeeld:
 
 ```rust
-println!("Hallo!");
+fn main() {
+    println!("Hallo!");
+}
 ```
 
 Deze opdracht betekent ongeveer:
@@ -57,11 +63,11 @@ Rust is een programmeertaal waarmee we allerlei soorten programma's kunnen maken
 
 Bijvoorbeeld:
 
-- computersoftware;
-- servers;
-- programma's voor kleine apparaten;
-- gereedschappen voor programmeurs;
-- games;
+- computersoftware
+- servers
+- programma's voor kleine apparaten
+- gereedschappen voor programmeurs
+- games
 - onderdelen van grotere programma's.
 
 Rust probeert programma's tegelijk **snel** en **veilig** te maken.
@@ -176,13 +182,13 @@ Programmeren leer je vooral door dingen uit te proberen.
 
 Verander:
 
-```rust
+```rust,ignore
 println!("Hallo wereld!");
 ```
 
 in:
 
-```rust
+```rust,ignore
 println!("Hallo Rust!");
 ```
 
@@ -196,7 +202,7 @@ Hallo Rust!
 
 Verander daarna de tekst bijvoorbeeld in:
 
-```rust
+```rust,ignore
 println!("Ik ga games maken!");
 ```
 
@@ -280,13 +286,13 @@ Toch hebben we hiermee al iets belangrijks geleerd:
 
 Een echte game bestaat uit heel veel meer onderdelen, zoals:
 
-- invoer van de speler;
-- afbeeldingen;
-- geluid;
-- beweging;
-- game-logica;
-- vijanden;
-- levels;
+- invoer van de speler
+- afbeeldingen
+- geluid
+- beweging
+- game-logica
+- vijanden
+- levels
 - scores.
 
 Maar ook een grote game bestaat uiteindelijk uit heel veel kleine opdrachten die de computer uitvoert.
@@ -315,11 +321,19 @@ Je kunt de compiler dus zien als een soort controleur.
 Wij schrijven:
 
 ```text
-Rust-broncode
-      ↓
-    compiler
-      ↓
-programma dat de computer kan uitvoeren
+┌─────────────────────────────────────────┐
+│              Rust-broncode              │
+└────────────────────┬────────────────────┘
+                     │ (compileren)
+                     ▼
+┌─────────────────────────────────────────┐
+│                Compiler                 │
+└────────────────────┬────────────────────┘
+                     │ (bouwen)
+                     ▼
+┌─────────────────────────────────────────┐
+│ Programma dat de computer kan uitvoeren │
+└─────────────────────────────────────────┘
 ```
 
 De compiler is daarbij niet onze vijand.
@@ -387,9 +401,9 @@ Kijk eerst naar de plek waar Rust het probleem heeft gevonden.
 
 Rust geeft meestal aan:
 
-- in welk bestand het probleem zit;
-- op welke regel;
-- waar ongeveer het probleem zit;
+- in welk bestand het probleem zit
+- op welke regel
+- waar ongeveer het probleem zit
 - soms wat er volgens Rust mis is.
 
 Leer daarom eerst rustig de foutmelding te lezen.
@@ -422,10 +436,10 @@ fn main() {
 
 Verander daarna:
 
-- de teksten;
-- de volgorde;
-- het aantal regels;
-- hoofdletters;
+- de teksten
+- de volgorde
+- het aantal regels
+- hoofdletters
 - leestekens.
 
 Kijk steeds wat er gebeurt.
@@ -524,3 +538,8 @@ Je bent klaar met dit artikel als je zonder hulp:
 - [ ] zelf kleine veranderingen in een programma durft te maken.
 
 Als iets nog niet lukt, is dat geen probleem. Herhaal vooral de oefeningen waarbij je nog hulp nodig hebt.
+
+## Rustlings-oefeningen
+
+Maak daarna de oefeningen uit de [Rustlings-map van Artikel 1](https://github.com/keitv-codecraft/keitv-rust-basis-rustlings/tree/master/exercises/artikel_1/).
+
