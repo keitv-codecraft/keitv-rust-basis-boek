@@ -247,7 +247,6 @@ impl Speler {
 
 In `main.rs`:
 
-`
 ```rust,ignore
 mod speler;
 
@@ -376,7 +375,6 @@ impl Vijand {
 
 `main.rs` wordt:
 
-`
 ```rust,ignore
 mod speler;
 mod vijand;
@@ -494,7 +492,6 @@ veranderen
 
 Pas `main.rs` aan:
 
-`
 ```rust,ignore
 mod speler;
 mod vijand;
@@ -914,7 +911,6 @@ Dit is een echte, zij het kleine, Rust-applicatie.
 
 Nu kan `main.rs` uiteindelijk bijna niets meer bevatten:
 
-`
 ```rust,ignore
 mod speler;
 mod vijand;
@@ -2196,4 +2192,3 @@ Het belangrijkste is dat we vanaf nu niet meer alleen losse Rust-oefeningen make
 ## Rustlings-oefeningen
 
 Maak daarna de oefeningen uit de [Rustlings-map van Artikel 29](https://github.com/keitv-codecraft/keitv-rust-basis-rustlings/tree/master/exercises/artikel_29/).
-
