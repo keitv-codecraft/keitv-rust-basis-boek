@@ -1,4 +1,4 @@
-﻿# Artikel 5 — Commentaar
+# 5. Commentaar
 
 ## Wat gaan we leren?
 
@@ -17,7 +17,7 @@ Het is bedoeld voor mensen die de code lezen.
 
 ---
 
-# 1. Wat is commentaar?
+## 1. Wat is commentaar?
 
 Commentaar is tekst in je programma die niet wordt uitgevoerd.
 
@@ -38,7 +38,7 @@ Je kunt het bijvoorbeeld gebruiken om uit te leggen wat een stuk code doet.
 
 ---
 
-# 2. Commentaar met `//`
+## 2. Commentaar met `//`
 
 De meest gebruikte vorm van commentaar begint met:
 
@@ -67,7 +67,7 @@ Dat werkt ook.
 
 ---
 
-# 3. Commentaar over meerdere regels
+## 3. Commentaar over meerdere regels
 
 Soms wil je een groter stuk tekst als commentaar schrijven.
 
@@ -100,7 +100,7 @@ Voor korte opmerkingen gebruiken Rust-programmeurs meestal `//`.
 
 ---
 
-# 4. Waarom commentaar?
+## 4. Waarom commentaar?
 
 Commentaar kan verschillende doelen hebben.
 
@@ -138,7 +138,7 @@ Een goede vuistregel is:
 
 ---
 
-# 5. Een voorbeeld uit een game
+## 5. Een voorbeeld uit een game
 
 Vergelijk:
 
@@ -178,7 +178,7 @@ De code is hier al duidelijk genoeg.
 
 ---
 
-# 6. Commentaar kan ook tijdelijk helpen
+## 6. Commentaar kan ook tijdelijk helpen
 
 Tijdens het programmeren kan commentaar handig zijn om iets tijdelijk uit te schakelen.
 
@@ -202,7 +202,7 @@ Let wel op: als je een groot programma hebt, kan veel oude uitgecommentarieerde 
 
 ---
 
-# 7. Commentaar bij functies
+## 7. Commentaar bij functies
 
 Nu we functies hebben geleerd, kunnen we functies documenteren.
 
@@ -228,7 +228,7 @@ De eerste versie vertelt iets over de bedoeling.
 
 ---
 
-# 8. Commentaar is geen vervanging voor goede namen
+## 8. Commentaar is geen vervanging voor goede namen
 
 Stel dat we dit schrijven:
 
@@ -270,7 +270,7 @@ De tweede versie is veel duidelijker.
 
 ---
 
-# 9. Commentaar bij onze game
+## 9. Commentaar bij onze game
 
 Een klein voorbeeld:
 
@@ -300,110 +300,7 @@ Hier helpen de commentaren om de bedoeling van het programma te volgen.
 
 ---
 
-# 10. Rustlings — Oefeningen
-
-Ook voor commentaar kunnen we kleine oefeningen maken.
-
-## ⭐ Oefening 1 — Je eerste commentaar
-
-Schrijf een programma met drie commentaren.
-
-Bijvoorbeeld:
-
-```rust
-fn main() {
-    // Dit is mijn eerste Rust-programma.
-
-    println!("Hallo Rust!");
-
-    // Hier eindigt het programma.
-}
-```
-
-Gebruik je eigen tekst.
-
----
-
-## ⭐ Oefening 2 — Commentaar toevoegen
-
-Neem dit programma:
-
-```rust
-fn main() {
-    let gezondheid = 100;
-    let schade = 20;
-    let nieuwe_gezondheid = gezondheid - schade;
-
-    println!("{nieuwe_gezondheid}");
-}
-```
-
-Voeg commentaar toe dat uitlegt wat er in het programma gebeurt.
-
----
-
-## ⭐ Oefening 3 — Commentaar verwijderen
-
-Hier staat te veel commentaar:
-
-```rust
-fn main() {
-    // Maak een variabele met de naam score.
-    // De waarde is 100.
-    let score = 100;
-
-    // Print de score.
-    println!("{score}");
-}
-```
-
-Verwijder het commentaar dat niets toevoegt.
-
----
-
-## ⭐⭐ Oefening 4 — Waarom?
-
-Voeg commentaar toe aan dit programma:
-
-```rust
-fn main() {
-    let mut gezondheid = 100;
-
-    gezondheid -= 30;
-
-    println!("Gezondheid: {gezondheid}");
-}
-```
-
-Probeer commentaar te schrijven dat uitlegt **waarom** de gezondheid verandert.
-
----
-
-## ⭐⭐ Oefening 5 — Functie documenteren
-
-Voeg nuttig commentaar toe aan:
-
-```rust
-fn bereken_schade(kracht: i32, wapen: i32) -> i32 {
-    kracht + wapen
-}
-```
-
-Denk na over wat iemand die jouw code nog niet kent zou moeten weten.
-
----
-
-## ⭐⭐⭐ Oefening 6 — Maak je game leesbaar
-
-Neem je mini-gevecht uit het vorige artikel.
-
-Voeg commentaar toe op plaatsen waar commentaar echt helpt.
-
-Probeer juist **niet** iedere regel te voorzien van commentaar.
-
----
-
-# 11. Rustlings — Commentaar als foutopsporing
+## 10. Code tijdelijk uitschakelen (uitcommentariëren)
 
 Commentaar kan ook helpen wanneer je een fout probeert te vinden.
 
@@ -444,19 +341,6 @@ Later leren we betere manieren om fouten systematisch te vinden.
 
 ---
 
-# 12. Wat moet je nu kunnen?
-
-Na dit artikel zou je moeten begrijpen:
-
-- [ ] wat commentaar is
-- [ ] dat Rust commentaar niet uitvoert
-- [ ] hoe `//` werkt
-- [ ] hoe `/* ... */` werkt
-- [ ] waarom commentaar nuttig kan zijn
-- [ ] dat commentaar vooral nuttig is voor uitleg van de bedoeling
-- [ ] dat goede namen vaak beter zijn dan extra commentaar
-- [ ] hoe commentaar kan helpen bij het debuggen.
-
 ## De belangrijkste gedachte
 
 Goede code hoeft niet overal commentaar bij te hebben.
@@ -490,3 +374,16 @@ Daarvoor hebben we **control flow** nodig.
 
 Maak daarna de oefeningen uit de [Rustlings-map van Artikel 5](https://github.com/keitv-codecraft/keitv-rust-basis-rustlings/tree/master/exercises/artikel_5/).
 
+---
+
+## Controlelijst
+
+Je bent klaar met dit artikel als je zonder hulp:
+
+- [ ] weet wat commentaar is
+- [ ] begrijpt dat Rust commentaar volledig negeert tijdens het uitvoeren
+- [ ] enkellijns commentaar met `//` kunt schrijven
+- [ ] meerregelig commentaar met `/* ... */` kunt schrijven
+- [ ] weet wanneer commentaar nuttig is (uitleggen *waarom*, niet letterlijk herhalen *wat*)
+- [ ] begrijpt dat duidelijke namen voorrang hebben op extra commentaar
+- [ ] code tijdelijk kunt uitcommentariëren bij het zoeken naar fouten.

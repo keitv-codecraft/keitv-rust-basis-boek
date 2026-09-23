@@ -1,67 +1,16 @@
-﻿# Rust 36 — Consolideren: van veel losse onderdelen naar één geheel
+﻿# 36. Consolideren
 
-Ons RPG-project is inmiddels behoorlijk groot geworden.
+## Wat gaan we leren?
 
-We hebben inmiddels onder andere:
+In dit artikel brengen we alle ontwikkelde systemen samen in een overzichtelijke, goed gestructureerde codebase.
 
-- een speler
-- vijanden
-- wapens
-- een inventaris
-- een winkel
-- gevechten
-- locaties
-- een wereld
-- NPC's
-- dialogen
-- ontmoetingen
-- XP en levels
-- goud en buit
-- savegames
-- een speltoestand.
+We leren:
 
-Dat is mooi.
-
-Maar er ontstaat ook een nieuw probleem.
-
-Als we alles gewoon achter elkaar blijven toevoegen, wordt het programma steeds moeilijker te begrijpen.
-
-Misschien staat er straks in `main.rs`:
-
-```text
-- speler maken
-- wereld maken
-- menu tonen
-- invoer lezen
-- reizen
-- NPC zoeken
-- gesprek voeren
-- vijand kiezen
-- gevecht starten
-- XP geven
-- level controleren
-- buit geven
-- winkel openen
-- spel opslaan
-- spel laden
-- ...
-```
-
-Alles werkt misschien nog.
-
-Maar het wordt steeds moeilijker om te beantwoorden:
-
-> Waar hoort deze code eigenlijk thuis?
-
-Dat is precies het probleem dat we in dit artikel gaan aanpakken.
-
-We gaan het programma **consolideren**.
-
-Daarmee bedoelen we:
-
-> We brengen de bestaande onderdelen terug tot een duidelijke structuur waarin ieder onderdeel een herkenbare verantwoordelijkheid heeft.
-
-Dit is de voorbereiding op **refactoring**.
+- `main.rs` klein en overzichtelijk houden door logica naar modules te verplaatsen
+- verantwoordelijkheden helder verdelen tussen `speler`, `vijand`, `wereld` en `spel`
+- encapsulatie en private velden toepassen voor robuuste interfaces
+- duplicatie opsporen en hergebruik stimuleren
+- bestaande code veilig herstructureren met behulp van compilerfoutmeldingen en tests.
 
 ---
 
@@ -1717,125 +1666,7 @@ afhankelijk van wat de functie werkelijk doet.
 
 ---
 
-## 51. Rustlings
-
-Maak:
-
-```text id="b8k2r6"
-exercises/consolideren/
-```
-
-## Functies
-
-### `01_toon_menu.rs`
-
-Verplaats een menu naar een aparte functie.
-
-### `02_speler_status.rs`
-
-Maak een functie die de status toont.
-
-### `03_reis.rs`
-
-Maak een aparte functie voor reizen.
-
-### `04_speel_spel.rs`
-
-Combineer meerdere functies in `speel_spel`.
-
----
-
-## Structuren
-
-### `05_speler_module.rs`
-
-Zet `Speler` in een module.
-
-### `06_vijand_module.rs`
-
-Zet `Vijand` in een module.
-
-### `07_gevecht_module.rs`
-
-Zet gevechtscode in een module.
-
-### `08_wereld_module.rs`
-
-Maak een `Wereld`-module.
-
-### `09_private_velden.rs`
-
-Maak velden privé en voeg publieke methodes toe.
-
-### `10_interface.rs`
-
-Gebruik de methodes in plaats van rechtstreeks velden te wijzigen.
-
----
-
-## Refactoring
-
-### `11_verplaats_functie.rs`
-
-Verplaats een functie naar een logischere module.
-
-### `12_verwijder_duplicatie.rs`
-
-Twee stukken code doen hetzelfde. Maak er één functie van.
-
-### `13_betere_naam.rs`
-
-Geef een slecht benoemde functie een duidelijke naam.
-
-### `14_te_grote_functie.rs`
-
-Splits een grote functie op.
-
-### `15_main_kleiner.rs`
-
-Maak `main` kleiner.
-
----
-
-## Ownership en modules
-
-### `16_debug_private.rs`
-
-Een andere module probeert een privéveld rechtstreeks te wijzigen.
-
-Los dit op met een methode.
-
-### `17_debug_move.rs`
-
-Een waarde wordt verplaatst terwijl een andere functie hem nog nodig heeft.
-
-Gebruik borrowing.
-
-### `18_debug_mut.rs`
-
-Een functie moet een waarde wijzigen maar krijgt geen `&mut`.
-
-Los de functie-aanroep op.
-
-### `19_debug_borrow.rs`
-
-Een mutable borrow duurt te lang.
-
-Beperk de scope zodat de waarde daarna opnieuw gebruikt kan worden.
-
----
-
-## Tests
-
-### `20_test_refactor.rs`
-
-Refactor een functie zonder het gedrag te veranderen.
-
-De bestaande tests moeten blijven slagen.
-
----
-
-## 52. Eindopdracht — Consolideer het RPG
+## 51. Eindopdracht — Consolideer het RPG
 
 Neem het volledige RPG-project van de vorige artikelen.
 
@@ -1944,7 +1775,7 @@ Alle drie zijn belangrijk.
 
 ---
 
-## 53. Een belangrijke vraag: wanneer stop je met refactoren?
+## 52. Een belangrijke vraag: wanneer stop je met refactoren?
 
 Ook refactoring kan te ver gaan.
 
@@ -1974,7 +1805,7 @@ Als de leerlingen naar een module kunnen kijken en redelijk snel begrijpen wat d
 
 ---
 
-## 54. De drie vragen
+## 53. De drie vragen
 
 Bij toekomstige code kunnen we daarom steeds drie vragen stellen.
 
@@ -2007,7 +1838,7 @@ Deze drie vragen vormen een goede basis voor refactoring.
 
 ---
 
-## 55. Refactoring is een programmeervaardigheid
+## 54. Refactoring is een programmeervaardigheid
 
 Tot nu toe lag de nadruk vooral op:
 
@@ -2047,7 +1878,7 @@ Dat is precies de richting waarin we met ons RPG-project willen gaan.
 
 ---
 
-## 56. Vooruitblik: echte refactoring
+## 55. Vooruitblik: echte refactoring
 
 In het volgende artikel kunnen we daadwerkelijk gaan refactoren.
 
@@ -2094,3 +1925,13 @@ naar:
 
 Maak daarna de oefeningen uit de [Rustlings-map van Artikel 36](https://github.com/keitv-codecraft/keitv-rust-basis-rustlings/tree/master/exercises/artikel_36/).
 
+---
+
+## Controlelijst
+
+Je bent klaar met dit artikel als je zonder hulp:
+
+- [ ] een grote `main.rs` kunt opsplitsen in logische modules
+- [ ] data kunt afschermen met private velden en publieke methoden
+- [ ] code-duplicatie kunt reduceren met gedeelde hulpfuncties
+- [ ] het project kunt compileren en testen na een herstructurering zonder functionele fouten.

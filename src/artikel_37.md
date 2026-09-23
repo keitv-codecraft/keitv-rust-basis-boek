@@ -1,28 +1,16 @@
-﻿# Rust 37 — Refactoring stap voor stap: van rommelige code naar duidelijke code
+﻿# 37. Refactoring
 
-Ons RPG-project begint inmiddels behoorlijk groot te worden. Dat is een goed teken: we hebben geleerd hoe we spelers, vijanden, wapens, inventarissen, gevechten, werelden en savegames kunnen programmeren.
+## Wat gaan we leren?
 
-Maar grotere programma's brengen een nieuw probleem mee:
+In dit artikel leren we hoe we code stapsgewijs kunnen verbeteren (refactoren) zonder het gedrag van het programma te veranderen.
 
-> Code die werkt, is niet automatisch code die prettig is om te begrijpen en te veranderen.
+We leren:
 
-In dit artikel gaan we daarom niet veel nieuwe Rust-onderdelen leren. We gaan vooral oefenen met iets wat in echte projecten heel belangrijk is:
-
-**refactoring.**
-
-Refactoring betekent dat je de structuur van bestaande code verbetert zonder bewust het gedrag van het programma te veranderen.
-
-We gaan daarbij steeds dezelfde werkwijze gebruiken:
-
-1. Begrijp wat de bestaande code doet.
-2. Zorg dat er tests zijn.
-3. Maak één kleine verandering.
-4. Compileer.
-5. Voer de tests uit.
-6. Controleer of het programma nog steeds hetzelfde doet.
-7. Ga pas daarna verder.
-
-Dat klinkt misschien voorzichtig. Dat is het ook. Juist daardoor kunnen we grotere veranderingen maken zonder de controle kwijt te raken.
+- wat refactoring is en wanneer (en wanneer vooral niet) je het toepast
+- functies opsplitsen volgens het principe: één functie, één duidelijke taak
+- heldere, betekenisvolle namen kiezen voor variabelen, functies en types
+- code-duplicatie elimineren
+- stapsgewijs werken met behulp van compilercontroles en tests als vangnet.
 
 ---
 
@@ -860,7 +848,7 @@ Als we die regel later veranderen, hoeven we niet door het hele project te zoeke
 
 Gebruik bij grotere veranderingen deze volgorde.
 
-## Stap 1 — Zorg dat de code werkt
+### Stap 1 — Zorg dat de code werkt
 
 Begin niet met refactoren als je niet weet wat de huidige code doet.
 
@@ -876,7 +864,7 @@ Noteer eventueel wat het programma hoort te doen.
 
 ---
 
-## Stap 2 — Zoek een klein probleem
+### Stap 2 — Zoek een klein probleem
 
 Bijvoorbeeld:
 
@@ -891,7 +879,7 @@ Kies één probleem.
 
 ---
 
-## Stap 3 — Maak één verandering
+### Stap 3 — Maak één verandering
 
 Niet:
 
@@ -903,7 +891,7 @@ Wel:
 
 ---
 
-## Stap 4 — Compileer
+### Stap 4 — Compileer
 
 ```text
 cargo check
@@ -913,7 +901,7 @@ Los eventuele compilerfouten op.
 
 ---
 
-## Stap 5 — Test
+### Stap 5 — Test
 
 ```text
 cargo test
@@ -923,7 +911,7 @@ Als een test faalt, onderzoek waarom.
 
 ---
 
-## Stap 6 — Controleer het programma
+### Stap 6 — Controleer het programma
 
 ```text
 cargo run
@@ -933,7 +921,7 @@ Controleer vooral het gedrag dat door de refactoring geraakt kan zijn.
 
 ---
 
-## Stap 7 — Pas daarna verder
+### Stap 7 — Pas daarna verder
 
 Nu pas ga je naar de volgende verbetering.
 
@@ -986,7 +974,7 @@ Maar `speel_spel()` doet drie dingen:
 
 ---
 
-## Stap 1: status eruit
+### Stap 1: status eruit
 
 ```rust,ignore
 fn toon_speler_status(speler: &Speler) {
@@ -1031,7 +1019,7 @@ Compileer en test.
 
 ---
 
-## Stap 2: gevecht eruit
+### Stap 2: gevecht eruit
 
 ```rust,ignore
 fn start_gevecht(speler: &mut Speler, vijand: &mut Vijand) {
@@ -1190,238 +1178,11 @@ Goede code is code waarvan de structuur duidelijk helpt om het programma te begr
 
 ---
 
-## 23. Rustlings — oefenen met refactoring
-
-Maak:
-
-```text
-exercises/refactoring/
-```
-
-De opdrachten moeten bewust klein blijven.
-
-## Deel 1 — Namen
-
-### 01_onduidelijke_naam.rs
-
-Gegeven:
-
-```rust,ignore
-fn doe_ding(speler: &Speler) {
-    println!("{}", speler.gezondheid());
-}
-```
-
-Geef de functie een duidelijkere naam.
-
----
-
-### 02_betere_variabele.rs
-
-Gegeven:
-
-```rust,ignore
-let x = speler.gezondheid();
-```
-
-Kies een betere naam.
-
----
-
-### 03_betere_parameter.rs
-
-Maak de parameternaam duidelijker:
-
-```rust,ignore
-fn toon_status(x: &Speler) {
-    // ...
-}
-```
-
----
-
-## Deel 2 — Functies opsplitsen
-
-### 04_te_grote_functie.rs
-
-Splits een functie die:
-
-- een menu toont
-- invoer leest
-- een vijand maakt
-- een gevecht uitvoert.
-
-op in meerdere functies.
-
----
-
-### 05_extract_gevecht.rs
-
-Haal een gevechtslus uit een bestaande functie en maak:
-
-```rust,ignore
-fn start_gevecht(...)
-```
-
----
-
-### 06_extract_menu.rs
-
-Maak:
-
-```rust,ignore
-fn toon_menu()
-```
-
-en haal alleen het tonen van het menu uit de bestaande functie.
-
----
-
-### 07_extract_status.rs
-
-Maak:
-
-```rust,ignore
-fn toon_speler_status(...)
-```
-
----
-
-## Deel 3 — Duplicatie
-
-### 08_duplicatie.rs
-
-Je krijgt dezelfde controle op meerdere plaatsen:
-
-```rust,ignore
-if speler.gezondheid() <= 0 {
-    println!("Je bent dood.");
-}
-```
-
-Verwijder de duplicatie.
-
----
-
-### 09_duplicatie_gevecht.rs
-
-Twee stukken code bevatten vrijwel dezelfde gevechtscontrole.
-
-Onderzoek of één functie kan worden gebruikt.
-
----
-
-### 10_duplicatie_beloning.rs
-
-Dezelfde code voor het geven van goud staat op meerdere plaatsen.
-
-Maak er één duidelijke functie van.
-
----
-
-## Deel 4 — Modules
-
-### 11_verplaats_functie.rs
-
-Verplaats een functie van `main.rs` naar `gevecht.rs`.
-
-Zorg dat het programma nog compileert.
-
----
-
-### 12_pub.rs
-
-Een functie moet vanuit `main.rs` gebruikt kunnen worden.
-
-Bepaal waar `pub` nodig is.
-
----
-
-### 13_use.rs
-
-Gebruik een `use`-declaratie zodat een lange module-naam niet steeds herhaald hoeft te worden.
-
----
-
-### 14_private_velden.rs
-
-Maak velden van `Speler` privé.
-
-Voeg een geschikte methode toe om de informatie te lezen.
-
----
-
-## Deel 5 — Compilerfouten oplossen
-
-### 15_verkeerde_naam.rs
-
-Een functie is hernoemd, maar ergens wordt nog de oude naam gebruikt.
-
-Los de compilerfout op.
-
----
-
-### 16_verkeerde_module.rs
-
-Een functie is naar een andere module verplaatst.
-
-Los de ontbrekende `use` of het verkeerde pad op.
-
----
-
-### 17_verkeerde_zichtbaarheid.rs
-
-Een functie is privé terwijl een andere module haar nodig heeft.
-
-Bepaal wat er moet veranderen.
-
----
-
-### 18_verkeerde_borrow.rs
-
-Een refactoring veroorzaakt een borrow-probleem.
-
-Lees de compilerfout en los het probleem op zonder `clone()` zomaar als oplossing te gebruiken.
-
----
-
-## Deel 6 — Tests
-
-### 19_refactoring_met_tests.rs
-
-Een functie heeft bestaande tests.
-
-Refactor de functie zonder de tests aan te passen.
-
-De tests moeten blijven slagen.
-
----
-
-### 20_final_refactoring.rs
-
-Je krijgt een kleine, werkende RPG-functie die:
-
-- te groot is
-- slechte namen gebruikt
-- dubbele code bevat
-- te veel verantwoordelijkheden heeft.
-
-Refactor de code stap voor stap.
-
-Voer na iedere stap uit:
-
-```text
-cargo check
-cargo test
-```
-
----
-
-## 24. Zelfstandige opdrachten
+## 23. Zelfstandige opdrachten
 
 Naast Rustlings zijn er een aantal grotere opdrachten.
 
-## Opdracht 1 — Maak `main` kleiner
+### Opdracht 1 — Maak `main` kleiner
 
 Neem jullie bestaande RPG-project.
 
@@ -1437,7 +1198,7 @@ Het moet vooral duidelijk zijn.
 
 ---
 
-## Opdracht 2 — Zoek duplicatie
+### Opdracht 2 — Zoek duplicatie
 
 Zoek minstens drie voorbeelden van dubbele of bijna dubbele logica.
 
@@ -1452,7 +1213,7 @@ Verwijder daarna minstens één duplicatie.
 
 ---
 
-## Opdracht 3 — Verbeter namen
+### Opdracht 3 — Verbeter namen
 
 Zoek minstens vijf namen die weinig vertellen.
 
@@ -1488,7 +1249,7 @@ De naam moet duidelijk zijn binnen de context.
 
 ---
 
-## Opdracht 4 — Refactor zonder gedrag te veranderen
+### Opdracht 4 — Refactor zonder gedrag te veranderen
 
 Kies één bestaand onderdeel van het RPG-project.
 
@@ -1515,7 +1276,7 @@ Schrijf kort op:
 
 ---
 
-## 25. De belangrijkste les
+## 24. De belangrijkste les
 
 Tot nu toe hebben we vooral geleerd hoe we nieuwe dingen kunnen bouwen.
 
@@ -1559,7 +1320,7 @@ Tijdens refactoring zijn ze juist nuttige signalen:
 
 ---
 
-## 26. Eindopdracht — Refactor het RPG-project
+## 25. Eindopdracht — Refactor het RPG-project
 
 Neem jullie huidige RPG-project.
 
@@ -1647,7 +1408,7 @@ Belangrijkste verbetering:
 
 ---
 
-## Samenvatting
+## 26. Samenvatting
 
 In dit artikel hebben we weinig nieuwe Rust-syntax geleerd. Dat is bewust.
 
@@ -1683,3 +1444,13 @@ Dat is de stap van losse oefeningen naar daadwerkelijk software ontwikkelen.
 
 Maak daarna de oefeningen uit de [Rustlings-map van Artikel 37](https://github.com/keitv-codecraft/keitv-rust-basis-rustlings/tree/master/exercises/artikel_37/).
 
+---
+
+## Controlelijst
+
+Je bent klaar met dit artikel als je zonder hulp:
+
+- [ ] een complexe functie kunt opsplitsen in kleinere, gerichte hulpfuncties
+- [ ] onduidelijke namen kunt vervangen door expressieve identificatienamen
+- [ ] code kunt herstructureren in kleine stappen en na elke stap kunt compileren en testen
+- [ ] weet wanneer verdere refactoring overbodig wordt en wanneer code ''goed genoeg'' is.

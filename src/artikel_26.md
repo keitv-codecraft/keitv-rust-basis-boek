@@ -1,48 +1,16 @@
-﻿# Rust 26 — Bestanden lezen en schrijven
+﻿# 26. Bestanden lezen en schrijven
 
-Tot nu toe leeft alle informatie van ons programma in het geheugen.
+## Wat gaan we leren?
 
-Als we bijvoorbeeld dit programma starten:
+In dit artikel leren we hoe we gegevens blijvend bewaren op schijf door bestanden te lezen en te schrijven.
 
-```rust,ignore
-struct Speler {
-    naam: String,
-    gezondheid: i32,
-    goud: i32,
-}
-```
+We leren:
 
-en een speler maken:
-
-```rust,ignore
-let speler = Speler {
-    naam: String::from("Arin"),
-    gezondheid: 100,
-    goud: 50,
-};
-```
-
-dan bestaat deze informatie alleen zolang het programma draait.
-
-Zodra het programma stopt, zijn de gegevens weg.
-
-Voor een RPG is dat natuurlijk onhandig.
-
-We willen bijvoorbeeld:
-
-```text
-Speler speelt
-    ↓
-spel opslaan
-    ↓
-programma afsluiten
-    ↓
-programma later opnieuw starten
-    ↓
-spel laden
-```
-
-Daarvoor moeten we leren werken met **bestanden**.
+- tekst wegschrijven naar een bestand met `std::fs::write`
+- bestanden inlezen als `String` met `std::fs::read_to_string`
+- foutafhandeling met `Result` en `?` bij bestandsoperaties
+- gestructureerde savegame-data parseren (regels splitsen en getallen converteren met `.parse()`)
+- mappen aanmaken met `std::fs::create_dir_all`.
 
 ---
 
@@ -1126,7 +1094,7 @@ fn laad() -> Result<String, std::io::Error> {
 
 We hebben inmiddels drie verschillende soorten problemen gezien.
 
-## Compilerfout
+### Compilerfout
 
 De code is niet geldig Rust.
 
@@ -1140,7 +1108,7 @@ De compiler stopt voordat het programma wordt uitgevoerd.
 
 ---
 
-## Testfout
+### Testfout
 
 De code compileert, maar een automatische test vindt dat het gedrag niet klopt.
 
@@ -1154,7 +1122,7 @@ als de functie `10` teruggeeft.
 
 ---
 
-## Runtimefout
+### Runtimefout
 
 Het programma compileert en begint te draaien, maar tijdens het uitvoeren gebeurt iets onverwachts.
 
@@ -1176,3 +1144,14 @@ Dit onderscheid blijft belangrijk naarmate ons RPG-project groter wordt.
 
 Maak daarna de oefeningen uit de [Rustlings-map van Artikel 26](https://github.com/keitv-codecraft/keitv-rust-basis-rustlings/tree/master/exercises/artikel_26/).
 
+---
+
+## Controlelijst
+
+Je bent klaar met dit artikel als je zonder hulp:
+
+- [ ] een bestand kunt aanmaken en tekst kunt wegschrijven met `fs::write`
+- [ ] de inhoud van een bestand kunt inlezen met `fs::read_to_string`
+- [ ] bestandsfouten kunt afhandelen met `Result` en `?`
+- [ ] tekstregels kunt doorlopen met `.lines()` en splitsen met `.split_once()`
+- [ ] een getal uit een tekst kunt inlezen met `.parse::<i32>()`.

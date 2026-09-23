@@ -1,36 +1,17 @@
-﻿# Rust 16 — Closures: acties als waarden
+﻿# 16. Closures
 
-We hebben inmiddels geleerd hoe we een groep vijanden kunnen opslaan:
+## Wat gaan we leren?
 
-```rust,ignore
-let mut vijanden = vec![
-    // vijanden...
-];
-```
+In dit artikel leren we hoe we acties en gedrag kunnen opslaan in een variabele met behulp van closures.
 
-En we kunnen met een `for`-lus iedere vijand bewerken:
+We leren:
 
-```rust,ignore
-for vijand in &mut vijanden {
-    vijand.gezondheid -= 20;
-}
-```
-
-Maar stel dat we verschillende aanvallen willen hebben.
-
-Een gewone aanval doet 20 schade.
-
-Een vuurstorm doet 30 schade.
-
-Een ijsstorm doet 15 schade.
-
-Een genezingsspreuk geeft 25 gezondheid.
-
-We zouden voor iedere actie aparte code kunnen schrijven.
-
-Maar er is een interessantere mogelijkheid:
-
-> We kunnen het **gedrag van een actie** bewaren in een closure.
+- wat een closure is en hoe de syntax met pipes (`|...|`) werkt
+- het verschil tussen een gewone functie en een closure
+- closures met parameters en returnwaarden schrijven
+- closures combineren met `&mut` om spelobjecten aan te passen
+- closures toepassen op een groep vijanden in een `Vec`
+- variabelen uit de omgeving gebruiken binnen een closure.
 
 ---
 
@@ -536,7 +517,7 @@ Dat bepaalt de code die de closure aanroept.
 
 ## 18. Oefeningen
 
-## Oefening 1 — Eerste actie
+### Oefening 1 — Eerste actie
 
 Maak een closure:
 
@@ -550,7 +531,7 @@ Voer hem uit op één vijand.
 
 ---
 
-## Oefening 2 — AoE
+### Oefening 2 — AoE
 
 Maak een `Vec<Vijand>` met drie vijanden.
 
@@ -558,7 +539,7 @@ Gebruik een closure om alle vijanden 15 schade te geven.
 
 ---
 
-## Oefening 3 — Vuurstorm
+### Oefening 3 — Vuurstorm
 
 Maak een closure die 30 schade geeft.
 
@@ -566,7 +547,7 @@ Gebruik hem op alle vijanden.
 
 ---
 
-## Oefening 4 — IJsstorm
+### Oefening 4 — IJsstorm
 
 Maak een tweede closure die 20 schade geeft.
 
@@ -574,7 +555,7 @@ Gebruik beide aanvallen na elkaar.
 
 ---
 
-## Oefening 5 — Genezing
+### Oefening 5 — Genezing
 
 Maak een closure:
 
@@ -588,7 +569,7 @@ Gebruik hem op alle vijanden.
 
 ---
 
-## Oefening 6 — Bonus
+### Oefening 6 — Bonus
 
 Maak:
 
@@ -600,7 +581,7 @@ Laat je vuurstorm deze bonus gebruiken.
 
 ---
 
-## Oefening 7 — Kritieke aanval
+### Oefening 7 — Kritieke aanval
 
 Maak een closure die de gegeven basisschade verdubbelt.
 
@@ -612,7 +593,7 @@ Gebruik bijvoorbeeld:
 
 ---
 
-## Oefening 8 — Verschillende doelen
+### Oefening 8 — Verschillende doelen
 
 Maak drie vijanden.
 
@@ -626,58 +607,7 @@ Print daarna hun gezondheid.
 
 ---
 
-## 19. Rustlings
-
-Maak:
-
-```text
-exercises/closures/
-```
-
-met:
-
-```text
-01_first_closure.rs
-02_two_parameters.rs
-03_no_parameters.rs
-04_damage.rs
-05_healing.rs
-06_enemy.rs
-07_single_target.rs
-08_aoe.rs
-09_firestorm.rs
-10_ice_storm.rs
-11_bonus.rs
-12_critical.rs
-13_game_mode.rs
-14_game_actions.rs
-15_debug_return.rs
-16_debug_mut.rs
-17_debug_borrow.rs
-18_game_battle.rs
-```
-
-De opdrachten moeten geleidelijk moeilijker worden.
-
-Bijvoorbeeld `15_debug_return.rs`:
-
-```rust,ignore
-fn main() {
-    let bereken_schade = |basis| {
-        basis + 10;
-    };
-
-    let schade = bereken_schade(20);
-
-    println!("{schade}");
-}
-```
-
-De compiler vertelt dat hier iets niet klopt met de waarde die de closure teruggeeft.
-
----
-
-## 20. Eindopdracht — Het gevecht
+## 19. Eindopdracht — Het gevecht
 
 Maak een volledig klein gevecht.
 
@@ -722,7 +652,7 @@ Print na iedere actie de gezondheid van alle vijanden.
 
 ---
 
-## 21. Wat moet je onthouden?
+## 20. Wat moet je onthouden?
 
 Een closure is een klein stukje gedrag dat we kunnen bewaren in een variabele.
 
@@ -768,3 +698,14 @@ Voorlopig is het genoeg om zelf closures te kunnen maken, aanroepen en gebruiken
 
 Maak daarna de oefeningen uit de [Rustlings-map van Artikel 16](https://github.com/keitv-codecraft/keitv-rust-basis-rustlings/tree/master/exercises/artikel_16/).
 
+---
+
+## Controlelijst
+
+Je bent klaar met dit artikel als je zonder hulp:
+
+- [ ] weet wat een closure is en hoe je die definieert met `|...|`
+- [ ] een closure kunt aanroepen alsof het een functie is
+- [ ] een closure met parameters en een returnwaarde kunt schrijven
+- [ ] een closure kunt toepassen op elementen in een `Vec` met een `for`-lus
+- [ ] begrijpt hoe een closure waarden uit zijn omgeving kan gebruiken.

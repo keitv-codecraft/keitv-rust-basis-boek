@@ -1,40 +1,17 @@
-﻿# Rust 21 — `Result<T, E>` en foutafhandeling
+﻿# 21. Result en foutafhandeling
 
-Tot nu toe hebben we geleerd dat een functie met `Option<T>` kan aangeven:
+## Wat gaan we leren?
 
-> Er is een waarde, of er is geen waarde.
+In dit artikel leren we hoe we omgaan met operaties die kunnen slagen of mislukken met behulp van `Result<T, E>`.
 
-Bijvoorbeeld:
+We leren:
 
-```rust,ignore
-fn vind_wapen(naam: &str) -> Option<String> {
-    if naam == "Zwaard" {
-        Some(String::from("Zwaard"))
-    } else {
-        None
-    }
-}
-```
-
-Maar soms is `None` niet genoeg.
-
-Stel dat we een savegame proberen te laden.
-
-Er zijn verschillende redenen waarom dat kan mislukken:
-
-- het bestand bestaat niet
-- het bestand kan niet worden gelezen
-- de inhoud is ongeldig
-- een getal kan niet worden omgezet
-- de savegame is beschadigd.
-
-Dan willen we niet alleen weten:
-
-> Het is niet gelukt.
-
-We willen ook weten **waarom**.
-
-Daarvoor gebruikt Rust `Result<T, E>`.
+- wat `Result<T, E>` is en wat `Ok` en `Err` voorstellen
+- het verschil tussen `Option` ("is er een waarde?") en `Result` ("is het gelukt?")
+- `Result` behandelen met `match`
+- de `?`-operator gebruiken om fouten gemakkelijk door te geven
+- fouten afhandelen bij bestandsoperaties (savegame opslaan en laden)
+- automatische tests schrijven voor zowel `Ok`- als `Err`-uitkomsten.
 
 ---
 
@@ -857,300 +834,9 @@ let waarde = een_functie()?;
 
 ---
 
-## 26. Rustlings
+## 26. Zelf oefenen met Result
 
-Maak:
-
-```text id="b9x4k7"
-exercises/result/
-```
-
-## 01_ok.rs
-
-Maak een `Result<i32, String>` met `Ok(100)`.
-
-Gebruik `match` om de waarde af te drukken.
-
----
-
-## 02_err.rs
-
-Maak een `Result<i32, String>` met een foutmelding.
-
-Gebruik `match` om de fout af te drukken.
-
----
-
-## 03_match_result.rs
-
-Maak:
-
-```rust,ignore
-fn deel(a: i32, b: i32) -> Result<i32, String>
-```
-
-Geef een fout terug wanneer `b` nul is.
-
----
-
-## 04_result_success.rs
-
-Test `deel(10, 2)`.
-
-De uitkomst moet `Ok(5)` zijn.
-
----
-
-## 05_result_error.rs
-
-Test `deel(10, 0)`.
-
-De uitkomst moet een fout zijn.
-
----
-
-## 06_is_ok.rs
-
-Gebruik `is_ok()` om te controleren of een berekening gelukt is.
-
----
-
-## 07_is_err.rs
-
-Gebruik `is_err()` om te controleren of een operatie is mislukt.
-
----
-
-## 08_unwrap.rs
-
-Maak een `Ok(100)` en gebruik `unwrap()`.
-
-Test daarna bewust een `Err`.
-
-Beschrijf in een commentaar wat er gebeurt.
-
----
-
-## 09_unwrap_or.rs
-
-Gebruik `unwrap_or()` om een standaardwaarde te gebruiken wanneer een berekening mislukt.
-
----
-
-## 10_shop.rs
-
-Maak:
-
-```rust,ignore
-fn koop_item(goud: i32, prijs: i32) -> Result<i32, String>
-```
-
-Geef een fout als er onvoldoende goud is.
-
----
-
-## 11_shop_invalid_price.rs
-
-Breid `koop_item` uit zodat een prijs van nul of lager ook een fout geeft.
-
----
-
-## 12_level_up.rs
-
-Maak:
-
-```rust,ignore
-fn level_up(xp: i32) -> Result<i32, String>
-```
-
-De speler heeft minimaal 100 XP nodig.
-
----
-
-## 13_savegame.rs
-
-Maak:
-
-```rust,ignore
-fn maak_savegame(
-    naam: &str,
-    gezondheid: i32,
-) -> Result<String, String>
-```
-
-Geef een fout wanneer de gezondheid negatief is.
-
----
-
-## 14_savegame_file.rs
-
-Gebruik:
-
-```rust,ignore
-std::fs::write
-```
-
-om een savegame op te slaan.
-
-Behandel de mogelijke fout met `Result`.
-
----
-
-## 15_load_savegame.rs
-
-Gebruik:
-
-```rust,ignore
-std::fs::read_to_string
-```
-
-om een savegame te lezen.
-
-Geef de inhoud terug als `Ok`.
-
-Geef de fout terug als `Err`.
-
----
-
-## 16_question_mark.rs
-
-Maak twee functies:
-
-```rust,ignore
-fn controleer(getal: i32) -> Result<i32, String>
-```
-
-en:
-
-```rust,ignore
-fn verdubbel(getal: i32) -> Result<i32, String>
-```
-
-Gebruik in `verdubbel` de `?`-operator.
-
----
-
-## 17_question_mark_debug.rs
-
-De volgende functie compileert niet:
-
-```rust,ignore
-fn controleer(getal: i32) -> Result<i32, String> {
-    if getal < 0 {
-        Err(String::from("Negatief"))
-    }
-
-    Ok(getal)
-}
-```
-
-Onderzoek waarom.
-
-Los de functie op.
-
----
-
-## 18_result_move.rs
-
-Onderzoek wat er gebeurt wanneer een `String` binnen een `Result` wordt verplaatst.
-
-Gebruik:
-
-```rust,ignore
-Result<String, String>
-```
-
-en los het ownership-probleem op met borrowing.
-
----
-
-## 19_rpg_save.rs
-
-Maak een `Speler` en een functie:
-
-```rust,ignore
-fn sla_speler_op(speler: &Speler) -> Result<(), String>
-```
-
-Schrijf de spelergegevens naar een bestand.
-
----
-
-## 20_rpg_load.rs
-
-Maak een functie:
-
-```rust,ignore
-fn laad_speler() -> Result<String, String>
-```
-
-Lees de savegame en behandel een ontbrekend bestand netjes.
-
----
-
-## 21_shop_tests.rs
-
-Schrijf automatische tests voor:
-
-- aankoop met genoeg goud
-- aankoop met te weinig goud
-- ongeldige prijs.
-
----
-
-## 22_save_tests.rs
-
-Test de savegamefuncties.
-
-Test minimaal:
-
-- geldige gegevens
-- ongeldige gegevens
-- succesvolle opslag.
-
----
-
-## 23_debug_result.rs
-
-De volgende code bevat een fout:
-
-```rust,ignore
-fn controleer(gezondheid: i32) -> Result<i32, String> {
-    if gezondheid > 0 {
-        Ok(gezondheid)
-    } else {
-        Err(String::from("Dood"))
-    }
-}
-
-fn main() {
-    let gezondheid = controleer(-10);
-
-    println!("{}", gezondheid + 10);
-}
-```
-
-Gebruik de compiler om te ontdekken waarom dit niet werkt.
-
----
-
-## 24_final_result.rs
-
-Maak een klein RPG-programma met:
-
-- een speler
-- een inventory
-- een shop
-- een savegame
-- minimaal drie functies die `Result` teruggeven
-- minimaal één functie die `?` gebruikt
-- automatische tests voor de belangrijkste foutgevallen.
-
----
-
-## 27. Oefeningen
-
-## Oefening 1 — Shop
+### Oefening 1 — Shop
 
 Maak een eenvoudige winkel.
 
@@ -1170,7 +856,7 @@ Laat de aankoop slagen wanneer er genoeg goud is en anders een fout opleveren.
 
 ---
 
-## Oefening 2 — Savegame
+### Oefening 2 — Savegame
 
 Maak een savegamebestand voor:
 
@@ -1182,7 +868,7 @@ Gebruik `Result` voor zowel opslaan als laden.
 
 ---
 
-## Oefening 3 — Ongeldige gegevens
+### Oefening 3 — Ongeldige gegevens
 
 Laat een savegame mislukken wanneer:
 
@@ -1192,7 +878,7 @@ Laat een savegame mislukken wanneer:
 
 ---
 
-## Oefening 4 — Fouten doorgeven
+### Oefening 4 — Fouten doorgeven
 
 Maak drie functies die elkaar aanroepen.
 
@@ -1200,7 +886,7 @@ Gebruik de `?`-operator om een fout helemaal terug naar `main` te laten gaan.
 
 ---
 
-## Oefening 5 — Fouten testen
+### Oefening 5 — Fouten testen
 
 Schrijf tests voor alle foutgevallen.
 
@@ -1208,7 +894,7 @@ Probeer daarbij zowel `Ok(...)` als `Err(...)` te testen.
 
 ---
 
-## 28. Wat moet je na dit artikel kunnen?
+## 27. Samenvatting en vooruitblik
 
 Je moet nu begrijpen:
 
@@ -1266,3 +952,14 @@ In het volgende artikel gaan we verder met **iterators**. Daar verbinden we `Vec
 
 Maak daarna de oefeningen uit de [Rustlings-map van Artikel 21](https://github.com/keitv-codecraft/keitv-rust-basis-rustlings/tree/master/exercises/artikel_21/).
 
+---
+
+## Controlelijst
+
+Je bent klaar met dit artikel als je zonder hulp:
+
+- [ ] weet wat `Result<T, E>` is en het verschil met `Option<T>` kunt uitleggen
+- [ ] een functie kunt schrijven die `Result` teruggeeft met `Ok(...)` of `Err(...)`
+- [ ] een `Result` kunt afhandelen met `match`
+- [ ] de `?`-operator kunt gebruiken om fouten door te geven naar de aanroepende functie
+- [ ] foutgevallen en geldige gevallen kunt testen met `cargo test`.

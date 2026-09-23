@@ -1,22 +1,17 @@
-﻿# Rust 22 — Iterators en iterator-adaptors
+﻿# 22. Iterators
 
-Tot nu toe hebben we met `Vec` al lijsten met waarden gemaakt en met `for` door die lijsten gelopen. We hebben ook closures geleerd, waarmee we kleine stukjes gedrag als waarde kunnen gebruiken.
+## Wat gaan we leren?
 
-Rust heeft hier een krachtig systeem voor: **iterators**.
+In dit artikel leren we hoe we efficiënt en expressief door data lopen met behulp van iterators en iterator-adaptors.
 
-Een iterator geeft ons één voor één waarden uit een verzameling. Vervolgens kunnen we die waarden bijvoorbeeld:
+We leren:
 
-- bekijken
-- aanpassen
-- selecteren
-- omzetten naar andere waarden
-- zoeken
-- optellen
-- verzamelen in een nieuwe `Vec`.
-
-De functies waarmee we een iterator bewerken, zoals `map()` en `filter()`, noemen we **iterator-adaptors**.
-
-We gaan dit vooral gebruiken voor onze RPG.
+- wat een iterator is en hoe `iter()` referenties levert
+- transformeren met `map()` en filteren met `filter()`
+- zoeken met `find()`, `any()` en `all()`
+- verzamelen naar een `Vec` met `collect()`
+- optellen met `sum()` en data aanpassen met `iter_mut()`
+- iterator-ketens bouwen voor game-logica.
 
 ---
 
@@ -928,7 +923,7 @@ collect() / sum() / any() / all()
 
 ## 22. Veelgemaakte fouten
 
-## Fout 1 — vergeten dat `iter()` referenties geeft
+### Fout 1 — vergeten dat `iter()` referenties geeft
 
 Bij:
 
@@ -961,7 +956,7 @@ Als je een compilerfout krijgt, kijk dan eerst naar de types.
 
 ---
 
-## Fout 2 — een `Vec` verwachten terwijl er nog een iterator is
+### Fout 2 — een `Vec` verwachten terwijl er nog een iterator is
 
 Dit:
 
@@ -982,7 +977,7 @@ let resultaat: Vec<i32> = getallen
 
 ---
 
-## Fout 3 — ownership per ongeluk overnemen
+### Fout 3 — ownership per ongeluk overnemen
 
 Dit:
 
@@ -998,7 +993,7 @@ Als je `namen` daarna nog nodig hebt, is `iter()` waarschijnlijk wat je zoekt.
 
 ---
 
-## Fout 4 — te veel tegelijk proberen
+### Fout 4 — te veel tegelijk proberen
 
 Een lange keten als:
 
@@ -1026,318 +1021,11 @@ De compiler is hierbij je hulpmiddel.
 
 ---
 
-## 23. Rustlings-oefeningen
-
-Voor dit hoofdstuk gebruiken we:
-
-```text
-exercises/iterators/
-```
-
-De opdrachten lopen bewust op in moeilijkheid.
-
-## Basis
-
-### 01_iter.rs
-
-Maak een `Vec` met drie getallen en loop er met `iter()` doorheen.
-
----
-
-### 02_next.rs
-
-Maak een iterator en gebruik `next()` om de eerste waarde op te vragen.
-
-Behandel het resultaat met `match`.
-
----
-
-### 03_next_none.rs
-
-Lees alle waarden uit een iterator met `next()`.
-
-Controleer wat er gebeurt nadat alle waarden zijn gelezen.
-
----
-
-### 04_map.rs
-
-Gebruik `map()` om ieder getal met 2 te vermenigvuldigen.
-
-Verzamel het resultaat met `collect()`.
-
----
-
-### 05_map_names.rs
-
-Maak een `Vec<String>` met drie namen.
-
-Gebruik `map()` om een nieuwe `Vec<String>` te maken waarin iedere naam `"Held: "` ervoor krijgt.
-
----
-
-### 06_collect.rs
-
-Maak een iterator die de getallen `1` tot en met `5` produceert en verzamel de resultaten in een `Vec<i32>`.
-
----
-
-## Filteren en zoeken
-
-### 07_filter.rs
-
-Maak een lijst met getallen en gebruik `filter()` om alleen getallen groter dan 10 te behouden.
-
----
-
-### 08_filter_even.rs
-
-Gebruik `filter()` om alleen even getallen te behouden.
-
----
-
-### 09_find.rs
-
-Gebruik `find()` om het eerste getal groter dan 20 te vinden.
-
-Behandel het resultaat als `Option`.
-
----
-
-### 10_find_name.rs
-
-Maak een `Vec<String>` met namen.
-
-Zoek met `find()` naar een specifieke naam.
-
----
-
-### 11_any.rs
-
-Controleer met `any()` of minstens één getal negatief is.
-
----
-
-### 12_all.rs
-
-Controleer met `all()` of alle getallen positief zijn.
-
----
-
-### 13_sum.rs
-
-Bereken met `sum()` de totale waarde van een lijst met getallen.
-
----
-
-## Mutable iterators
-
-### 14_iter_mut.rs
-
-Maak een `Vec<i32>`.
-
-Gebruik `iter_mut()` om ieder getal met 10 te verhogen.
-
----
-
-### 15_damage_all.rs
-
-Maak een struct:
-
-```rust,ignore
-struct Vijand {
-    naam: String,
-    gezondheid: i32,
-}
-```
-
-Gebruik `iter_mut()` om iedere vijand 10 schade te geven.
-
----
-
-### 16_heal_all.rs
-
-Gebruik `iter_mut()` om alle spelers 5 gezondheid te laten herstellen.
-
----
-
-## RPG
-
-### 17_living_enemies.rs
-
-Maak een lijst vijanden.
-
-Gebruik:
-
-```text
-iter()
-filter()
-collect()
-```
-
-om alle levende vijanden te verzamelen.
-
----
-
-### 18_enemy_names.rs
-
-Gebruik:
-
-```text
-iter()
-map()
-collect()
-```
-
-om de namen van alle vijanden te verzamelen.
-
-Omdat `naam` een `String` is, moet je goed nadenken over ownership en `clone()`.
-
----
-
-### 19_living_enemy_names.rs
-
-Combineer:
-
-```text
-filter()
-map()
-collect()
-```
-
-om alleen de namen van levende vijanden te krijgen.
-
----
-
-### 20_find_item.rs
-
-Maak een `Item`-struct en een inventaris.
-
-Gebruik `find()` om een item met een bepaalde naam te zoeken.
-
-Geef `Option<&Item>` terug.
-
----
-
-## Tests
-
-### 21_iterator_test.rs
-
-Schrijf een functie:
-
-```rust,ignore
-fn levende_vijanden(vijanden: &[Vijand]) -> Vec<&Vijand>
-```
-
-Schrijf minimaal twee tests:
-
-1. er zijn levende vijanden
-2. alle vijanden zijn dood.
-
----
-
-### 22_damage_test.rs
-
-Maak een functie die met `iter_mut()` alle vijanden schade geeft.
-
-Test daarna of alle gezondheid correct is aangepast.
-
----
-
-### 23_iterator_debug.rs
-
-In deze oefening staat bewust code die niet compileert.
-
-De iterator gebruikt een type dat niet overeenkomt met wat de closure verwacht.
-
-Lees de compilerfout en herstel de code.
-
----
-
-### 24_collect_debug.rs
-
-De code gebruikt `collect()`, maar Rust weet niet welk type verzameling moet worden gemaakt.
-
-Voeg de ontbrekende type-informatie toe.
-
----
-
-### 25_borrow_debug.rs
-
-De code probeert tijdens het itereren een verzameling op een manier te wijzigen die niet toegestaan is.
-
-Los het probleem op zonder `clone()` toe te voegen als dat niet nodig is.
-
----
-
-### 26_ownership_debug.rs
-
-De code gebruikt `into_iter()` en probeert daarna de oorspronkelijke `Vec` nog te gebruiken.
-
-Bepaal of `iter()` of een andere oplossing hier beter past.
-
----
-
-## Iterator-ketens
-
-### 27_chain.rs
-
-Maak een lijst met vijanden.
-
-Maak daarna één iterator-keten die:
-
-1. alleen levende vijanden selecteert
-2. hun namen neemt
-3. de namen verzamelt in een `Vec<String>`.
-
----
-
-### 28_strong_enemies.rs
-
-Selecteer met `filter()` alleen vijanden met minstens 50 gezondheid.
-
-Gebruik daarna `map()` om hun namen te verzamelen.
-
----
-
-### 29_total_health.rs
-
-Gebruik `iter()` en `map()` om de gezondheid van alle vijanden te verzamelen en gebruik daarna `sum()` om de totale gezondheid te berekenen.
-
----
-
-### 30_final_battle.rs
-
-Maak een klein gevechtssysteem met:
-
-```rust,ignore
-struct Speler {
-    naam: String,
-    gezondheid: i32,
-}
-
-struct Vijand {
-    naam: String,
-    gezondheid: i32,
-}
-```
-
-Gebruik iterators om:
-
-1. alle levende vijanden te vinden
-2. hun namen te verzamelen
-3. te bepalen of er nog minstens één vijand leeft
-4. de totale gezondheid van alle vijanden te berekenen.
-
-Schrijf daarnaast minimaal drie automatische tests.
-
----
-
-## 24. Zelfstandige opdrachten
+## 23. Zelfstandige opdrachten
 
 Naast Rustlings zijn deze opdrachten geschikt om zelfstandig te maken.
 
-## Opdracht 1 — Inventaris
+### Opdracht 1 — Inventaris
 
 Maak:
 
@@ -1359,7 +1047,7 @@ Gebruik iterators om:
 
 ---
 
-## Opdracht 2 — Gevecht
+### Opdracht 2 — Gevecht
 
 Maak vijf vijanden.
 
@@ -1381,7 +1069,7 @@ om de levende vijanden te vinden.
 
 ---
 
-## Opdracht 3 — Ervaringspunten
+### Opdracht 3 — Ervaringspunten
 
 Geef iedere vijand een hoeveelheid ervaringspunten:
 
@@ -1397,7 +1085,7 @@ Bereken met `map()` en `sum()` hoeveel ervaring de speler krijgt wanneer alle vi
 
 ---
 
-## Opdracht 4 — Zoek de baas
+### Opdracht 4 — Zoek de baas
 
 Maak een lijst met vijanden.
 
@@ -1409,7 +1097,7 @@ Behandel de mogelijkheid dat de draak niet bestaat met `Option`.
 
 ---
 
-## Opdracht 5 — Battle report
+### Opdracht 5 — Battle report
 
 Maak een functie die een tekstuele samenvatting van het gevecht maakt.
 
@@ -1423,7 +1111,7 @@ Schrijf tests voor de functie.
 
 ---
 
-## 25. Wat je nu moet kunnen
+## 24. Wat je nu moet kunnen
 
 Na dit hoofdstuk moet je begrijpen:
 
@@ -1482,3 +1170,14 @@ In een volgend hoofdstuk kunnen we dieper ingaan op **iterators en adaptors zelf
 
 Maak daarna de oefeningen uit de [Rustlings-map van Artikel 22](https://github.com/keitv-codecraft/keitv-rust-basis-rustlings/tree/master/exercises/artikel_22/).
 
+---
+
+## Controlelijst
+
+Je bent klaar met dit artikel als je zonder hulp:
+
+- [ ] een iterator kunt starten met `iter()` of `iter_mut()`
+- [ ] `map()` kunt gebruiken om elementen te transformeren
+- [ ] `filter()` kunt gebruiken om specifieke elementen te selecteren
+- [ ] elementen kunt verzamelen in een nieuwe `Vec` met `collect()`
+- [ ] `find()`, `any()`, `all()` en `sum()` kunt toepassen.

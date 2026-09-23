@@ -1,28 +1,17 @@
-﻿# Rust 20 — `Option<T>`: waarden die er misschien niet zijn
+﻿# 20. Option
 
-Tot nu toe gingen onze functies er meestal vanuit dat een waarde bestaat.
+## Wat gaan we leren?
 
-Bijvoorbeeld:
+In dit artikel leren we hoe Rust omgaat met waarden die er misschien wel zijn, maar misschien ook niet, met behulp van `Option<T>`.
 
-```rust,ignore
-fn gezondheid(speler: &Speler) -> i32 {
-    speler.gezondheid()
-}
-```
+We leren:
 
-Er is altijd een `Speler`, dus de functie kan gewoon een `i32` teruggeven.
-
-Maar in een echt programma zijn er situaties waarin iets **misschien bestaat en misschien niet**.
-
-Bijvoorbeeld:
-
-- een speler heeft misschien een wapen
-- een inventory bevat misschien een bepaald item
-- een vijand kan misschien gevonden worden
-- een speler kan misschien een quest hebben
-- een lijst kan misschien geen geschikt object bevatten.
-
-Rust gebruikt hiervoor `Option<T>`.
+- wat `Option<T>` is en wat `Some` en `None` betekenen
+- waarom Rust geen `null` heeft en hoe `Option` crashes voorkomt
+- `Option` uitpakken met `match` en `if let`
+- handige methods zoals `is_some()`, `is_none()`, `unwrap()` en `unwrap_or()`
+- hoe je optionele velden in structs gebruikt (zoals een optioneel wapen)
+- functies schrijven die een `Option` teruggeven.
 
 ---
 
@@ -721,274 +710,9 @@ waarde.unwrap_or(100)
 
 ---
 
-## 22. Rustlings
+## 22. Zelf oefenen met Option
 
-Maak:
-
-```text
-exercises/option/
-```
-
-## 01_some.rs
-
-Maak een `Option<i32>` met de waarde `100`.
-
-Druk de waarde af met `match`.
-
----
-
-## 02_none.rs
-
-Maak een `Option<String>` die geen waarde bevat.
-
-Gebruik `match` om:
-
-```text
-Geen wapen.
-```
-
-af te drukken.
-
----
-
-## 03_match_option.rs
-
-Maak:
-
-```rust,ignore
-fn toon_score(score: Option<i32>)
-```
-
-Druk de score af als deze bestaat en anders:
-
-```text
-Geen score.
-```
-
----
-
-## 04_option_string.rs
-
-Maak:
-
-```rust,ignore
-let wapen: Option<String>
-```
-
-Geef de speler een zwaard en druk de naam af.
-
-Gebruik `match`.
-
----
-
-## 05_option_none.rs
-
-Maak een speler zonder wapen.
-
-Gebruik `match` om dit netjes weer te geven.
-
----
-
-## 06_option_struct.rs
-
-Maak:
-
-```rust,ignore
-struct Speler {
-    naam: String,
-    wapen: Option<String>,
-}
-```
-
-Maak twee spelers:
-
-- één met een wapen
-- één zonder wapen.
-
-Toon beide.
-
----
-
-## 07_if_let.rs
-
-Gebruik `if let` om alleen een wapen af te drukken als de speler er één heeft.
-
----
-
-## 08_is_some.rs
-
-Gebruik `is_some()` om te controleren of een speler een wapen heeft.
-
----
-
-## 09_is_none.rs
-
-Gebruik `is_none()` om te controleren of een inventory-slot leeg is.
-
----
-
-## 10_unwrap.rs
-
-Maak een `Some(100)` en haal de waarde eruit met `unwrap()`.
-
-Test daarna wat er gebeurt wanneer je `unwrap()` gebruikt op `None`.
-
-Deze oefening mag bewust crashen.
-
----
-
-## 11_unwrap_or.rs
-
-Gebruik `unwrap_or()` om een standaardgezondheid van `100` te gebruiken wanneer de echte gezondheid ontbreekt.
-
----
-
-## 12_find_player.rs
-
-Maak:
-
-```rust,ignore
-fn vind_speler(naam: &str) -> Option<String>
-```
-
-Geef `Some(naam)` terug wanneer de naam `"Arin"` is.
-
-Geef anders `None` terug.
-
----
-
-## 13_find_item.rs
-
-Maak:
-
-```rust,ignore
-struct Item {
-    naam: String,
-}
-```
-
-Schrijf een functie die zoekt naar een item en `Option` teruggeeft.
-
----
-
-## 14_option_move.rs
-
-De volgende code bevat een ownership-probleem:
-
-```rust,ignore
-let wapen = Some(String::from("Zwaard"));
-
-match wapen {
-    Some(naam) => println!("{naam}"),
-    None => println!("Geen wapen"),
-}
-
-println!("{:?}", wapen);
-```
-
-Gebruik `#[derive(Debug)]` waar nodig.
-
-Onderzoek waarom de laatste regel niet werkt.
-
-Los het probleem op door de `Option` alleen te lenen.
-
----
-
-## 15_option_debug.rs
-
-De volgende functie heeft een probleem:
-
-```rust,ignore
-fn vind_score(naam: &str) -> i32 {
-    if naam == "Arin" {
-        100
-    }
-}
-```
-
-De functie kan blijkbaar niets teruggeven wanneer de naam anders is.
-
-Pas de functie aan zodat dat expliciet wordt gemaakt met `Option`.
-
----
-
-## 16_option_game.rs
-
-Maak een `Speler` met:
-
-```rust,ignore
-wapen: Option<String>
-```
-
-Schrijf een functie:
-
-```rust,ignore
-fn toon_wapen(speler: &Speler)
-```
-
-die beide mogelijkheden correct behandelt.
-
----
-
-## 17_option_inventory.rs
-
-Maak een inventory met `Vec<Item>`.
-
-Schrijf:
-
-```rust,ignore
-fn vind_item(items: &[Item], naam: &str) -> Option<&Item>
-```
-
-Zoek een item op naam.
-
----
-
-## 18_option_debug.rs
-
-De volgende code bevat een fout:
-
-```rust,ignore
-fn geef_wapen() -> Option<String> {
-    String::from("Zwaard")
-}
-```
-
-Gebruik de compiler om te bepalen wat er ontbreekt.
-
----
-
-## 19_option_battle.rs
-
-Maak:
-
-```rust,ignore
-struct Vijand {
-    naam: String,
-    wapen: Option<String>,
-}
-```
-
-Schrijf een functie die het wapen van de vijand toont.
-
----
-
-## 20_final_option.rs
-
-Maak een klein RPG-programma waarin:
-
-- een speler een optioneel wapen heeft
-- een inventory items bevat
-- een functie een item kan zoeken
-- een functie `Option` teruggeeft
-- de uitkomst met `match` wordt behandeld
-- minimaal drie automatische tests aanwezig zijn.
-
----
-
-## 23. Oefeningen
-
-## Oefening 1 — Optioneel wapen
+### Oefening 1 — Optioneel wapen
 
 Voeg aan je bestaande `Speler` een optioneel wapen toe.
 
@@ -996,7 +720,7 @@ Zorg ervoor dat een speler zonder wapen correct wordt weergegeven.
 
 ---
 
-## Oefening 2 — Item zoeken
+### Oefening 2 — Item zoeken
 
 Maak een inventory met minstens vijf items.
 
@@ -1009,7 +733,7 @@ Test zowel:
 
 ---
 
-## Oefening 3 — Optionele quest
+### Oefening 3 — Optionele quest
 
 Maak:
 
@@ -1023,7 +747,7 @@ Toon een passende melding voor beide situaties.
 
 ---
 
-## Oefening 4 — Optionele beloning
+### Oefening 4 — Optionele beloning
 
 Maak een functie die soms een beloning geeft:
 
@@ -1045,7 +769,7 @@ None
 
 ---
 
-## Oefening 5 — Tests
+### Oefening 5 — Tests
 
 Schrijf tests voor:
 
@@ -1056,7 +780,7 @@ Schrijf tests voor:
 
 ---
 
-## 24. Wat moet je na dit artikel kunnen?
+## 23. Samenvatting en vooruitblik
 
 Na dit artikel moet je begrijpen:
 
@@ -1099,3 +823,14 @@ Daarvoor gebruiken we `Result<T, E>`.
 
 Maak daarna de oefeningen uit de [Rustlings-map van Artikel 20](https://github.com/keitv-codecraft/keitv-rust-basis-rustlings/tree/master/exercises/artikel_20/).
 
+---
+
+## Controlelijst
+
+Je bent klaar met dit artikel als je zonder hulp:
+
+- [ ] weet wat `Option<T>` is en wat `Some` en `None` voorstellen
+- [ ] een `Option` veilig kunt afhandelen met `match` of `if let`
+- [ ] weet waarom `unwrap()` gevaarlijk kan zijn en wanneer je `unwrap_or()` gebruikt
+- [ ] een optioneel veld kunt toevoegen aan een struct
+- [ ] een zoekfunctie kunt schrijven die `Option` teruggeeft.

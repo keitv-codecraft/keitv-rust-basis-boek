@@ -1,20 +1,26 @@
-# Nog aanpassen
+# TODO & Status
 
-- Controleer na de eerste deploy de Pages-URL en pas eventueel links of huisstijl aan.
-- Voeg eventueel logo, huisstijl en contactgegevens toe.
+## Afgerond
 
-## Inhoudelijke review
+- [x] Titels van alle 38 artikelen gestandaardiseerd naar `# N. TITEL` (synchroon met `SUMMARY.md`).
+- [x] Consistente lesopbouw ingevoerd in alle 38 artikelen:
+  - Bovenin: `## Wat gaan we leren?` met kernpunten en scheidingslijn `---`.
+  - Onderin: directe verwijzing naar de bijbehorende map in `keitv-rustlings` (`https://github.com/keitv-codecraft/keitv-rust-basis-rustlings/tree/master/exercises/artikel_N/`).
+  - Afsluitende scheidingslijn `---` en `## Controlelijst` met checklists voor leerdoelen.
+- [x] Alle uitgeschreven ChatGPT-Rustlings opgaven verwijderd uit de artikelen; niet-Rustlings oefeningen (zelfstandige opdrachten, eindopdrachten, denkvragen) behouden met herstelde H2-nummering en logische H3-subkoppen.
+- [x] Alle codevoorbeelden gecontroleerd op playground-compatibiliteit en testbaarheid:
+  - Bewust foutieve voorbeelden voorzien van `ignore`.
+  - Interactieve invoer/loops en bestands-I/O voorzien van `no_run` of `ignore`.
+  - `mdbook test` slaagt 100% (alle 38 artikelen compileren en slagen).
+- [x] Rustlings-repo gecontroleerd:
+  - Alle 132 oplossingen geformatteerd met `rustfmt --edition 2024`.
+  - `rustlings dev check` slaagt 100% (6/6 verificaties en 132/132 oplossingen).
+- [x] Diagrammen en ASCII-schema's opgeschoond met Unicode boxed art.
+- [x] Losse puntkomma's buiten codeblokken verwijderd.
 
-- Controleer per artikel of de Rustlings-oefeningen alle leerdoelen oefenen.
-- Controleer per artikel de eerste, middelste en laatste codevoorbeelden in de
-	Playground.
-- Voeg verborgen `#`-regels toe wanneer een voorbeeld imports, `main` of
-	ondersteunende types nodig heeft.
-- Gebruik `ignore` voor bewust foutieve compiler-oefeningen en `no_run` voor
-	voorbeelden die wel compileren maar bestanden of invoer gebruiken.
-- Controleer taal, trailing punctuation en admonitions op beginnersniveau.
-- Overweeg een korte tussenles over numerieke conversies, `char`/Unicode,
-	gebruikersinvoer en testbare pure functies. Houd macroquad, Bevy, physics,
-	design patterns en grote delen van het Rust Book buiten scope.
-- Controleer of de RPG-artikelen voldoende concrete code bevatten zonder de
-	leerlingen te overspoelen met architectuur.
+## Toekomstige wensen & onderhoud
+
+- [ ] Controleer na de eerste online publicatie de GitHub Pages URL en pas eventueel verdere stijlelementen aan.
+- [ ] Voeg eventueel een logo, huisstijl en contactgegevens van KeiTV toe.
+- [ ] Eventueel verdere interactieve Playground-verfijningen met verborgen `#`-regels waar gewenst voor specifieke losse expressies.
+- [ ] Besluit nemen over publieke status van de `solutions/`-map in `keitv-rustlings` (zie `keitv-rustlings/TODO.md`).

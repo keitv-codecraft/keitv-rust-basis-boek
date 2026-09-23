@@ -1,6 +1,6 @@
-﻿# Rust 13 — Traits: gedrag delen
+﻿# 13. Traits: gedrag delen
 
-## 1. Wat gaan we leren?
+## Wat gaan we leren?
 
 We hebben inmiddels geleerd om:
 
@@ -53,7 +53,7 @@ Na dit artikel kun je:
 
 ---
 
-## 2. Eerst het probleem
+## 1. Eerst het probleem
 
 Stel dat we deze twee structs hebben:
 
@@ -107,7 +107,7 @@ Daarvoor maken we een trait.
 
 ---
 
-## 3. Wat is een trait?
+## 2. Wat is een trait?
 
 Een trait beschrijft **gedrag dat een type kan hebben**.
 
@@ -149,7 +149,7 @@ Nu hebben beide types de eigenschap `Levend`.
 
 ---
 
-## 4. Een trait maken
+## 3. Een trait maken
 
 De eenvoudigste vorm is:
 
@@ -210,7 +210,7 @@ impl Levend for Speler {
 
 ---
 
-## 5. Een trait gebruiken
+## 4. Een trait gebruiken
 
 We kunnen daarna gewoon schrijven:
 
@@ -230,7 +230,7 @@ Dit werkt omdat `Speler` de trait `Levend` heeft geïmplementeerd.
 
 ---
 
-## 6. Dezelfde trait voor meerdere structs
+## 5. Dezelfde trait voor meerdere structs
 
 Dit is waar traits echt interessant worden.
 
@@ -290,7 +290,7 @@ Het belangrijke is dat beide types dezelfde **soort gedrag** aanbieden.
 
 ---
 
-## 7. Traits kunnen verschillend worden uitgevoerd
+## 6. Traits kunnen verschillend worden uitgevoerd
 
 De implementatie hoeft niet hetzelfde te zijn.
 
@@ -345,7 +345,7 @@ Maar ieder type bepaalt zelf hoe dat werkt.
 
 ---
 
-## 8. Trait versus `impl`
+## 7. Trait versus `impl`
 
 We hebben eerder dit geleerd:
 
@@ -393,7 +393,7 @@ De tweede voert een trait uit voor `Speler`.
 
 ---
 
-## 9. Een trait met meer dan één method
+## 8. Een trait met meer dan één method
 
 Een trait kan meerdere methods bevatten.
 
@@ -455,7 +455,7 @@ De `String` blijft eigendom van de `Speler`.
 
 ---
 
-## 10. Een trait kan ook standaardgedrag hebben
+## 9. Een trait kan ook standaardgedrag hebben
 
 Een trait hoeft niet voor iedere method alleen een beschrijving te bevatten.
 
@@ -503,7 +503,7 @@ Dit is handig als verschillende types hetzelfde gedrag kunnen delen.
 
 ---
 
-## 11. Een gamevoorbeeld: aanvallers
+## 10. Een gamevoorbeeld: aanvallers
 
 Stel dat we verschillende dingen hebben die kunnen aanvallen.
 
@@ -579,7 +579,7 @@ Toren  → kan schade doen
 
 ---
 
-## 12. Een trait gebruiken in een functie
+## 11. Een trait gebruiken in een functie
 
 Hier wordt het interessant.
 
@@ -617,7 +617,7 @@ Dezelfde functie kan dus met beide werken.
 
 ---
 
-## 13. Een eenvoudiger voorbeeld zonder generics
+## 12. Een eenvoudiger voorbeeld zonder generics
 
 Omdat generics nog niet zijn uitgelegd, kunnen we hetzelfde idee voorlopig ook bekijken zonder die extra syntax.
 
@@ -641,7 +641,7 @@ De generics komen later terug wanneer we precies willen leren hoe we één funct
 
 ---
 
-## 14. Een trait voor gamekarakters
+## 13. Een trait voor gamekarakters
 
 We kunnen een wat groter voorbeeld maken.
 
@@ -727,7 +727,7 @@ Dit is een mooi voorbeeld van een trait die gedrag beschrijft dat verschillende 
 
 ---
 
-## 15. Traits met mutable methods
+## 14. Traits met mutable methods
 
 Een trait kan natuurlijk ook methods bevatten die iets veranderen.
 
@@ -792,7 +792,7 @@ en borrowing.
 
 ---
 
-## 16. Traits en enums
+## 15. Traits en enums
 
 Traits kunnen ook bij enums worden gebruikt.
 
@@ -843,7 +843,7 @@ Dit combineert twee dingen die we net geleerd hebben:
 
 ---
 
-## 17. Een trait is een afspraak
+## 16. Een trait is een afspraak
 
 Dit is misschien de belangrijkste manier om over traits na te denken.
 
@@ -879,9 +879,9 @@ De precieze manier waarop ze hun schade bepalen kan verschillen.
 
 ---
 
-## 18. Veelgemaakte fouten
+## 17. Veelgemaakte fouten
 
-## Fout 1 — Een method vergeten
+### Fout 1 — Een method vergeten
 
 Als je trait zegt:
 
@@ -905,7 +905,7 @@ Als je hem vergeet, geeft Rust een foutmelding.
 
 ---
 
-## Fout 2 — Verkeerde returnwaarde
+### Fout 2 — Verkeerde returnwaarde
 
 Als de trait zegt:
 
@@ -925,7 +925,7 @@ fn is_levend(&self) -> i32 {
 
 ---
 
-## Fout 3 — Verkeerde parameters
+### Fout 3 — Verkeerde parameters
 
 Als de trait zegt:
 
@@ -943,7 +943,7 @@ fn neem_schade(&mut self, schade: i32) {
 
 ---
 
-## Fout 4 — `impl` door elkaar halen
+### Fout 4 — `impl` door elkaar halen
 
 Dit:
 
@@ -969,9 +969,9 @@ Het tweede implementeert de trait `Levend` voor `Speler`.
 
 ---
 
-## 19. Zelf proberen
+## 18. Zelf proberen
 
-## Opdracht 1 — Eerste trait
+### Opdracht 1 — Eerste trait
 
 Maak:
 
@@ -985,7 +985,7 @@ Maak daarna een `Speler` en implementeer deze trait.
 
 ---
 
-## Opdracht 2 — Tweede type
+### Opdracht 2 — Tweede type
 
 Maak een `Vijand` die dezelfde `Praat`-trait gebruikt.
 
@@ -993,7 +993,7 @@ Laat de speler iets anders zeggen dan de vijand.
 
 ---
 
-## Opdracht 3 — Levend
+### Opdracht 3 — Levend
 
 Maak:
 
@@ -1007,13 +1007,13 @@ Implementeer deze voor `Speler`.
 
 ---
 
-## Opdracht 4 — Vijand
+### Opdracht 4 — Vijand
 
 Implementeer `Levend` ook voor `Vijand`.
 
 ---
 
-## Opdracht 5 — Beschadigbaar
+### Opdracht 5 — Beschadigbaar
 
 Maak:
 
@@ -1027,7 +1027,7 @@ Implementeer dit voor `Speler`.
 
 ---
 
-## Opdracht 6 — Wapen
+### Opdracht 6 — Wapen
 
 Maak:
 
@@ -1051,7 +1051,7 @@ Implementeer `Schade` voor `Wapen`.
 
 ---
 
-## Opdracht 7 — Eigen gedrag
+### Opdracht 7 — Eigen gedrag
 
 Bedenk een trait voor iets uit een game.
 
@@ -1069,314 +1069,7 @@ Maak een trait en implementeer die voor één van je structs.
 
 ---
 
-## 20. Rustlings-opgaven
-
-Maak:
-
-```text
-exercises/
-└── traits/
-    ├── 01_first_trait.rs
-    ├── 02_implement_trait.rs
-    ├── 03_second_type.rs
-    ├── 04_trait_method.rs
-    ├── 05_alive.rs
-    ├── 06_enemy_alive.rs
-    ├── 07_damageable.rs
-    ├── 08_mut_trait.rs
-    ├── 09_default_method.rs
-    ├── 10_multiple_methods.rs
-    ├── 11_weapon_trait.rs
-    ├── 12_enum_trait.rs
-    ├── 13_game_character.rs
-    ├── 14_debug_missing_method.rs
-    ├── 15_debug_return.rs
-    ├── 16_debug_parameters.rs
-    ├── 17_debug_impl.rs
-    └── 18_game_traits.rs
-```
-
-## ⭐ Niveau 1 — de basis
-
-### 1. Eerste trait
-
-Maak een trait:
-
-```rust,ignore
-trait Praat {
-    fn praat(&self);
-}
-```
-
-Maak een `Speler` en implementeer de trait.
-
----
-
-### 2. Implementeren
-
-Maak een tweede struct:
-
-```rust,ignore
-struct Vijand {
-}
-```
-
-Laat ook deze `Praat` implementeren.
-
----
-
-### 3. Eigen tekst
-
-Laat de speler bijvoorbeeld zeggen:
-
-```text
-Ik ben de held!
-```
-
-en de vijand:
-
-```text
-Ik ben een goblin!
-```
-
----
-
-### 4. Trait-method gebruiken
-
-Maak beide objecten en roep hun `praat()`-method aan.
-
----
-
-### 5. `Levend`
-
-Maak een `Levend` trait met:
-
-```rust,ignore
-fn is_levend(&self) -> bool;
-```
-
-Implementeer hem voor `Speler`.
-
----
-
-### 6. Tweede implementatie
-
-Implementeer `Levend` ook voor `Vijand`.
-
----
-
-## ⭐⭐ Niveau 2 — traits combineren met eerdere kennis
-
-### 7. Beschadigbaar
-
-Maak:
-
-```rust,ignore
-trait Beschadigbaar {
-    fn neem_schade(&mut self, schade: i32);
-}
-```
-
-Gebruik `&mut self`.
-
----
-
-### 8. Gezondheid veranderen
-
-Maak een `Speler` met gezondheid en implementeer `Beschadigbaar`.
-
-Test:
-
-```rust,ignore
-speler.neem_schade(25);
-```
-
----
-
-### 9. Standaardmethod
-
-Maak een trait met:
-
-```rust,ignore
-fn is_levend(&self) -> bool;
-
-fn status(&self) {
-    println!("Status gecontroleerd.");
-}
-```
-
-Implementeer alleen `is_levend()`.
-
-Test daarna `status()`.
-
----
-
-### 10. Meerdere methods
-
-Maak:
-
-```text
-Karakter
-├── naam()
-├── gezondheid()
-└── is_levend()
-```
-
-Implementeer deze voor `Speler`.
-
----
-
-### 11. Wapen
-
-Maak:
-
-```rust,ignore
-enum Wapen {
-    Zwaard,
-    Boog,
-    Staf,
-}
-```
-
-Maak een trait:
-
-```rust,ignore
-trait Schade {
-    fn schade(&self) -> i32;
-}
-```
-
-Geef ieder wapen een eigen hoeveelheid schade.
-
----
-
-### 12. Enum + trait
-
-Gebruik `match` in de implementatie van `Schade`.
-
-Bijvoorbeeld:
-
-```text
-Zwaard → 20
-Boog   → 15
-Staf   → 10
-```
-
----
-
-## ⭐⭐⭐ Niveau 3 — combineren
-
-### 13. Gamekarakter
-
-Maak:
-
-```rust,ignore
-trait Karakter {
-    fn naam(&self) -> &str;
-    fn gezondheid(&self) -> i32;
-}
-```
-
-Implementeer dit voor `Speler` en `Vijand`.
-
----
-
-### 14. Debug — ontbrekende method
-
-Je krijgt een trait met:
-
-```rust,ignore
-trait Levend {
-    fn is_levend(&self) -> bool;
-}
-```
-
-De implementatie bevat geen `is_levend()`.
-
-Laat de compilerfout je vertellen wat ontbreekt.
-
----
-
-### 15. Debug — verkeerde returnwaarde
-
-De trait verwacht:
-
-```rust,ignore
-fn is_levend(&self) -> bool;
-```
-
-maar de implementatie geeft een `i32` terug.
-
-Zoek en herstel de fout.
-
----
-
-### 16. Debug — verkeerde parameters
-
-De trait verwacht:
-
-```rust,ignore
-fn neem_schade(&mut self, schade: i32);
-```
-
-maar de implementatie gebruikt bijvoorbeeld:
-
-```rust,ignore
-fn neem_schade(&self);
-```
-
-Zoek uit waarom Rust dit niet accepteert.
-
----
-
-### 17. Debug — verkeerde `impl`
-
-Je krijgt:
-
-```rust,ignore
-impl Speler {
-    fn is_levend(&self) -> bool {
-        self.gezondheid > 0
-    }
-}
-```
-
-maar `is_levend()` hoort bij de trait `Levend`.
-
-Pas de code aan zodat de trait correct wordt geïmplementeerd.
-
----
-
-### 18. Eindopdracht — gamekarakters
-
-Maak twee types:
-
-```text
-Speler
-Vijand
-```
-
-Maak een trait:
-
-```text
-Karakter
-```
-
-met minstens:
-
-```text
-naam()
-gezondheid()
-is_levend()
-```
-
-Laat beide types de trait implementeren.
-
-Maak vervolgens een klein programma waarin je beide karakters toont.
-
----
-
-## 21. Kleine eindopdracht — wie kan aanvallen?
+## 19. Kleine eindopdracht — wie kan aanvallen?
 
 We gaan ons RPG-project verder uitbreiden.
 
@@ -1429,67 +1122,18 @@ Dat is precies het soort structuur waarvoor traits nuttig zijn.
 
 ---
 
-## 22. Wat moet je nu kunnen?
-
-Na dit artikel zou je moeten kunnen:
-
-- [ ] uitleggen wat een trait is
-- [ ] een trait maken
-- [ ] een trait implementeren voor een struct
-- [ ] dezelfde trait voor meerdere structs implementeren
-- [ ] trait-methods gebruiken
-- [ ] `impl Speler` herkennen
-- [ ] `impl Trait for Speler` herkennen
-- [ ] een trait met meerdere methods maken
-- [ ] een standaardmethod in een trait maken
-- [ ] `&self` en `&mut self` in traits gebruiken
-- [ ] een trait gebruiken met een enum
-- [ ] traits combineren met structs en methods.
-
-Het belangrijkste idee:
-
-> **Een trait beschrijft gedrag dat een type kan hebben.**
-
-Bijvoorbeeld:
-
-```rust,ignore
-trait Aanvaller {
-    fn schade(&self) -> i32;
-}
-```
-
-Daarna kan een speler zeggen:
-
-```rust,ignore
-impl Aanvaller for Speler {
-    fn schade(&self) -> i32 {
-        self.schade
-    }
-}
-```
-
-en een vijand:
-
-```rust,ignore
-impl Aanvaller for Vijand {
-    fn schade(&self) -> i32 {
-        self.schade
-    }
-}
-```
-
-Beide kunnen dan zeggen:
-
-```rust,ignore
-speler.schade()
-vijand.schade()
-```
-
-Hoewel `Speler` en `Vijand` verschillende types zijn, hebben ze hetzelfde soort gedrag.
-
-Dat is de kern van traits.
-
 ## Rustlings-oefeningen
 
 Maak daarna de oefeningen uit de [Rustlings-map van Artikel 13](https://github.com/keitv-codecraft/keitv-rust-basis-rustlings/tree/master/exercises/artikel_13/).
 
+---
+
+## Controlelijst
+
+Je bent klaar met dit artikel als je zonder hulp:
+
+- [ ] weet wat een trait is en waarom je traits gebruikt
+- [ ] een trait met method-definities kunt maken
+- [ ] een trait kunt implementeren voor meerdere verschillende structs
+- [ ] een trait met standaardgedrag (default implementation) kunt schrijven
+- [ ] een functie kunt schrijven die een trait als parameter accepteert.

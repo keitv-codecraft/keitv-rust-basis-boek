@@ -1,4 +1,4 @@
-﻿# 3. Variabelen en muteerbaarheid
+# 3. Variabelen en muteerbaarheid
 
 ## Wat gaan we leren?
 
@@ -747,12 +747,6 @@ De waarde mag wel veranderen.
 
 ---
 
-## Rustlings oefeningen
-
-Ga nu verder met de Rustlings oefeningen die bij dit artikel horen. Kom daarna hier weer terug.
-
----
-
 ## Uitdaging: RPG status
 
 Maak een programma dat een speler beschrijft.
@@ -835,6 +829,12 @@ Waarom?
 
 ---
 
+## Rustlings-oefeningen
+
+Maak daarna de oefeningen uit de [Rustlings-map van Artikel 3](https://github.com/keitv-codecraft/keitv-rust-basis-rustlings/tree/master/exercises/artikel_3/).
+
+---
+
 ## Controlelijst
 
 Je bent klaar met dit artikel als je zonder hulp:
@@ -849,8 +849,4 @@ Je bent klaar met dit artikel als je zonder hulp:
 - [ ] variabelen kunt gebruiken in berekeningen
 - [ ] goede namen voor variabelen kunt kiezen
 - [ ] een klein stukje game-status met variabelen kunt programmeren.
-
-## Rustlings-oefeningen
-
-Maak daarna de oefeningen uit de [Rustlings-map van Artikel 3](https://github.com/keitv-codecraft/keitv-rust-basis-rustlings/tree/master/exercises/artikel_3/).
 

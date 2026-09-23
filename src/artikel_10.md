@@ -1,6 +1,6 @@
-﻿# Structs: gegevens bij elkaar bewaren
+﻿# 10. Structs
 
-## 1. Wat gaan we leren?
+## Wat gaan we leren?
 
 Tot nu toe hebben we veel losse variabelen gebruikt.
 
@@ -36,7 +36,7 @@ We leren nog **geen `impl`-blokken en methods**. Die komen in de volgende les.
 
 ---
 
-## 2. Wat is een struct?
+## 1. Wat is een struct?
 
 Een `struct` is een datatype dat we zelf kunnen maken.
 
@@ -77,7 +77,7 @@ Speler
 
 ---
 
-## 3. Waarom hebben we structs nodig?
+## 2. Waarom hebben we structs nodig?
 
 Zonder struct zouden we bijvoorbeeld dit hebben:
 
@@ -133,7 +133,7 @@ Nu zijn de gegevens netjes gegroepeerd.
 
 ---
 
-## 4. Een struct definiëren
+## 3. Een struct definiëren
 
 Een struct definiëren we met `struct`.
 
@@ -178,7 +178,7 @@ We kunnen dus zelf datatypes maken die passen bij ons programma.
 
 ---
 
-## 5. Een struct maken
+## 4. Een struct maken
 
 Nadat we een struct hebben gedefinieerd, kunnen we er een waarde van maken.
 
@@ -206,7 +206,7 @@ De waarden tussen `{` en `}` zijn de velden.
 
 ---
 
-## 6. De velden uitlezen
+## 5. De velden uitlezen
 
 We kunnen bij een veld komen met een punt:
 
@@ -240,7 +240,7 @@ speler.goud
 
 ---
 
-## 7. Een veld veranderen
+## 6. Een veld veranderen
 
 We kunnen een veld veranderen als de struct zelf mutable is.
 
@@ -270,7 +270,7 @@ println!("Goud: {}", speler.goud);
 
 ---
 
-## 8. `mut` geldt voor de hele struct
+## 7. `mut` geldt voor de hele struct
 
 Dit werkt niet:
 
@@ -306,7 +306,7 @@ Een eenvoudige manier om het te onthouden:
 
 ---
 
-## 9. Een struct met verschillende datatypes
+## 8. Een struct met verschillende datatypes
 
 Een struct kan verschillende datatypes bevatten.
 
@@ -338,7 +338,7 @@ Dit is precies waarvoor structs handig zijn:
 
 ---
 
-## 10. Structs voor onze game
+## 9. Structs voor onze game
 
 We kunnen nu beginnen met echte game-objecten.
 
@@ -398,7 +398,7 @@ Onze gamewereld begint nu vorm te krijgen.
 
 ---
 
-## 11. Een struct aan een functie geven
+## 10. Een struct aan een functie geven
 
 We kunnen een struct aan een functie meegeven.
 
@@ -441,7 +441,7 @@ kunnen we `speler` niet zomaar opnieuw gebruiken.
 
 ---
 
-## 12. Een struct lenen
+## 11. Een struct lenen
 
 Meestal willen we alleen de gegevens bekijken.
 
@@ -479,7 +479,7 @@ Dit is een mooie combinatie van de vorige twee lessen:
 
 ---
 
-## 13. Een struct mutable lenen
+## 12. Een struct mutable lenen
 
 We kunnen een struct ook mutable lenen.
 
@@ -516,7 +516,7 @@ Hij mocht de speler alleen tijdelijk veranderen.
 
 ---
 
-## 14. Waarom is dit zo handig?
+## 13. Waarom is dit zo handig?
 
 We kunnen nu functies schrijven die met onze game-objecten werken.
 
@@ -562,7 +562,7 @@ Dit begint al sterk te lijken op een echte game.
 
 ---
 
-## 15. Een struct kan andere structs bevatten
+## 14. Een struct kan andere structs bevatten
 
 Een struct hoeft niet alleen eenvoudige waarden te bevatten.
 
@@ -619,7 +619,7 @@ Hiermee kunnen we steeds complexere gamewerelden beschrijven.
 
 ---
 
-## 16. Ownership bij structs
+## 15. Ownership bij structs
 
 Hier komt ownership weer terug.
 
@@ -652,7 +652,7 @@ Ownership helpt dus ook bij het modelleren van onze gamewereld.
 
 ---
 
-## 17. Een struct teruggeven uit een functie
+## 16. Een struct teruggeven uit een functie
 
 Een functie kan een struct maken en teruggeven.
 
@@ -688,7 +688,7 @@ Dit is een heel gebruikelijk patroon.
 
 ---
 
-## 18. Structs met dezelfde datatype
+## 17. Structs met dezelfde datatype
 
 Stel dat we posities in onze game willen bewaren.
 
@@ -725,7 +725,7 @@ Dat is beter dan overal losse `x`- en `y`-variabelen gebruiken.
 
 ---
 
-## 19. Structs zijn geen classes
+## 18. Structs zijn geen classes
 
 Als je eerder met andere programmeertalen hebt gewerkt, kom je misschien het woord **class** tegen.
 
@@ -751,9 +751,9 @@ Voor nu concentreren we ons op de gegevens.
 
 ---
 
-## 20. Veelgemaakte fouten
+## 19. Veelgemaakte fouten
 
-## Fout 1 — een veld vergeten
+### Fout 1 — een veld vergeten
 
 Als we hebben:
 
@@ -777,7 +777,7 @@ let speler = Speler {
 
 ---
 
-## Fout 2 — verkeerde datatype
+### Fout 2 — verkeerde datatype
 
 Dit klopt niet:
 
@@ -801,7 +801,7 @@ gezondheid: 100,
 
 ---
 
-## Fout 3 — vergeten `mut`
+### Fout 3 — vergeten `mut`
 
 Dit werkt niet:
 
@@ -827,7 +827,7 @@ speler.gezondheid = 50;
 
 ---
 
-## Fout 4 — ownership vergeten
+### Fout 4 — ownership vergeten
 
 Dit:
 
@@ -849,7 +849,7 @@ fn toon_speler(speler: &Speler) {
 
 ---
 
-## 21. Zelf proberen
+## 20. Zelf proberen
 
 ### Opdracht 1 — Eerste struct
 
@@ -957,291 +957,7 @@ Laat een speler schade krijgen.
 
 ---
 
-## 22. Rustlings-opgaven
-
-Een mogelijke structuur:
-
-```text
-exercises/
-└── structs/
-    ├── 01_struct.rs
-    ├── 02_create_player.rs
-    ├── 03_player_fields.rs
-    ├── 04_mut_player.rs
-    ├── 05_enemy.rs
-    ├── 06_weapon.rs
-    ├── 07_position.rs
-    ├── 08_show_player.rs
-    ├── 09_damage.rs
-    ├── 10_heal.rs
-    ├── 11_nested_struct.rs
-    ├── 12_create_enemy.rs
-    ├── 13_return_struct.rs
-    ├── 14_debug_struct.rs
-    ├── 15_debug_mut.rs
-    ├── 16_debug_borrow.rs
-    └── 17_game_character.rs
-```
-
-## ⭐ Niveau 1
-
-### 01 — Eerste struct
-
-Vul een lege `.rs`-file aan met een struct:
-
-```rust,ignore
-struct Speler {
-    naam: String,
-    gezondheid: i32,
-}
-```
-
-Maak daarna een speler.
-
----
-
-### 02 — Player
-
-Maak een speler met:
-
-```text
-Naam: Arin
-HP: 100
-```
-
-Print beide velden.
-
----
-
-### 03 — Velden
-
-Maak een struct met drie velden:
-
-```rust,ignore
-naam
-gezondheid
-goud
-```
-
-Vul ze in en print ze.
-
----
-
-### 04 — Mutable player
-
-Maak een mutable speler.
-
-Verander zijn gezondheid van 100 naar 75.
-
-Print het resultaat.
-
----
-
-### 05 — Enemy
-
-Maak een `Vijand` met:
-
-- naam
-- gezondheid
-- schade.
-
-Maak een Goblin.
-
----
-
-### 06 — Weapon
-
-Maak een `Wapen` met:
-
-- naam
-- schade
-- waarde.
-
-Maak een zwaard.
-
----
-
-### 07 — Position
-
-Maak een `Positie` met `x` en `y`.
-
-Maak een positie `(10, 20)`.
-
----
-
-## ⭐⭐ Niveau 2
-
-### 08 — Show player
-
-Maak een functie:
-
-```rust,ignore
-fn toon_speler(speler: &Speler) {
-    // ...
-}
-```
-
-De functie moet de spelergegevens printen.
-
----
-
-### 09 — Damage
-
-Maak:
-
-```rust,ignore
-fn neem_schade(speler: &mut Speler, schade: i32) {
-    // ...
-}
-```
-
-Gebruik de functie.
-
----
-
-### 10 — Heal
-
-Maak:
-
-```rust,ignore
-fn genees(speler: &mut Speler, hoeveelheid: i32) {
-    // ...
-}
-```
-
-Laat de speler genezen.
-
----
-
-### 11 — Nested struct
-
-Maak een `Wapen` en een `Speler`.
-
-De speler moet een wapen bevatten:
-
-```rust,ignore
-struct Speler {
-    naam: String,
-    wapen: Wapen,
-}
-```
-
-Print de naam van het wapen.
-
----
-
-### 12 — Enemy function
-
-Maak een functie die een nieuwe vijand teruggeeft:
-
-```rust,ignore
-fn maak_goblin() -> Vijand {
-    // ...
-}
-```
-
-Gebruik de functie in `main`.
-
----
-
-### 13 — Return struct
-
-Maak een functie:
-
-```rust,ignore
-fn maak_speler() -> Speler {
-    // ...
-}
-```
-
-Laat deze een volledige speler teruggeven.
-
----
-
-## ⭐⭐⭐ Niveau 3
-
-### 14 — Debug struct
-
-In dit programma zitten fouten:
-
-```rust,ignore
-struct Speler {
-    naam: String,
-    gezondheid: i32,
-}
-
-fn main() {
-    let speler = Speler {
-        naam: "Arin",
-    };
-
-    println!("{}", speler.gezondheid);
-}
-```
-
-Maak het programma werkend.
-
----
-
-### 15 — Debug mutable
-
-Dit programma moet de HP veranderen:
-
-```rust,ignore
-struct Speler {
-    gezondheid: i32,
-}
-
-fn main() {
-    let speler = Speler {
-        gezondheid: 100,
-    };
-
-    speler.gezondheid -= 20;
-}
-```
-
-Zoek de fout.
-
----
-
-### 16 — Debug borrowing
-
-Deze functie moet de speler alleen bekijken:
-
-```rust,ignore
-fn toon_speler(speler: Speler) {
-    println!("{}", speler.naam);
-}
-```
-
-De speler moet daarna in `main` nog gebruikt kunnen worden.
-
-Pas de functie en/of aanroep aan.
-
----
-
-### 17 — Game character
-
-Maak een struct waarmee je een volledig gamepersonage kunt beschrijven.
-
-Gebruik bijvoorbeeld:
-
-```text
-naam
-gezondheid
-goud
-ervaring
-levend
-```
-
-Maak daarna twee verschillende personages.
-
-Print hun gegevens.
-
----
-
-## 23. Eindopdracht — Een echte speler
+## 21. Eindopdracht — Een echte speler
 
 Maak een `Speler`-struct die minimaal deze informatie bevat:
 
@@ -1306,54 +1022,6 @@ Probeer hierbij goed gebruik te maken van borrowing:
 
 ---
 
-## 24. Wat moet je nu kunnen?
-
-Na deze les zou je moeten begrijpen:
-
-- [ ] wat een struct is
-- [ ] waarom structs handig zijn
-- [ ] hoe je een struct definieert
-- [ ] wat een veld is
-- [ ] hoe je een struct maakt
-- [ ] hoe je velden uitleest
-- [ ] hoe je velden verandert
-- [ ] waarom `mut` nodig is
-- [ ] hoe structs verschillende datatypes kunnen bevatten
-- [ ] hoe een struct aan een functie wordt gegeven
-- [ ] hoe je een struct leent met `&Speler`
-- [ ] hoe je een struct mutable leent met `&mut Speler`
-- [ ] hoe structs andere structs kunnen bevatten
-- [ ] hoe een functie een struct kan teruggeven.
-
-Het belangrijkste idee:
-
-> **Een struct laat je gegevens die bij elkaar horen samenbrengen in één duidelijk datatype.**
-
-We zijn daarmee een belangrijke stap verder dan losse variabelen:
-
-```text
-Losse variabelen:
-
-naam
-gezondheid
-goud
-ervaring
-```
-
-worden:
-
-```text
-Speler
-├── naam
-├── gezondheid
-├── goud
-└── ervaring
-```
-
-En dat maakt onze game steeds beter te modelleren.
-
----
-
 ## Vooruitblik
 
 Onze `Speler` bevat nu gegevens, maar nog geen eigen gedrag.
@@ -1390,3 +1058,16 @@ Dat is de volgende stap: **methods en `impl`**.
 
 Maak daarna de oefeningen uit de [Rustlings-map van Artikel 10](https://github.com/keitv-codecraft/keitv-rust-basis-rustlings/tree/master/exercises/artikel_10/).
 
+---
+
+## Controlelijst
+
+Je bent klaar met dit artikel als je zonder hulp:
+
+- [ ] weet wat een struct is en waarom je structs gebruikt
+- [ ] een struct kunt definiëren en instanties ervan kunt aanmaken
+- [ ] velden van een struct kunt uitlezen en aanpassen
+- [ ] begrijpt hoe `mut` werkt op een complete struct
+- [ ] een struct via borrowing (`&Speler` en `&mut Speler`) aan een functie kunt meegeven
+- [ ] structs kunt nesten (een struct binnen een andere struct)
+- [ ] een nieuwe struct vanuit een functie kunt teruggeven.

@@ -1,35 +1,17 @@
-﻿# Rust 25 — HashMap: werken met sleutel en waarde
+﻿# 25. HashMap
 
-Tot nu toe hebben we verschillende manieren gezien om gegevens op te slaan:
+## Wat gaan we leren?
 
-- een enkele waarde met een variabele
-- meerdere waarden met een array
-- een groeiende lijst met een `Vec`
-- gegevens met verschillende eigenschappen met een `struct`
-- verschillende mogelijke soorten waarden met een `enum`.
+In dit artikel leren we hoe we gegevens koppelen aan sleutels met behulp van de collectie `HashMap`.
 
-Er is nog een veelgebruikte manier om gegevens op te slaan: een **`HashMap`**.
+We leren:
 
-Een `HashMap` is handig wanneer je een waarde wilt kunnen terugvinden aan de hand van een **sleutel**.
-
-Bijvoorbeeld:
-
-```text
-naam van speler → score
-naam van item   → prijs
-naam van speler → level
-itemnaam        → aantal
-```
-
-In een RPG kun je daarmee bijvoorbeeld een inventaris maken:
-
-```text
-"Potion"  → 3
-"Zwaard"  → 1
-"Brood"   → 5
-```
-
-De naam van het item is de sleutel en het aantal is de waarde.
+- een `HashMap` aanmaken en importeren (`use std::collections::HashMap`)
+- sleutel-waardeparen toevoegen en bijwerken met `insert()`
+- waarden veilig opzoeken met `get()` en `contains_key()` (levert `Option`)
+- waarden aanpassen met de handige `entry(...).or_insert(...)` api
+- itereren over sleutels, waarden of paren met `for`
+- een inventarissysteem met aantallen bouwen voor een RPG.
 
 ---
 
@@ -991,7 +973,7 @@ maar:
 
 ## 29. Veelgemaakte fouten
 
-## Fout 1 — `get` behandelt alsof de waarde direct terugkomt
+### Fout 1 — `get` behandelt alsof de waarde direct terugkomt
 
 Dit werkt niet zoals je misschien verwacht:
 
@@ -1013,7 +995,7 @@ if let Some(aantal) = inventaris.get("Potion") {
 
 ---
 
-## Fout 2 — vergeten dat `get_mut` een reference geeft
+### Fout 2 — vergeten dat `get_mut` een reference geeft
 
 Dit:
 
@@ -1035,7 +1017,7 @@ if let Some(aantal) = inventaris.get_mut("Potion") {
 
 ---
 
-## Fout 3 — bestaande waarde per ongeluk vervangen
+### Fout 3 — bestaande waarde per ongeluk vervangen
 
 Dit:
 
@@ -1059,7 +1041,7 @@ let aantal = inventaris
 
 ---
 
-## Fout 4 — ownership vergeten
+### Fout 4 — ownership vergeten
 
 Dit:
 
@@ -1248,3 +1230,15 @@ Een `HashMap` en `Option` werken dus heel natuurlijk samen.
 
 Maak daarna de oefeningen uit de [Rustlings-map van Artikel 25](https://github.com/keitv-codecraft/keitv-rust-basis-rustlings/tree/master/exercises/artikel_25/).
 
+---
+
+## Controlelijst
+
+Je bent klaar met dit artikel als je zonder hulp:
+
+- [ ] een `HashMap` kunt aanmaken en importeren
+- [ ] waarden kunt toevoegen met `insert()`
+- [ ] waarden kunt opzoeken en afhandelen via `Option` met `get()`
+- [ ] de `entry().or_insert()` methode kunt gebruiken om tellers bij te houden
+- [ ] elementen kunt verwijderen met `remove()`
+- [ ] door een `HashMap` kunt itereren met een `for`-lus.

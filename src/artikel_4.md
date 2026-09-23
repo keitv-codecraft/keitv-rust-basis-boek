@@ -1,4 +1,4 @@
-﻿# Artikel 4 — Functies
+﻿# 4. Functies
 
 ## Wat gaan we leren?
 
@@ -762,7 +762,7 @@ Voorlopig hoeven we alleen te onthouden:
 
 ## 17. Veelgemaakte fouten
 
-## Fout 1 — Vergeten de functie aan te roepen
+### Fout 1 — Vergeten de functie aan te roepen
 
 Je hebt:
 
@@ -793,7 +793,7 @@ fn main() {
 
 ---
 
-## Fout 2 — Het verkeerde aantal argumenten
+### Fout 2 — Het verkeerde aantal argumenten
 
 Deze functie:
 
@@ -827,7 +827,7 @@ Rust zal hier een foutmelding geven.
 
 ---
 
-## Fout 3 — Verkeerd datatype
+### Fout 3 — Verkeerd datatype
 
 Bij:
 
@@ -847,7 +847,7 @@ De functie verwacht een `i32`.
 
 ---
 
-## Fout 4 — Vergeten wat de functie teruggeeft
+### Fout 4 — Vergeten wat de functie teruggeeft
 
 Deze functie:
 
@@ -869,486 +869,10 @@ Het is daarom belangrijk om te weten:
 
 > Geeft mijn functie een resultaat terug, of doet hij alleen iets?
 
----
-
-## 18. Rustlings — Oefeningen
-
-De oefeningen kunnen bijvoorbeeld staan in:
-
-```text
-exercises/
-└── functies/
-    ├── 01_eenvoudige_functie.rs
-    ├── 02_start_game.rs
-    ├── 03_score.rs
-    ├── 04_verdubbel.rs
-    ├── 05_tel_op.rs
-    ├── 06_schade.rs
-    ├── 07_genees.rs
-    ├── 08_levend.rs
-    ├── 09_fout_parameter.rs
-    ├── 10_fout_return.rs
-    ├── 11_mini_gevecht.rs
-    ├── 12_aanroep.rs
-    ├── 13_meerdere_parameters.rs
-    ├── 14_returnwaarde.rs
-    ├── 15_bool_return.rs
-    └── 16_functies_combineren.rs
-```
-
-## ⭐ Oefening 1 — Een eenvoudige functie
-
-Maak een functie:
-
-```rust,ignore
-fn hallo() {
-    println!("Hallo!");
-}
-```
-
-Roep hem vanuit `main` aan.
 
 ---
 
-## ⭐ Oefening 2 — Startscherm
-
-Maak:
-
-```rust,ignore
-fn start_game() {
-    // ...
-}
-```
-
-Laat deze functie drie regels tekst afdrukken.
-
-Bijvoorbeeld:
-
-```text
-====================
-     MIJN GAME
-====================
-```
-
-Roep de functie vanuit `main` aan.
-
----
-
-## ⭐ Oefening 3 — Score tonen
-
-Maak:
-
-```rust,ignore
-fn toon_score(score: i32) {
-    // ...
-}
-```
-
-Zorg dat:
-
-```rust,ignore
-toon_score(250);
-```
-
-dit oplevert:
-
-```text
-Score: 250
-```
-
----
-
-## ⭐ Oefening 4 — Verdubbelen
-
-Maak:
-
-```rust,ignore
-fn verdubbel(getal: i32) -> i32 {
-    // ...
-}
-```
-
-Bij:
-
-```rust,ignore
-let resultaat = verdubbel(7);
-```
-
-moet `resultaat` gelijk zijn aan `14`.
-
----
-
-## ⭐ Oefening 5 — Optellen
-
-Maak:
-
-```rust,ignore
-fn tel_op(a: i32, b: i32) -> i32 {
-    // ...
-}
-```
-
-Test met verschillende getallen.
-
-Bijvoorbeeld:
-
-```rust,ignore
-println!("{}", tel_op(10, 5));
-```
-
----
-
-## ⭐ Oefening 6 — Aftrekken
-
-Maak:
-
-```rust,ignore
-fn trek_af(a: i32, b: i32) -> i32 {
-    // ...
-}
-```
-
-Test bijvoorbeeld:
-
-```rust,ignore
-println!("{}", trek_af(20, 7));
-```
-
-Het resultaat moet `13` zijn.
-
----
-
-## ⭐ Oefening 7 — Drie keer zo groot
-
-Maak:
-
-```rust,ignore
-fn keer_drie(getal: i32) -> i32 {
-    // ...
-}
-```
-
-Test verschillende waarden.
-
----
-
-## ⭐ Oefening 8 — Schade berekenen
-
-Maak:
-
-```rust,ignore
-fn bereken_schade(kracht: i32, wapenschade: i32) -> i32 {
-    // ...
-}
-```
-
-Test bijvoorbeeld:
-
-```rust,ignore
-let schade = bereken_schade(12, 8);
-println!("Schade: {schade}");
-```
-
----
-
-## ⭐ Oefening 9 — Genezen
-
-Maak:
-
-```rust,ignore
-fn genees(gezondheid: i32, hoeveelheid: i32) -> i32 {
-    // ...
-}
-```
-
-Als de gezondheid `40` is en de speler `15` geneest, moet het resultaat `55` zijn.
-
----
-
-## ⭐ Oefening 10 — Levend?
-
-Maak:
-
-```rust,ignore
-fn is_levend(gezondheid: i32) -> bool {
-    // ...
-}
-```
-
-De functie moet:
-
-- `true` geven als gezondheid groter is dan 0
-- `false` geven als gezondheid 0 of lager is.
-
-Test meerdere waarden.
-
----
-
-## ⭐ Oefening 11 — Kritieke gezondheid
-
-Maak:
-
-```rust,ignore
-fn is_kritiek(gezondheid: i32) -> bool {
-    // ...
-}
-```
-
-Een speler heeft kritieke gezondheid als hij 20 of minder gezondheid heeft.
-
-Test:
-
-```text
-10 → true
-20 → true
-21 → false
-50 → false
-```
-
----
-
-## ⭐⭐ Oefening 12 — Vierkant
-
-Maak:
-
-```rust,ignore
-fn kwadraat(getal: i32) -> i32 {
-    // ...
-}
-```
-
-Bijvoorbeeld:
-
-```rust,ignore
-kwadraat(5)
-```
-
-moet `25` opleveren.
-
----
-
-## ⭐⭐ Oefening 13 — Verschil tussen twee getallen
-
-Maak:
-
-```rust,ignore
-fn verschil(a: i32, b: i32) -> i32 {
-    // ...
-}
-```
-
-De functie moet het verschil tussen de twee getallen berekenen.
-
-Test bijvoorbeeld:
-
-```text
-verschil(10, 7) → 3
-verschil(7, 10) → 3
-```
-
-*Hint: hiervoor heb je iets nodig dat we in een later artikel uitgebreider gaan behandelen. Als je dit nog niet kunt oplossen, is dat prima.*
-
----
-
-## ⭐⭐ Oefening 14 — Ervaringspunten
-
-Maak:
-
-```rust,ignore
-fn bereken_xp(basis_xp: i32, bonus: i32) -> i32 {
-    // ...
-}
-```
-
-Bij:
-
-```rust,ignore
-let xp = bereken_xp(100, 25);
-```
-
-moet `xp` gelijk zijn aan `125`.
-
----
-
-## ⭐⭐ Oefening 15 — Verschillende soorten returnwaarden
-
-Maak twee functies:
-
-```rust,ignore
-fn dubbele_score(score: i32) -> i32 {
-    // ...
-}
-
-fn is_hoge_score(score: i32) -> bool {
-    // ...
-}
-```
-
-Laat `is_hoge_score` `true` teruggeven als de score minstens 1000 is.
-
-Test beide functies.
-
----
-
-## ⭐⭐⭐ Oefening 16 — Functies combineren
-
-Maak drie functies:
-
-```rust,ignore
-fn bereken_schade(kracht: i32, wapen: i32) -> i32 {
-    // ...
-}
-
-fn pas_schade_to(gezondheid: i32, schade: i32) -> i32 {
-    // ...
-}
-
-fn is_levend(gezondheid: i32) -> bool {
-    // ...
-}
-```
-
-Gebruik ze vervolgens in `main`.
-
-Begin bijvoorbeeld met:
-
-```text
-Spelerkracht: 10
-Wapenschade: 7
-Vijandelijke gezondheid: 30
-```
-
-Bereken:
-
-1. de schade
-2. de nieuwe gezondheid
-3. of de vijand nog leeft.
-
----
-
-## ⭐⭐⭐ Oefening 17 — Functie als onderdeel van een groter programma
-
-Maak de volgende functies:
-
-```rust,ignore
-fn bereken_schade(kracht: i32, wapen: i32) -> i32 {
-    // ...
-}
-
-fn genees(gezondheid: i32, hoeveelheid: i32) -> i32 {
-    // ...
-}
-
-fn is_levend(gezondheid: i32) -> bool {
-    // ...
-}
-
-fn toon_gezondheid(gezondheid: i32) {
-    // ...
-}
-```
-
-Maak vervolgens in `main` een kleine situatie waarin:
-
-1. de speler begint met 100 gezondheid
-2. de speler schade krijgt
-3. je de nieuwe gezondheid toont
-4. de speler geneest
-5. je opnieuw de gezondheid toont
-6. je controleert of de speler nog leeft.
-
-Hier oefenen we vooral met het **combineren van functies**.
-
----
-
-## 19. Rustlings — Bewust kapotte programma's
-
-Niet iedere Rustlings-oefening hoeft een leeg bestand te zijn.
-
-Sommige oefeningen mogen juist beginnen met code die bijna goed is.
-
-## Debug 1 — Vergeten `;`?
-
-```rust
-fn main() {
-    let score = verdubbel(10);
-    println!("{score}")
-}
-
-fn verdubbel(getal: i32) -> i32 {
-    getal * 2
-}
-```
-
-Zoek uit wat er mis is en repareer het.
-
----
-
-## Debug 2 — Verkeerd aantal argumenten
-
-```rust,ignore
-fn tel_op(a: i32, b: i32) -> i32 {
-    a + b
-}
-
-fn main() {
-    let resultaat = tel_op(10);
-
-    println!("{resultaat}");
-}
-```
-
-Waarom werkt dit niet?
-
----
-
-## Debug 3 — Verkeerd datatype
-
-```rust,ignore
-fn bereken_schade(kracht: i32, wapen: i32) -> i32 {
-    kracht + wapen
-}
-
-fn main() {
-    let schade = bereken_schade(10, true);
-
-    println!("{schade}");
-}
-```
-
-Welke datatypefout maakt de programmeur?
-
----
-
-## Debug 4 — Verkeerde returnwaarde
-
-```rust,ignore
-fn verdubbel(getal: i32) -> i32 {
-    println!("Ik ga verdubbelen!");
-}
-```
-
-De functie belooft een `i32` terug te geven.
-
-Waar is die waarde?
-
----
-
-## Debug 5 — Puntkomma op de verkeerde plaats
-
-```rust,ignore
-fn verdubbel(getal: i32) -> i32 {
-    getal * 2;
-}
-```
-
-Waarom geeft Rust hier een foutmelding?
-
-Probeer het programma te repareren.
-
----
-
-## 20. Kleine eindopdracht — Het gevecht
+## 18. Kleine eindopdracht — Het gevecht
 
 Maak een klein programma waarin een speler tegen een vijand vecht.
 
@@ -1404,26 +928,6 @@ Maak het programma vooral zelf. Het hoeft nog niet perfect te zijn.
 
 ---
 
-## 21. Wat moet je nu kunnen?
-
-Na dit artikel zou je moeten begrijpen:
-
-- [ ] wat een functie is
-- [ ] waarom functies handig zijn
-- [ ] hoe je een functie maakt met `fn`
-- [ ] hoe je een functie aanroept
-- [ ] wat een parameter is
-- [ ] wat een argument is
-- [ ] hoe je meerdere parameters gebruikt
-- [ ] hoe je het datatype van een parameter opgeeft
-- [ ] hoe je een waarde teruggeeft
-- [ ] wat `-> i32` betekent
-- [ ] waarom de laatste expressie zonder `;` belangrijk is
-- [ ] dat een functie ook `bool` kan teruggeven
-- [ ] dat functies hun eigen lokale variabelen kunnen hebben
-- [ ] hoe je functies kunt combineren in een klein programma
-- [ ] hoe je compilerfouten bij functies kunt lezen en oplossen.
-
 ## De belangrijkste gedachte
 
 Een programma hoeft niet één groot blok code te zijn.
@@ -1450,7 +954,27 @@ Dat is een van de eerste belangrijke stappen van **gestructureerd programmeren**
 
 En vanaf dit punt kunnen onze games steeds groter worden zonder dat alle code in één grote `main` hoeft te staan.
 
+---
+
 ## Rustlings-oefeningen
 
 Maak daarna de oefeningen uit de [Rustlings-map van Artikel 4](https://github.com/keitv-codecraft/keitv-rust-basis-rustlings/tree/master/exercises/artikel_4/).
 
+---
+
+## Controlelijst
+
+Je bent klaar met dit artikel als je zonder hulp:
+
+- [ ] wat een functie is
+- [ ] waarom functies handig zijn
+- [ ] hoe je een functie maakt met `fn`
+- [ ] hoe je een functie aanroept
+- [ ] wat een parameter en een argument zijn
+- [ ] hoe je meerdere parameters gebruikt en het datatype van een parameter opgeeft
+- [ ] hoe je een waarde teruggeeft (bijvoorbeeld `-> i32`)
+- [ ] waarom de laatste expressie zonder `;` de returnwaarde oplevert
+- [ ] dat een functie ook een `bool` kan teruggeven
+- [ ] dat functies hun eigen lokale variabelen (scope) hebben
+- [ ] hoe je functies kunt combineren in een klein programma
+- [ ] hoe je compilerfouten bij functies kunt lezen en oplossen.

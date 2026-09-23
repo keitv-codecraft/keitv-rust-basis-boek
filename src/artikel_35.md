@@ -1,37 +1,16 @@
-﻿# Rust 35 — Ontmoetingen, NPC's en de spelwereld interactief maken
+﻿# 35. Interactie en NPC's
 
-In het vorige artikel hebben we onze RPG-wereld uitgebreid.
+## Wat gaan we leren?
 
-De speler kon:
+In dit artikel maken we de spelwereld dynamisch en levendig met NPC's (non-player characters), dialogen en gebeurtenissen.
 
-- locaties bezoeken
-- vijanden tegenkomen
-- vechten
-- ervaring krijgen
-- een level omhoog gaan
-- goud krijgen
-- buit verzamelen
-- tussen verbonden locaties reizen.
+We leren:
 
-Onze wereld begint daarmee op een echt spel te lijken.
-
-Toch is er nog een belangrijk verschil met een echte RPG:
-
-> De wereld reageert nog maar weinig op de speler.
-
-In dit artikel brengen we daar verandering in.
-
-We voegen onder andere toe:
-
-- meerdere vijanden op een locatie
-- willekeurige ontmoetingen
-- NPC's
-- eenvoudige gesprekken
-- verschillende soorten ontmoetingen
-- een duidelijkere spel-lus
-- tests voor deze onderdelen.
-
-Daarbij gebruiken we vooral Rust die we al kennen.
+- meerdere entiteiten (vijanden en NPC's) beheren op één locatie
+- een `Npc` struct ontwerpen met dialoogopties
+- niet-vijandige interacties afhandelen naast gevechten
+- willekeurige gebeurtenissen en ontmoetingen modelleren met enums
+- speltoestanden beheren en dialogen testen met unit tests.
 
 ---
 
@@ -1687,242 +1666,7 @@ De speler moet vrij kunnen rondreizen.
 
 ---
 
-## 42. Rustlings
-
-Maak:
-
-```text
-exercises/ontmoetingen/
-```
-
-## Meerdere vijanden
-
-### `01_locatie_vijanden.rs`
-
-Voeg `Vec<Vijand>` toe aan `Locatie`.
-
-### `02_meerdere_vijanden.rs`
-
-Maak een locatie met meerdere vijanden.
-
-### `03_toon_vijanden.rs`
-
-Loop door de vijanden.
-
-### `04_levende_vijanden.rs`
-
-Toon alleen levende vijanden.
-
-### `05_filter_vijanden.rs`
-
-Gebruik `filter`.
-
-### `06_vind_vijand.rs`
-
-Gebruik `find`.
-
----
-
-## Willekeur
-
-### `07_leeg_vijanden.rs`
-
-Behandel een lege lijst veilig.
-
-### `08_random_index.rs`
-
-Kies een geldige willekeurige index.
-
-### `09_random_vijand.rs`
-
-Maak:
-
-```rust,ignore
-willekeurige_vijand()
-```
-
-### `10_random_debug.rs`
-
-De code kan crashen wanneer de lijst leeg is.
-
-Zoek uit waarom.
-
-Los het op met een controle.
-
----
-
-## Enums
-
-### `11_ontmoeting_enum.rs`
-
-Maak de enum `Ontmoeting`.
-
-### `12_ontmoeting_match.rs`
-
-Gebruik `match`.
-
-### `13_ontmoeting_data.rs`
-
-Gebruik een enumvariant die een `Vijand` bevat.
-
-### `14_ontmoeting_resultaat.rs`
-
-Voeg een nieuwe variant toe en pas alle `match`-expressies aan.
-
----
-
-## NPC's
-
-### `15_npc.rs`
-
-Maak de struct `Npc`.
-
-### `16_npc_nieuw.rs`
-
-Maak de constructor.
-
-### `17_npc_praat.rs`
-
-Laat alle dialogen zien.
-
-### `18_npc_dialoog.rs`
-
-Geef één dialoogzin terug.
-
-### `19_npc_ongeldig.rs`
-
-Laat een ongeldige index `None` opleveren.
-
-### `20_npc_vinden.rs`
-
-Zoek een NPC met `find`.
-
----
-
-## Gebeurtenissen
-
-### `21_gebeurtenis.rs`
-
-Maak de enum `Gebeurtenis`.
-
-### `22_schat.rs`
-
-Verwerk een schat met een hoeveelheid goud.
-
-### `23_gesprek.rs`
-
-Verwerk een gesprek met een NPC.
-
-### `24_gevecht.rs`
-
-Verwerk een gevecht.
-
-### `25_gebeurtenis_match.rs`
-
-Verwerk alle varianten met `match`.
-
----
-
-## Speltoestand
-
-### `26_speltoestand.rs`
-
-Maak `Speltoestand`.
-
-### `27_toestand_match.rs`
-
-Gebruik een `match` om verschillende toestanden te verwerken.
-
-### `28_toestand_wijzigen.rs`
-
-Laat een toestand veranderen.
-
-### `29_spel_loop.rs`
-
-Maak een eenvoudige spel-lus.
-
-### `30_spel_stoppen.rs`
-
-Laat de loop eindigen met `break`.
-
----
-
-## Tests
-
-### `31_test_npc.rs`
-
-Test het aantal dialogen.
-
-### `32_test_dialoog.rs`
-
-Test een geldige dialoog.
-
-### `33_test_ongeldige_dialoog.rs`
-
-Test `None`.
-
-### `34_test_vijanden.rs`
-
-Test een locatie met meerdere vijanden.
-
-### `35_test_lege_locatie.rs`
-
-Test een locatie zonder vijanden.
-
----
-
-## Debug-opgaven
-
-### `36_debug_index.rs`
-
-De code gebruikt een index die buiten de `Vec` kan vallen.
-
-Zoek het probleem.
-
-### `37_debug_borrow.rs`
-
-De code probeert een geleende waarde tegelijk te gebruiken en te wijzigen.
-
-Los de borrowing-fout op.
-
-### `38_debug_move_npc.rs`
-
-Een `Npc` wordt verplaatst en daarna opnieuw gebruikt.
-
-Los dit op met borrowing of `clone()`.
-
-### `39_debug_option.rs`
-
-De code behandelt `Option` alsof er altijd een waarde aanwezig is.
-
-Gebruik `match` of `if let`.
-
----
-
-## Eindopgave
-
-### `40_final_ontmoetingen.rs`
-
-Bouw een klein interactief RPG-gedeelte waarin:
-
-- de wereld meerdere locaties heeft
-- locaties meerdere vijanden kunnen hebben
-- locaties NPC's kunnen hebben
-- NPC's dialogen hebben
-- de speler NPC's kan aanspreken
-- de speler vijanden kan tegenkomen
-- er willekeurige ontmoetingen kunnen plaatsvinden
-- gebeurtenissen met een enum worden beschreven
-- de speltoestand met een enum wordt bijgehouden
-- gevechten gebruikmaken van het bestaande gevechtssysteem
-- de speler XP, goud en buit kan krijgen
-- het hoofdprogramma een duidelijke spel-lus heeft.
-
-Schrijf minimaal **acht tests**.
-
----
-
-## 43. Extra uitdaging — keuzes in dialogen
+## 42. Extra uitdaging — keuzes in dialogen
 
 We kunnen dialogen interessanter maken.
 
@@ -1969,7 +1713,7 @@ Ook hier gebruiken we bijna uitsluitend bekende concepten.
 
 ---
 
-## 44. Extra uitdaging — opdrachten van NPC's
+## 43. Extra uitdaging — opdrachten van NPC's
 
 Een NPC kan de speler een opdracht geven.
 
@@ -2017,7 +1761,7 @@ Dit is opnieuw vooral een combinatie van bestaande technieken.
 
 ---
 
-## 45. Extra uitdaging — opdrachten met een enum
+## 44. Extra uitdaging — opdrachten met een enum
 
 Je kunt het nog flexibeler maken.
 
@@ -2051,7 +1795,7 @@ Een belangrijke ontwerpgedachte ontstaat hier:
 
 ---
 
-## 46. Wat hebben we deze keer vooral geoefend?
+## 45. Wat hebben we deze keer vooral geoefend?
 
 We hebben weinig nieuwe Rust geleerd.
 
@@ -2112,7 +1856,7 @@ Daar komen de Rust-datatypen vanzelf steeds beter bij passen.
 
 ---
 
-## 47. De volgende stap
+## 46. De volgende stap
 
 Ons RPG heeft inmiddels behoorlijk veel onderdelen.
 
@@ -2161,3 +1905,13 @@ Dat is een belangrijke overgang: van losse oefeningen naar het daadwerkelijk bou
 
 Maak daarna de oefeningen uit de [Rustlings-map van Artikel 35](https://github.com/keitv-codecraft/keitv-rust-basis-rustlings/tree/master/exercises/artikel_35/).
 
+---
+
+## Controlelijst
+
+Je bent klaar met dit artikel als je zonder hulp:
+
+- [ ] een `Npc` struct kunt maken en toevoegen aan een locatie
+- [ ] gesprekken en dialoogkeuzes kunt implementeren
+- [ ] gebeurtenissen kunt modelleren met een enum en kunt uitvoeren in de gameloop
+- [ ] speltoestanden kunt testen zonder afhankelijk te zijn van onvoorspelbare willekeur.

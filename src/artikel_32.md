@@ -1,28 +1,16 @@
-﻿# Rust 32 — De spel-lus en gebruikersinvoer
+﻿# 32. De spel-lus en gebruikersinvoer
 
-Onze RPG heeft inmiddels een wereld, een speler, vijanden, wapens, een inventaris en winkels.
+## Wat gaan we leren?
 
-Maar er ontbreekt nog iets belangrijks:
-
-**de speler moet daadwerkelijk kunnen spelen.**
-
-Tot nu toe hebben we vooral functies aangeroepen vanuit `main`. Een echt spel werkt anders. Het programma wacht steeds op een keuze van de speler, voert die keuze uit en toont daarna de nieuwe situatie.
-
-Dat patroon noemen we de **spel-lus**.
-
-In dit artikel bouwen we die stap voor stap.
+In dit artikel bouwen we een interactieve spel-lus waarin de speler keuzes kan maken via het toetsenbord.
 
 We leren:
 
-- tekst van de gebruiker lezen
-- invoer controleren
-- keuzes verwerken
-- een menu maken
-- een spel-lus bouwen met `loop`
-- `break` gebruiken om het spel te beëindigen
-- functies gebruiken om de spel-lus overzichtelijk te houden
-- fouten in gebruikersinvoer netjes afhandelen
-- tests schrijven voor onderdelen van de spel-lus.
+- gebruikersinvoer lezen met `std::io::stdin().read_line()`
+- invoer omzetten naar getallen of commando's en robuust omgaan met foutieve invoer
+- een hoofdmenu en actiemenu's weergeven en afhandelen met `match`
+- de gameloop structureren als toestandmachine met `loop`, `break` en `continue`
+- gebruikersinterface (I/O) netjes scheiden van de onderliggende spelregels.
 
 ---
 
@@ -1243,119 +1231,7 @@ Dat is voldoende.
 
 ---
 
-## 36. Rustlings — Gebruikersinvoer
-
-Maak:
-
-```text
-exercises/spel_lus/
-```
-
-### Invoer
-
-1. `01_lees_tekst.rs`  
-   Lees tekst met `read_line`.
-
-2. `02_trim.rs`  
-   Verwijder de newline.
-
-3. `03_lees_tekst_functie.rs`  
-   Maak `lees_tekst()`.
-
-4. `04_parse.rs`  
-   Zet tekst om naar `u32`.
-
-5. `05_parse_match.rs`  
-   Gebruik `match` op het resultaat van `parse`.
-
-6. `06_ongeldige_invoer.rs`  
-   Vraag opnieuw bij ongeldige invoer.
-
-7. `07_lees_getal.rs`  
-   Maak een herbruikbare `lees_getal()` functie.
-
-### Lussen
-
-8. `08_loop.rs`  
-   Maak een oneindige lus en beëindig die met `break`.
-
-9. `09_return.rs`  
-   Gebruik `return` in een lus binnen een functie.
-
-10. `10_break_vs_return.rs`  
-    Onderzoek het verschil tussen `break` en `return`.
-
-### Menu
-
-11. `11_menu.rs`  
-    Maak een eenvoudig menu.
-
-12. `12_menu_match.rs`  
-    Verwerk een keuze met `match`.
-
-13. `13_ongeldige_keuze.rs`  
-    Handel keuzes buiten het menu af.
-
-14. `14_actie_enum.rs`  
-    Maak een `Actie` enum.
-
-15. `15_kies_actie.rs`  
-    Laat `kies_hoofdactie()` een `Option<Actie>` teruggeven.
-
-### Spel
-
-16. `16_spel_struct.rs`  
-    Maak een eenvoudige `Spel` struct.
-
-17. `17_spel_nieuw.rs`  
-    Maak een constructor.
-
-18. `18_spel_start.rs`  
-    Maak `start()` met een spel-lus.
-
-19. `19_spel_acties.rs`  
-    Voeg methodes voor verschillende acties toe.
-
-20. `20_spel_toestand.rs`  
-    Laat acties de toestand van het spel veranderen.
-
-### Gevecht
-
-21. `21_gevechtslus.rs`  
-    Maak een eenvoudige gevechtslus.
-
-22. `22_gevecht_einde.rs`  
-    Laat het gevecht stoppen als één deelnemer dood is.
-
-23. `23_gevechtsmenu.rs`  
-    Voeg meerdere gevechtsacties toe.
-
-24. `24_gevecht_naar_menu.rs`  
-    Keer na een gevecht terug naar de hoofdloop.
-
-### Debug-oefeningen
-
-25. `25_debug_mut.rs`  
-    Los een ontbrekende `mut` op.
-
-26. `26_debug_parse.rs`  
-    Zoek een probleem met `parse()`.
-
-27. `27_debug_loop.rs`  
-    Zoek waarom een lus nooit stopt.
-
-28. `28_debug_match.rs`  
-    Los een onvolledige `match` op.
-
-29. `29_debug_ownership.rs`  
-    Los een ownership-probleem in de spel-lus op.
-
-30. `30_final_game_loop.rs`  
-    Bouw een complete kleine spel-lus.
-
----
-
-## 37. Zelfstandige oefening — Een menu
+## 36. Zelfstandige oefening — Een menu
 
 Maak een programma met:
 
@@ -1379,7 +1255,7 @@ Gebruik:
 
 ---
 
-## 38. Zelfstandige oefening — RPG-menu
+## 37. Zelfstandige oefening — RPG-menu
 
 Maak een menu:
 
@@ -1415,7 +1291,7 @@ Test iedere mogelijke invoer.
 
 ---
 
-## 39. Zelfstandige oefening — Gevechtsmenu
+## 38. Zelfstandige oefening — Gevechtsmenu
 
 Maak twee structs:
 
@@ -1446,7 +1322,7 @@ Het gevecht stopt zodra:
 
 ---
 
-## 40. Eindopdracht — Speelbare command-line RPG
+## 39. Eindopdracht — Speelbare command-line RPG
 
 Breid het RPG-project uit tot een eerste echte speelbare versie.
 
@@ -1499,7 +1375,7 @@ Gebruik functies en methodes om verantwoordelijkheden te verdelen.
 
 ---
 
-## 41. Tests
+## 40. Tests
 
 Niet alles aan een interactieve spel-lus is eenvoudig automatisch te testen.
 
@@ -1535,7 +1411,7 @@ We testen dus vooral de **spelregels**, niet het feit dat `stdin` daadwerkelijk 
 
 ---
 
-## 42. Wat hebben we nu gebouwd?
+## 41. Wat hebben we nu gebouwd?
 
 We hebben een belangrijk omslagpunt bereikt.
 
@@ -1585,3 +1461,13 @@ In het volgende artikel kunnen we daarom de **gevechten volledig uitwerken**: be
 
 Maak daarna de oefeningen uit de [Rustlings-map van Artikel 32](https://github.com/keitv-codecraft/keitv-rust-basis-rustlings/tree/master/exercises/artikel_32/).
 
+---
+
+## Controlelijst
+
+Je bent klaar met dit artikel als je zonder hulp:
+
+- [ ] invoer van de gebruiker kunt inlezen en de newline kunt verwijderen
+- [ ] een menufunctie kunt schrijven die herhaalt totdat geldige invoer is gegeven
+- [ ] een interactieve spel-lus kunt bouwen met `loop` en `break`
+- [ ] menu-keuzes kunt koppelen aan spelacties zonder het spel te laten crashen op ongeldige invoer.

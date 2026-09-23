@@ -1,22 +1,16 @@
-﻿# Rust 18 — Strings in de praktijk
+﻿# 18. Strings in de praktijk
 
-Tot nu toe hebben we twee soorten tekst gezien:
+## Wat gaan we leren?
 
-```rust,ignore
-let naam: String = String::from("Arin");
-```
+In dit artikel leren we wanneer je `String` en wanneer je `&str` gebruikt bij het programmeren in Rust.
 
-en:
+We leren:
 
-```rust,ignore
-let naam: &str = "Arin";
-```
-
-Beide bevatten tekst, maar ze gedragen zich op een belangrijk punt verschillend.
-
-In dit artikel gaan we daar wat dieper op in. We leren vooral **wanneer je `String` en wanneer je `&str` gebruikt**.
-
-Dit is belangrijk omdat je in echte Rust-programma's voortdurend met tekst werkt.
+- het verschil tussen een eigen `String` en een geleende `&str` (string slice)
+- wanneer een functie `&str` moet accepteren
+- hoe je tekst aanpast met `push_str` en `push`
+- strings vergelijken en controleren
+- hoe ownership en borrowing werken bij tekst.
 
 ---
 
@@ -716,312 +710,7 @@ struct Speler {
 
 ---
 
-## 18. Rustlings
-
-Maak voor dit onderwerp een nieuwe map:
-
-```text
-exercises/strings/
-```
-
-De oefeningen moeten de leerlingen niet alleen `String`-methoden laten opzoeken, maar vooral laten begrijpen **waarom** `String` en `&str` verschillend worden gebruikt.
-
-## 01_string.rs
-
-Maak een `String` met de naam van een speler en druk deze af.
-
----
-
-## 02_mut_string.rs
-
-Maak een veranderbare `String` en voeg met `push_str` een achternaam toe.
-
----
-
-## 03_push_char.rs
-
-Voeg met `push` een uitroepteken toe aan een `String`.
-
----
-
-## 04_string_new.rs
-
-Begin met een lege `String` en bouw hiermee de tekst:
-
-```text
-Welkom in het spel!
-```
-
----
-
-## 05_string_function.rs
-
-Maak:
-
-```rust,ignore
-fn toon_naam(naam: String)
-```
-
-en roep deze aan met een `String`.
-
----
-
-## 06_debug_move.rs
-
-De volgende code compileert niet:
-
-```rust,ignore
-fn toon_naam(naam: String) {
-    println!("{naam}");
-}
-
-fn main() {
-    let naam = String::from("Arin");
-
-    toon_naam(naam);
-
-    println!("{naam}");
-}
-```
-
-Onderzoek de compilerfout.
-
-Los het probleem op door de functie aan te passen zodat de functie de tekst alleen leent.
-
----
-
-## 07_str_parameter.rs
-
-Maak:
-
-```rust,ignore
-fn begroet(naam: &str)
-```
-
-De functie moet:
-
-```text
-Welkom, Arin!
-```
-
-afdrukken.
-
-Test de functie met een string literal.
-
----
-
-## 08_string_as_str.rs
-
-Gebruik dezelfde functie uit de vorige oefening, maar geef nu een `String` door.
-
-Hint:
-
-```rust,ignore
-let naam = String::from("Arin");
-```
-
-De functie verwacht:
-
-```rust,ignore
-&str
-```
-
----
-
-## 09_compare.rs
-
-Maak een functie:
-
-```rust,ignore
-fn is_tovenaar(klasse: &str) -> bool
-```
-
-De functie moet `true` teruggeven als de klasse `"Tovenaar"` is.
-
----
-
-## 10_valid_name.rs
-
-Maak:
-
-```rust,ignore
-fn is_geldige_naam(naam: &str) -> bool
-```
-
-Een lege naam is ongeldig.
-
----
-
-## 11_make_greeting.rs
-
-Maak:
-
-```rust,ignore
-fn maak_groet(naam: &str) -> String
-```
-
-De functie moet bijvoorbeeld:
-
-```text
-Welkom, Arin!
-```
-
-teruggeven.
-
----
-
-## 12_player_name.rs
-
-Gebruik:
-
-```rust,ignore
-struct Speler {
-    naam: String,
-}
-```
-
-Maak een speler en schrijf een functie:
-
-```rust,ignore
-fn toon_speler(speler: &Speler)
-```
-
-die de naam afdrukt.
-
----
-
-## 13_player_name_str.rs
-
-Voeg aan `Speler` een methode toe:
-
-```rust,ignore
-fn naam(&self) -> &str
-```
-
-De methode moet de naam van de speler teruggeven zonder een nieuwe `String` te maken.
-
----
-
-## 14_string_debug.rs
-
-De volgende code geeft een compilerfout:
-
-```rust,ignore
-fn toon_naam(naam: String) {
-    println!("{naam}");
-}
-
-fn main() {
-    let naam = String::from("Arin");
-
-    toon_naam(naam);
-
-    println!("Speler: {naam}");
-}
-```
-
-Pas de code aan zodat beide `println!`-regels werken.
-
-Gebruik hiervoor borrowing.
-
----
-
-## 15_game_greeting.rs
-
-Maak:
-
-```rust,ignore
-struct Speler {
-    naam: String,
-    gezondheid: i32,
-}
-```
-
-Maak vervolgens een methode:
-
-```rust,ignore
-fn begroet(&self)
-```
-
-die bijvoorbeeld afdrukt:
-
-```text
-Welkom, Arin!
-Je hebt 100 levenspunten.
-```
-
----
-
-## 16_string_or_str.rs
-
-Maak twee functies:
-
-```rust,ignore
-fn toon_tekst(tekst: &str)
-fn maak_tekst() -> String
-```
-
-De eerste functie moet bestaande tekst afdrukken.
-
-De tweede functie moet nieuwe tekst maken en teruggeven.
-
-Test beide functies.
-
----
-
-## 17_debug_wrong_type.rs
-
-De volgende code is expres fout:
-
-```rust,ignore
-fn begroet(naam: &str) {
-    println!("Welkom, {naam}!");
-}
-
-fn main() {
-    let naam = String::from("Arin");
-
-    begroet(naam);
-}
-```
-
-Gebruik de compilerfout om uit te zoeken waarom dit niet werkt.
-
-Los het op zonder de `String` te verplaatsen.
-
----
-
-## 18_final_game.rs
-
-Maak een klein RPG-programma met:
-
-```rust,ignore
-struct Speler {
-    naam: String,
-    klasse: String,
-    gezondheid: i32,
-}
-```
-
-Maak daarnaast:
-
-```rust,ignore
-fn begroet(speler: &Speler)
-fn is_geldige_naam(naam: &str) -> bool
-```
-
-Het programma moet:
-
-1. een speler maken
-2. controleren of de naam geldig is
-3. de speler begroeten
-4. de klasse en gezondheid afdrukken.
-
-Gebruik daarbij bewust zowel `String` als `&str`.
-
----
-
-## 19. Wat moet je na dit artikel kunnen?
+## 18. Samenvatting en vuistregels
 
 Na dit artikel hoef je niet alle String-methoden te kennen.
 
@@ -1060,3 +749,14 @@ Dat sluit direct aan op ownership en borrowing en vormt een goede basis voor de 
 
 Maak daarna de oefeningen uit de [Rustlings-map van Artikel 18](https://github.com/keitv-codecraft/keitv-rust-basis-rustlings/tree/master/exercises/artikel_18/).
 
+---
+
+## Controlelijst
+
+Je bent klaar met dit artikel als je zonder hulp:
+
+- [ ] het verschil tussen `String` (eigenaar) en `&str` (geleende tekst) kunt uitleggen
+- [ ] weet waarom functies die alleen tekst lezen bij voorkeur `&str` als parameter gebruiken
+- [ ] tekst aan een `String` kunt toevoegen met `push_str` en `push`
+- [ ] strings kunt vergelijken met `==`
+- [ ] een nieuwe `String` vanuit een functie kunt teruggeven.

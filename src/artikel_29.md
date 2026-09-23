@@ -1,30 +1,16 @@
-﻿# Rust 29 — De eerste speelbare RPG bouwen
+﻿# 29. De eerste speelbare RPG
 
-In het vorige hoofdstuk hebben we ons RPG ontworpen.
+## Wat gaan we leren?
 
-We hebben bepaald dat ons spel onder andere bestaat uit:
+In dit artikel bouwen we onze allereerste werkende, speelbare command-line RPG op basis van het eerdere ontwerp.
 
-- een `Spel`
-- een `Speler`
-- `Vijanden`
-- een `SpelStatus`
-- later ook wapens en een inventaris.
+We leren:
 
-Nu gaan we dat ontwerp daadwerkelijk programmeren.
-
-We beginnen bewust klein.
-
-Ons doel is aan het einde van dit hoofdstuk een programma te hebben waarin:
-
-1. een spel wordt gestart
-2. een speler wordt gemaakt
-3. een vijand wordt gemaakt
-4. de speler en vijand met elkaar kunnen vechten
-5. schade wordt uitgedeeld
-6. wordt gecontroleerd of iemand nog leeft
-7. het spel eindigt wanneer de speler of vijand dood is.
-
-Daarna breiden we dit programma met oefeningen verder uit.
+- de kernstructuren `Speler`, `Vijand` en `Spel` implementeren
+- modules opzetten en encapsulatie toepassen
+- een eenvoudige spelstatus (`SpelStatus`) modelleren met een enum
+- een gevechtsronde en turn-based gevechtslus programmeren
+- de werking testen met automatische tests.
 
 ---
 
@@ -1771,308 +1757,7 @@ tests
 
 ---
 
-## 54. Rustlings — Eerste RPG
-
-Maak:
-
-```text
-exercises/rpg/
-```
-
-met de volgende bestanden:
-
-```text
-01_speler_struct.rs
-02_speler_nieuw.rs
-03_speler_schade.rs
-04_speler_levend.rs
-05_speler_test.rs
-
-06_vijand_struct.rs
-07_vijand_nieuw.rs
-08_vijand_schade.rs
-09_vijand_aanval.rs
-10_vijand_test.rs
-
-11_gevecht_aanval.rs
-12_gevecht_terug.rs
-13_gevecht_ronde.rs
-14_gevecht_lus.rs
-15_gevecht_einde.rs
-
-16_spelstatus.rs
-17_spel_struct.rs
-18_spel_nieuw.rs
-19_spel_loop.rs
-20_spel_gevecht.rs
-
-21_module_speler.rs
-22_module_vijand.rs
-23_module_gevecht.rs
-24_module_spel.rs
-
-25_trait_aanvaller.rs
-26_trait_speler.rs
-27_trait_vijand.rs
-28_trait_gevecht.rs
-
-29_tests_gevecht.rs
-30_finale_rpg.rs
-```
-
----
-
-## 55. Wat moet iedere Rustlings-oefening doen?
-
-We gebruiken verschillende soorten oefeningen.
-
-Niet alles is een leeg bestand.
-
-Sommige bestanden bevatten bijvoorbeeld:
-
-```rust,ignore
-struct Speler {
-    naam: String,
-    gezondheid: i32,
-}
-```
-
-en moeten worden afgemaakt.
-
-Andere bevatten bewust verkeerde code:
-
-```rust,ignore
-let speler = Speler::nieuw(
-    String::from("Arin")
-);
-
-speler.neem_schade(10);
-```
-
-De cursist moet de compilerfout begrijpen en oplossen.
-
-Weer andere bevatten een test:
-
-```rust,ignore
-#[test]
-fn schade_werkt() {
-    // ...
-}
-```
-
-waarbij de implementatie ontbreekt.
-
-Zo oefenen we drie vaardigheden:
-
-```text
-code schrijven
-+
-code lezen
-+
-fouten oplossen
-```
-
-Alle drie zijn belangrijk.
-
----
-
-## 56. Rustlings 01–05 — Speler
-
-### `01_speler_struct.rs`
-
-Maak de struct.
-
-### `02_speler_nieuw.rs`
-
-Maak `Speler::nieuw()`.
-
-### `03_speler_schade.rs`
-
-Implementeer `neem_schade()`.
-
-### `04_speler_levend.rs`
-
-Implementeer `is_levend()`.
-
-### `05_speler_test.rs`
-
-Laat de test slagen.
-
----
-
-## 57. Rustlings 06–10 — Vijand
-
-Herhaal dezelfde stappen voor `Vijand`.
-
-Voeg bij oefening 09 een methode toe:
-
-```rust,ignore
-aanvalskracht()
-```
-
-Bij oefening 10 staat een test die eerst faalt.
-
-De cursist moet de implementatie repareren.
-
----
-
-## 58. Rustlings 11–15 — Gevecht
-
-Hier combineren we de onderdelen.
-
-### 11
-
-Speler valt aan.
-
-### 12
-
-Vijand valt terug aan.
-
-### 13
-
-Eén gevechtsronde.
-
-### 14
-
-Een volledige gevechtslus.
-
-### 15
-
-Het gevecht stopt correct.
-
-Bij oefening 15 moet bewust een fout in de lus zitten.
-
-De cursist moet ontdekken waarom de lus te lang doorgaat.
-
----
-
-## 59. Rustlings 16–20 — Spel
-
-Hier bouwen we `SpelStatus` en `Spel`.
-
-De oefeningen leren:
-
-```text
-enum
-match
-struct
-ownership
-methods
-game-loop
-```
-
-Bij oefening 19 wordt een bestaande `match` bewust incompleet gemaakt.
-
-Bijvoorbeeld:
-
-```rust,ignore
-match self.status {
-    SpelStatus::Menu => {
-        // ...
-    }
-
-    // Gevecht ontbreekt
-}
-```
-
-De compiler geeft aan dat niet alle mogelijke gevallen zijn afgehandeld.
-
-Dat is nuttige informatie.
-
----
-
-## 60. Rustlings 21–24 — Modules
-
-Deze oefeningen laten zien hoe de losse bestanden samenwerken.
-
-Een oefening kan bijvoorbeeld `speler.rs` bevatten maar vergeten:
-
-```rust,ignore
-mod speler;
-```
-
-De cursist moet de fout herkennen.
-
-Een andere oefening maakt `Speler` wel openbaar:
-
-```rust,ignore
-pub struct Speler
-```
-
-maar vergeet:
-
-```rust,ignore
-pub fn nieuw(...)
-```
-
-De cursist ziet dan waarom de constructor vanuit een andere module niet gebruikt kan worden.
-
----
-
-## 61. Rustlings 25–28 — Traits
-
-Maak:
-
-```rust,ignore
-trait Aanvaller {
-    fn aanvalskracht(&self) -> i32;
-}
-```
-
-Implementeer hem voor `Speler` en `Vijand`.
-
-Gebruik daarna:
-
-```rust,ignore
-fn toon_aanval(aanvaller: &impl Aanvaller)
-```
-
-Deze oefeningen verbinden de eerdere lessen over traits en generics met het RPG-project.
-
----
-
-## 62. Rustlings 29 — Gevechtstests
-
-Maak een serie tests:
-
-```text
-speler_doet_schade
-vijand_doet_schade
-vijand_kan_sterven
-speler_kan_sterven
-gevecht_eindigt
-```
-
-De testcode moet zoveel mogelijk alleen de openbare interface gebruiken.
-
-Dus niet proberen privévelden rechtstreeks te veranderen.
-
----
-
-## 63. Rustlings 30 — De eerste RPG
-
-De laatste oefening bevat een gedeeltelijk werkende RPG.
-
-De code compileert misschien al, maar meerdere onderdelen ontbreken.
-
-De cursist moet:
-
-- ontbrekende functies implementeren
-- compilerfouten oplossen
-- tests laten slagen
-- het gevecht correct laten eindigen.
-
-Het uiteindelijke programma moet daadwerkelijk kunnen worden gestart met:
-
-```text
-cargo run
-```
-
-en een volledig gevecht uitvoeren.
-
----
-
-## 64. Extra opdracht — maak je eigen vijand
+## 54. Extra opdracht — maak je eigen vijand
 
 Maak een nieuwe vijand.
 
@@ -2102,7 +1787,7 @@ Dat is een eerste kleine oefening in het voordeel van een goed ontworpen model:
 
 ---
 
-## 65. Extra opdracht — voeg een moeilijkheidsgraad toe
+## 55. Extra opdracht — voeg een moeilijkheidsgraad toe
 
 Maak bijvoorbeeld:
 
@@ -2130,7 +1815,7 @@ Maak eerst alleen het ontwerp.
 
 ---
 
-## 66. Extra opdracht — ontwerp zonder code
+## 56. Extra opdracht — ontwerp zonder code
 
 Stel dat we later honderd verschillende vijanden willen hebben.
 
@@ -2151,7 +1836,7 @@ Dit is een belangrijke stap richting herbruikbare code.
 
 ---
 
-## 67. Wat komt hierna?
+## 57. Wat komt hierna?
 
 We hebben nu een minimale RPG die daadwerkelijk kan spelen.
 
@@ -2192,3 +1877,14 @@ Het belangrijkste is dat we vanaf nu niet meer alleen losse Rust-oefeningen make
 ## Rustlings-oefeningen
 
 Maak daarna de oefeningen uit de [Rustlings-map van Artikel 29](https://github.com/keitv-codecraft/keitv-rust-basis-rustlings/tree/master/exercises/artikel_29/).
+
+---
+
+## Controlelijst
+
+Je bent klaar met dit artikel als je zonder hulp:
+
+- [ ] een werkende `Speler` en `Vijand` struct kunt aanmaken met constructor en methoden
+- [ ] een `SpelStatus` enum kunt opzetten om de toestand van het spel bij te houden
+- [ ] een gevechtslus kunt implementeren waarin speler en vijand beurtelings aanvallen
+- [ ] gevechtslogica kunt verifiëren met automatische tests.

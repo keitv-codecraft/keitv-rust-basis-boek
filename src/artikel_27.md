@@ -1,42 +1,16 @@
-﻿# Rust 27 — Een groter Rust-project structureren
+﻿# 27. Een groter project structureren
 
-Tot nu toe hebben we veel afzonderlijke onderdelen van Rust geleerd.
+## Wat gaan we leren?
 
-We kunnen inmiddels onder andere:
+In dit artikel leren we hoe we een compleet project met meerdere modules, bestanden en tests netjes structureren volgens Rust-conventies.
 
-- variabelen gebruiken
-- functies schrijven
-- structs maken
-- methodes schrijven
-- enums en traits gebruiken
-- `Vec` en `HashMap` gebruiken
-- iterators gebruiken
-- `Option` en `Result` gebruiken
-- bestanden lezen en schrijven
-- automatische tests schrijven.
+We leren:
 
-Dat is genoeg om een veel groter programma te bouwen.
-
-Maar er ontstaat nu een nieuw probleem.
-
-Als we alles in één bestand zetten, krijgen we al snel iets als:
-
-```text
-main.rs
-  ├── Speler
-  ├── Vijand
-  ├── Wapen
-  ├── Inventaris
-  ├── Gevecht
-  ├── Winkel
-  ├── Savegame
-  ├── Tests
-  └── heel veel code
-```
-
-Dat wordt moeilijk te lezen en moeilijk te onderhouden.
-
-Daarom gaan we onze RPG opdelen in **modules** en bestanden.
+- code verdelen over gespecialiseerde bestanden (`speler.rs`, `vijand.rs`, `gevecht.rs`, etc.)
+- het principe van encapsulatie (gegevens afschermen en methoden aanbieden)
+- `crate::`-paden gebruiken om types uit andere modules te importeren
+- `main.rs` klein en overzichtelijk houden als dirigent van het spel
+- tests dicht bij de bron plaatsen in modules.
 
 ---
 
@@ -1307,306 +1281,9 @@ Dit is geen exacte technische afhankelijkheidsgrafiek; het is vooral een manier 
 
 ---
 
-## 36. Rustlings
+## 36. Zelfstandig oefenen met projectstructuur
 
-Maak voor dit hoofdstuk:
-
-```text id="z9tq1c"
-exercises/
-└── project_structure/
-```
-
-De oefeningen worden nu iets groter. Het doel is niet alleen syntax oefenen, maar leren bepalen **waar code hoort**.
-
-## 01 — Eerste module
-
-`01_module.rs`
-
-Maak:
-
-```text id="q4b5c8"
-main.rs
-groet.rs
-```
-
-Laat `groet.rs` een publieke functie bevatten:
-
-```rust,ignore
-pub fn zeg_hallo()
-```
-
-Roep deze vanuit `main.rs` aan.
-
----
-
-## 02 — `pub`
-
-`02_pub.rs`
-
-Maak een publieke struct in een aparte module.
-
-Onderzoek wat er gebeurt als `pub` wordt verwijderd.
-
----
-
-## 03 — `use`
-
-`03_use.rs`
-
-Gebruik een type uit een module met:
-
-```rust,ignore
-use
-```
-
-en probeer daarna hetzelfde zonder `use`.
-
----
-
-## 04 — Privé functie
-
-`04_private.rs`
-
-Maak een publieke functie die intern een private functie gebruikt.
-
-Bepaal welke functie vanuit `main.rs` beschikbaar moet zijn.
-
----
-
-## 05 — Privé velden
-
-`05_private_fields.rs`
-
-Maak:
-
-```rust,ignore
-pub struct Speler {
-    naam: String,
-    gezondheid: i32,
-}
-```
-
-Maak methodes waarmee de naam en gezondheid kunnen worden gelezen.
-
----
-
-## 06 — Constructor
-
-`06_constructor.rs`
-
-Maak:
-
-```rust,ignore
-Speler::nieuw(...)
-```
-
-met `Self`.
-
----
-
-## 07 — Tweede module
-
-`07_enemy_module.rs`
-
-Maak een `Vijand` in een eigen bestand.
-
----
-
-## 08 — Twee modules
-
-`08_two_modules.rs`
-
-Gebruik zowel:
-
-```text id="l7x3ck"
-Speler
-Vijand
-```
-
-uit aparte modules.
-
----
-
-## 09 — `crate::`
-
-`09_crate_path.rs`
-
-Maak een functie in `gevecht.rs` die `Speler` en `Vijand` gebruikt.
-
-Gebruik:
-
-```rust,ignore
-crate::
-```
-
-om de types te importeren.
-
----
-
-## 10 — Gevechtsfunctie
-
-`10_combat.rs`
-
-Schrijf:
-
-```rust,ignore
-fn speler_valt_aan(
-    speler: &Speler,
-    vijand: &mut Vijand,
-)
-```
-
----
-
-## 11 — Inventaris
-
-`11_inventory_module.rs`
-
-Maak een `Inventaris` in een eigen module met:
-
-```text id="j3k5n8"
-nieuw
-voeg_item_toe
-aantal
-```
-
----
-
-## 12 — Inventaris testen
-
-`12_inventory_tests.rs`
-
-Voeg minimaal drie tests toe.
-
----
-
-## 13 — Speler gebruikt inventaris
-
-`13_player_inventory.rs`
-
-Laat `Speler` een `Inventaris` bevatten.
-
----
-
-## 14 — Encapsulatie
-
-`14_encapsulation.rs`
-
-Maak de velden van `Speler` privé.
-
-Gebruik alleen methodes om ze te lezen of wijzigen.
-
----
-
-## 15 — Compilerfout: ontbrekende `pub`
-
-`15_debug_pub.rs`
-
-Laat bewust een publieke struct zonder `pub` staan.
-
-Lees de compilerfout en los hem op.
-
----
-
-## 16 — Compilerfout: ontbrekende `mod`
-
-`16_debug_mod.rs`
-
-Maak wel een bestand `vijand.rs`, maar vergeet:
-
-```rust,ignore
-mod vijand;
-```
-
-Onderzoek de foutmelding.
-
----
-
-## 17 — Compilerfout: verkeerd pad
-
-`17_debug_path.rs`
-
-Gebruik bewust:
-
-```rust,ignore
-use speler::Vijand;
-```
-
-terwijl `Vijand` in een andere module staat.
-
-Los de fout op.
-
----
-
-## 18 — Compilerfout: privé veld
-
-`18_debug_private.rs`
-
-Probeer vanuit `main.rs` een privé veld rechtstreeks te wijzigen.
-
-Gebruik daarna een methode om hetzelfde resultaat veilig te bereiken.
-
----
-
-## 19 — RPG-structuur
-
-`19_rpg_modules.rs`
-
-Maak minimaal:
-
-```text id="2u0b4p"
-main.rs
-speler.rs
-vijand.rs
-inventaris.rs
-gevecht.rs
-```
-
-Zorg dat alles compileert.
-
----
-
-## 20 — Eindopdracht
-
-`20_final_structure.rs`
-
-Maak een kleine RPG met de volgende structuur:
-
-```text id="8t4c5v"
-src/
-├── main.rs
-├── speler.rs
-├── vijand.rs
-├── inventaris.rs
-└── gevecht.rs
-```
-
-De speler moet:
-
-- een naam hebben
-- gezondheid hebben
-- een inventaris hebben
-- items kunnen krijgen.
-
-De vijand moet:
-
-- een naam hebben
-- gezondheid hebben
-- schade kunnen veroorzaken.
-
-De gevechtsmodule moet:
-
-- de speler laten aanvallen
-- schade aan de vijand toebrengen
-- controleren of de vijand nog leeft.
-
-Gebruik encapsulatie en minimaal vijf tests.
-
----
-
-## Zelfstandig oefenen
-
-## Opdracht 1 — Module opnieuw ontwerpen
+### Opdracht 1 — Module opnieuw ontwerpen
 
 Neem een eerdere RPG-oefening waarin alles in `main.rs` staat.
 
@@ -1622,7 +1299,7 @@ De werking van het programma mag niet veranderen.
 
 ---
 
-## Opdracht 2 — Inventaris toevoegen
+### Opdracht 2 — Inventaris toevoegen
 
 Voeg:
 
@@ -1636,7 +1313,7 @@ Zorg dat `Speler` een inventaris bezit.
 
 ---
 
-## Opdracht 3 — Encapsulatie verbeteren
+### Opdracht 3 — Encapsulatie verbeteren
 
 Zoek alle publieke velden in je RPG.
 
@@ -1648,7 +1325,7 @@ Als het antwoord nee is, maak het veld privé en bied een methode aan.
 
 ---
 
-## Opdracht 4 — Tests verplaatsen
+### Opdracht 4 — Tests verplaatsen
 
 Verplaats tests naar de module waarop ze betrekking hebben.
 
@@ -1749,3 +1426,14 @@ Compilerfouten en falende tests blijven daarbij gewoon onderdeel van het ontwikk
 
 Maak daarna de oefeningen uit de [Rustlings-map van Artikel 27](https://github.com/keitv-codecraft/keitv-rust-basis-rustlings/tree/master/exercises/artikel_27/).
 
+---
+
+## Controlelijst
+
+Je bent klaar met dit artikel als je zonder hulp:
+
+- [ ] een project kunt structureren over meerdere `.rs`-bestanden
+- [ ] encapsulatie kunt toepassen door velden privé te houden en methoden aan te bieden
+- [ ] `crate::` kunt gebruiken voor paden binnen je eigen crate
+- [ ] `main.rs` overzichtelijk kunt houden door logica naar modules te verplaatsen
+- [ ] unit tests per module kunt toevoegen.

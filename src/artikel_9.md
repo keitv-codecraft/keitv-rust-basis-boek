@@ -1,6 +1,6 @@
-﻿# Borrowing: tijdelijk iets gebruiken zonder eigenaar te worden
+﻿# 9. Borrowing
 
-## 1. Wat gaan we leren?
+## Wat gaan we leren?
 
 In de vorige les leerden we dat een waarde een eigenaar heeft.
 
@@ -38,7 +38,7 @@ In deze les leren we:
 
 ---
 
-## 2. Het probleem uit de vorige les
+## 1. Het probleem uit de vorige les
 
 We hadden bijvoorbeeld:
 
@@ -90,7 +90,7 @@ Daarvoor hebben we een **reference**.
 
 ---
 
-## 3. Een reference maken
+## 2. Een reference maken
 
 Een reference maak je met `&`.
 
@@ -126,7 +126,7 @@ De eigenaar blijft `naam`.
 
 ---
 
-## 4. Een reference gebruiken
+## 3. Een reference gebruiken
 
 We kunnen de reference gewoon gebruiken:
 
@@ -157,7 +157,7 @@ Beide werken.
 
 ---
 
-## 5. Borrowing
+## 4. Borrowing
 
 Wanneer we een reference gebruiken om tijdelijk toegang tot een waarde te geven, noemen we dat **borrowing**.
 
@@ -175,7 +175,7 @@ Dat verschil is de kern van borrowing.
 
 ---
 
-## 6. Borrowing bij functies
+## 5. Borrowing bij functies
 
 Dit is een van de belangrijkste toepassingen.
 
@@ -213,7 +213,7 @@ Nu blijft `naam` gewoon bruikbaar.
 
 ---
 
-## 7. Wat gebeurt er precies?
+## 6. Wat gebeurt er precies?
 
 We hebben:
 
@@ -248,7 +248,7 @@ De oorspronkelijke String blijft bestaan.
 
 ---
 
-## 8. Ownership versus borrowing
+## 7. Ownership versus borrowing
 
 Vergelijk deze twee functies.
 
@@ -288,7 +288,7 @@ Dit is een van de belangrijkste verschillen die je in Rust moet leren herkennen.
 
 ---
 
-## 9. Waarom heet het `&`?
+## 8. Waarom heet het `&`?
 
 Het symbool:
 
@@ -326,7 +326,7 @@ Voor nu is dit model voldoende.
 
 ---
 
-## 10. Een reference verandert de waarde niet
+## 9. Een reference verandert de waarde niet
 
 Kijk naar:
 
@@ -360,7 +360,7 @@ Maar niet zomaar veranderen.
 
 ---
 
-## 11. Meerdere references
+## 10. Meerdere references
 
 Een van de handige eigenschappen van borrowing is dat meerdere delen van een programma dezelfde waarde kunnen bekijken.
 
@@ -396,7 +396,7 @@ Geen van deze references is eigenaar.
 
 ---
 
-## 12. Borrowing in een game
+## 11. Borrowing in een game
 
 Stel dat we een speler hebben:
 
@@ -435,7 +435,7 @@ Dat is precies waarvoor borrowing erg nuttig is.
 
 ---
 
-## 13. Een reference kan ook naar een andere variabele worden verwezen
+## 12. Een reference kan ook naar een andere variabele worden verwezen
 
 We kunnen ook dit doen:
 
@@ -461,7 +461,7 @@ De reference geeft alleen toegang tot die bestaande waarde.
 
 ---
 
-## 14. Mutable borrowing
+## 13. Mutable borrowing
 
 Tot nu toe konden we alleen kijken.
 
@@ -487,7 +487,7 @@ Daarmee kan de waarde via de reference worden aangepast.
 
 ---
 
-## 15. Een mutable reference gebruiken
+## 14. Een mutable reference gebruiken
 
 Bijvoorbeeld:
 
@@ -523,7 +523,7 @@ verwijzing
 
 ---
 
-## 16. Mutable borrowing bij functies
+## 15. Mutable borrowing bij functies
 
 Dit is vooral nuttig bij functies.
 
@@ -561,7 +561,7 @@ geeft de functie tijdelijk toestemming om de waarde te veranderen.
 
 ---
 
-## 17. Waarom staat er een `*`?
+## 16. Waarom staat er een `*`?
 
 In:
 
@@ -599,7 +599,7 @@ We gaan hier voorlopig niet veel dieper op in.
 
 ---
 
-## 18. Een gamevoorbeeld met healing
+## 17. Een gamevoorbeeld met healing
 
 Dit is een mooi voorbeeld van borrowing.
 
@@ -625,7 +625,7 @@ Dat is precies wat mutable borrowing betekent.
 
 ---
 
-## 19. Borrowing en `mut`
+## 18. Borrowing en `mut`
 
 Let goed op:
 
@@ -665,7 +665,7 @@ En:
 
 ---
 
-## 20. De belangrijkste borrowing-regels
+## 19. De belangrijkste borrowing-regels
 
 Rust heeft hier strenge regels.
 
@@ -722,7 +722,7 @@ blijven gebruiken.
 
 ---
 
-## 21. Niet tegelijk veranderen én bekijken
+## 20. Niet tegelijk veranderen én bekijken
 
 Rust heeft een belangrijke regel:
 
@@ -749,7 +749,7 @@ Rust voorkomt het daarom al tijdens het compileren.
 
 ---
 
-## 22. Meerdere immutable references mogen wel
+## 21. Meerdere immutable references mogen wel
 
 Dit mag:
 
@@ -796,7 +796,7 @@ wanneer die references tegelijkertijd actief zijn.
 
 ---
 
-## 23. Een mutable reference doorgeven
+## 22. Een mutable reference doorgeven
 
 We kunnen dit gebruiken voor gamefuncties.
 
@@ -833,7 +833,7 @@ We hebben hier mooi verschillende onderwerpen gecombineerd:
 
 ---
 
-## 24. Ownership, borrowing en `clone`
+## 23. Ownership, borrowing en `clone`
 
 We kunnen nu drie verschillende manieren vergelijken.
 
@@ -878,7 +878,7 @@ Dit onderscheid ga je in Rust heel vaak tegenkomen.
 
 ---
 
-## 25. Borrowing in ons RPG-project
+## 24. Borrowing in ons RPG-project
 
 Stel dat onze speler 100 HP heeft.
 
@@ -923,7 +923,7 @@ Ze gebruiken de waarde alleen tijdelijk.
 
 ---
 
-## 26. Waarom is borrowing zo belangrijk?
+## 25. Waarom is borrowing zo belangrijk?
 
 Zonder borrowing zouden we vaak moeten kiezen tussen:
 
@@ -946,9 +946,9 @@ Dit is een van de redenen waarom ownership en borrowing zo'n centrale rol spelen
 
 ---
 
-## 27. Veelgemaakte fouten
+## 26. Veelgemaakte fouten
 
-## Fout 1 — `&` vergeten
+### Fout 1 — `&` vergeten
 
 Dit:
 
@@ -976,7 +976,7 @@ toon_naam(&naam);
 
 ---
 
-## Fout 2 — `&mut` vergeten
+### Fout 2 — `&mut` vergeten
 
 Als een functie een mutable reference verwacht:
 
@@ -996,7 +996,7 @@ gebruiken.
 
 ---
 
-## Fout 3 — `mut` vergeten
+### Fout 3 — `mut` vergeten
 
 Dit werkt niet:
 
@@ -1014,7 +1014,7 @@ let mut gezondheid = 50;
 
 ---
 
-## Fout 4 — denken dat borrowing ownership verandert
+### Fout 4 — denken dat borrowing ownership verandert
 
 Bij:
 
@@ -1028,7 +1028,7 @@ De functie leent de waarde alleen.
 
 ---
 
-## 28. Zelf proberen
+## 27. Zelf proberen
 
 ### Opdracht 1 — Eerste reference
 
@@ -1102,250 +1102,7 @@ Gebruik de functie om een speler schade toe te brengen.
 
 ---
 
-## 29. Rustlings-opgaven
-
-```text
-exercises/
-└── borrowing/
-    ├── 01_reference.rs
-    ├── 02_function_reference.rs
-    ├── 03_multiple_references.rs
-    ├── 04_mut_reference.rs
-    ├── 05_change_value.rs
-    ├── 06_heal.rs
-    ├── 07_damage.rs
-    ├── 08_player.rs
-    ├── 09_game_status.rs
-    ├── 10_inventory.rs
-    ├── 11_debug_reference.rs
-    ├── 12_debug_mut.rs
-    ├── 13_debug_borrow.rs
-    └── 14_game_combat.rs
-```
-
-## ⭐ Niveau 1
-
-### 01 — Een reference
-
-Maak een String en een reference.
-
-Print de reference.
-
----
-
-### 02 — Reference naar functie
-
-Maak een functie die een `&String` ontvangt en de String print.
-
----
-
-### 03 — Meerdere references
-
-Maak twee immutable references naar dezelfde String.
-
-Print beide.
-
----
-
-### 04 — Mutable reference
-
-Maak:
-
-```rust,ignore
-let mut score = 100;
-```
-
-Gebruik een mutable reference om de score met 25 te verhogen.
-
----
-
-### 05 — Verander een waarde
-
-Maak een functie:
-
-```rust,ignore
-fn verhoog_score(score: &mut i32) {
-    // ...
-}
-```
-
-Laat de functie 10 punten toevoegen.
-
----
-
-## ⭐⭐ Niveau 2
-
-### 06 — Genezen
-
-Maak:
-
-```rust,ignore
-fn genees(gezondheid: &mut i32) {
-    *gezondheid += 25;
-}
-```
-
-Gebruik deze functie in een klein programma.
-
----
-
-### 07 — Schade
-
-Maak:
-
-```rust,ignore
-fn neem_schade(gezondheid: &mut i32, schade: i32) {
-    *gezondheid -= schade;
-}
-```
-
-Laat de speler drie keer schade krijgen.
-
----
-
-### 08 — Player
-
-Maak een programma met:
-
-```text
-Naam: Arin
-HP: 100
-```
-
-Gebruik aparte functies om de naam en gezondheid te tonen.
-
-De functies mogen geen ownership overnemen.
-
----
-
-### 09 — Game status
-
-Maak functies:
-
-```rust,ignore
-fn toon_naam(naam: &String) {
-    // ...
-}
-
-fn toon_gezondheid(gezondheid: &i32) {
-    // ...
-}
-```
-
-Gebruik beide functies vanuit `main`.
-
----
-
-### 10 — Inventory
-
-Maak een String voor een item.
-
-Maak een functie die het item alleen bekijkt:
-
-```rust,ignore
-fn bekijk_item(item: &String) {
-    println!("Je bekijkt: {item}");
-}
-```
-
-Gebruik het item daarna nogmaals.
-
----
-
-## ⭐⭐⭐ Niveau 3
-
-### 11 — Debug: reference
-
-Deze functie:
-
-```rust,ignore
-fn toon_naam(naam: &String) {
-    println!("{naam}");
-}
-```
-
-wordt verkeerd aangeroepen:
-
-```rust,ignore
-let naam = String::from("Arin");
-
-toon_naam(naam);
-```
-
-Maak het programma werkend.
-
----
-
-### 12 — Debug: mutable reference
-
-Hier zit een fout:
-
-```rust,ignore
-fn genees(gezondheid: &mut i32) {
-    *gezondheid += 20;
-}
-
-let gezondheid = 50;
-
-genees(&mut gezondheid);
-```
-
-Zoek de fout en los hem op.
-
----
-
-### 13 — Debug: twee soorten borrowing
-
-Hier zit een probleem:
-
-```rust,ignore
-let mut naam = String::from("Arin");
-
-let eerste = &naam;
-let tweede = &mut naam;
-
-println!("{eerste}");
-println!("{tweede}");
-```
-
-Maak het programma correct.
-
-Denk na over de regel:
-
-> Veel lezers óf één schrijver.
-
----
-
-### 14 — Game combat
-
-Maak een gevechtssysteem met functies:
-
-```rust,ignore
-fn neem_schade(gezondheid: &mut i32, schade: i32) {
-    // ...
-}
-
-fn genees(gezondheid: &mut i32, hoeveelheid: i32) {
-    // ...
-}
-
-fn toon_gezondheid(gezondheid: &i32) {
-    // ...
-}
-```
-
-Gebruik deze functies om een speler:
-
-1. schade te laten krijgen
-2. gezondheid te laten bekijken
-3. te laten genezen
-4. opnieuw schade te laten krijgen.
-
-De variabele `gezondheid` moet steeds dezelfde eigenaar blijven.
-
----
-
-## 30. Eindopdracht — Het gevechtssysteem
+## 28. Eindopdracht — Het gevechtssysteem
 
 Bouw voort op het gevecht uit de vorige lessen.
 
@@ -1392,23 +1149,6 @@ Probeer daarbij geen `clone()` te gebruiken.
 Het doel van deze opdracht is vooral dat je begrijpt waarom we references gebruiken.
 
 ---
-
-## 31. Wat moet je nu kunnen?
-
-Na deze les zou je moeten begrijpen:
-
-- [ ] wat een reference is
-- [ ] wat `&` betekent
-- [ ] wat borrowing betekent
-- [ ] dat borrowing geen ownership overdraagt
-- [ ] hoe je een `&String` aan een functie geeft
-- [ ] dat meerdere immutable references mogelijk zijn
-- [ ] wat `&mut` betekent
-- [ ] waarom een variabele `mut` moet zijn om haar via `&mut` te veranderen
-- [ ] wat dereferencing met `*` betekent
-- [ ] waarom je niet tegelijkertijd onbeperkt kunt lezen en schrijven
-- [ ] wanneer borrowing handiger is dan `clone()`
-- [ ] hoe borrowing in een game kan worden gebruikt.
 
 ### De belangrijkste gedachte
 
@@ -1481,3 +1221,16 @@ Daarmee kunnen we voor het eerst echt beginnen met het modelleren van onze gamew
 
 Maak daarna de oefeningen uit de [Rustlings-map van Artikel 9](https://github.com/keitv-codecraft/keitv-rust-basis-rustlings/tree/master/exercises/artikel_9/).
 
+---
+
+## Controlelijst
+
+Je bent klaar met dit artikel als je zonder hulp:
+
+- [ ] kunt uitleggen wat een reference is en wat `&` betekent
+- [ ] begrijpt dat borrowing geen ownership overdraagt
+- [ ] een `&String` of ander leentype aan een functie kunt meegeven
+- [ ] weet dat meerdere immutable references (`&`) tegelijk mogen bestaan
+- [ ] weet wat `&mut` betekent en waarom de variabele zelf dan ook `mut` moet zijn
+- [ ] begrijpt waarom je niet tegelijkertijd mag lezen en schrijven naar dezelfde waarde
+- [ ] weet hoe je een geleende waarde kunt aanpassen (met `*`).

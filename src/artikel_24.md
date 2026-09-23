@@ -1,39 +1,16 @@
-﻿# Rust 24 — Generics: werken met verschillende typen
+﻿# 24. Generics
 
-Tot nu toe hebben we functies geschreven voor concrete typen.
+## Wat gaan we leren?
 
-Bijvoorbeeld:
+In dit artikel leren we hoe we herbruikbare code schrijven die met verschillende datatypes werkt met behulp van generics en trait bounds.
 
-```rust,ignore
-fn verdubbel(getal: i32) -> i32 {
-    getal * 2
-}
-```
+We leren:
 
-Deze functie werkt met `i32`.
-
-Maar stel dat we dezelfde soort bewerking ook voor andere typen willen gebruiken.
-
-Dan kunnen **generics** helpen.
-
-Generics maken het mogelijk om code te schrijven die met verschillende typen kan werken, zonder dezelfde code steeds opnieuw te schrijven.
-
-In dit hoofdstuk leren we:
-
-- wat een generic type is
-- hoe je generieke functies schrijft
-- hoe je generics met structs gebruikt
-- hoe je generics met enums gebruikt
-- hoe traits en generics samenwerken
-- wat trait bounds zijn
-- hoe meerdere trait bounds werken
-- wat `impl Trait` betekent
-- wat een trait object is
-- wat `dyn Trait` betekent
-- hoe je een trait object aan een functie kunt doorgeven
-- hoe je een trait object uit een functie kunt teruggeven
-- wanneer je `T` gebruikt en wanneer `dyn Trait`
-- hoe dit allemaal samenkomt in onze RPG.
+- wat generics zijn en wat de type-parameter `T` betekent
+- generieke functies en generieke structs schrijven
+- eisen stellen aan types met trait bounds (`T: Trait` en `where`-clausules)
+- het verschil tussen generieke code (`impl Trait`) en dynamische trait objects (`dyn Trait` / `Box<dyn Trait>`)
+- statische dispatch (monomorphization) versus dynamische dispatch.
 
 ---
 
@@ -1563,415 +1540,9 @@ De lifetime in dit voorbeeld bespreken we nu niet verder. Die komt later.
 
 ---
 
-## 41. Rustlings-oefeningen
+## 41. Zelfstandige opdrachten
 
-Voor dit hoofdstuk gebruiken we:
-
-```text id="r4z8nk"
-exercises/generics/
-```
-
-De oefeningen bouwen langzaam op.
-
-## Basis
-
-### 01_generic_function.rs
-
-Maak:
-
-```rust,ignore
-fn geef_terug<T>(waarde: T) -> T
-```
-
-De functie moet de waarde teruggeven.
-
-Test hem met een getal en een `String`.
-
----
-
-### 02_generic_bool.rs
-
-Gebruik dezelfde functie met een `bool`.
-
----
-
-### 03_two_types.rs
-
-Maak:
-
-```rust,ignore
-fn maak_paar<T, U>(eerste: T, tweede: U) -> (T, U)
-```
-
-Test verschillende combinaties.
-
----
-
-### 04_generic_struct.rs
-
-Maak:
-
-```rust,ignore
-struct Houder<T> {
-    waarde: T,
-}
-```
-
-Gebruik hem met verschillende typen.
-
----
-
-### 05_generic_pair.rs
-
-Maak:
-
-```rust,ignore
-struct Paar<T, U> {
-    eerste: T,
-    tweede: U,
-}
-```
-
-Maak verschillende paren.
-
----
-
-## 42. Trait bounds
-
-### 06_debug_bound.rs
-
-Maak een functie:
-
-```rust,ignore
-fn toon<T: std::fmt::Debug>(waarde: T)
-```
-
-Print de waarde met `{:?}`.
-
----
-
-### 07_clone_bound.rs
-
-Maak:
-
-```rust,ignore
-fn kopieer<T: Clone>(waarde: &T) -> T
-```
-
-Test de functie met verschillende `Clone`-typen.
-
----
-
-### 08_trait_bound.rs
-
-Maak een trait:
-
-```rust,ignore
-trait Schade {
-    fn schade(&self) -> i32;
-}
-```
-
-Maak twee structs die deze trait implementeren.
-
-Maak daarna een generieke functie met:
-
-```text
-T: Schade
-```
-
----
-
-### 09_multiple_bounds.rs
-
-Maak een functie waarvoor `T` zowel `Schade` als `Debug` moet implementeren.
-
----
-
-### 10_where.rs
-
-Schrijf de vorige oefening opnieuw met een `where`-blok.
-
----
-
-## 43. Generics met de RPG
-
-### 11_generic_reward.rs
-
-Maak:
-
-```rust,ignore
-struct Beloning<T> {
-    waarde: T,
-}
-```
-
-Gebruik hem voor goud en voor een itemnaam.
-
----
-
-### 12_generic_inventory.rs
-
-Maak een generieke inventaris:
-
-```rust,ignore
-struct Inventaris<T> {
-    items: Vec<T>,
-}
-```
-
-Maak een inventaris van `String` en een inventaris van `i32`.
-
----
-
-### 13_generic_count.rs
-
-Maak:
-
-```rust,ignore
-fn aantal<T>(waarden: &[T]) -> usize
-```
-
-Test de functie met verschillende soorten waarden.
-
----
-
-### 14_generic_find.rs
-
-Maak een generieke functie die controleert of een `Vec<T>` leeg is.
-
-Gebruik geen specifieke waarde van `T`.
-
----
-
-## 44. `impl Trait`
-
-### 15_impl_parameter.rs
-
-Maak een functie:
-
-```rust,ignore
-fn toon_aanval(aanvaller: &impl Aanvaller)
-```
-
-Test hem met twee verschillende typen.
-
----
-
-### 16_impl_return.rs
-
-Maak een functie:
-
-```rust,ignore
-fn maak_speler() -> impl Karakter
-```
-
-De functie moet een `Speler` teruggeven.
-
----
-
-### 17_impl_iterator.rs
-
-Maak een functie die:
-
-```rust,ignore
-impl Iterator<Item = i32>
-```
-
-teruggeeft.
-
-Gebruik bijvoorbeeld:
-
-```rust,ignore
-1..=5
-```
-
-als iterator.
-
----
-
-## 45. Trait objects
-
-### 18_trait_object_parameter.rs
-
-Maak:
-
-```rust,ignore
-fn toon_karakter(karakter: &dyn Karakter)
-```
-
-Roep de functie aan met een `Speler` en een `Vijand`.
-
----
-
-### 19_trait_object_vec.rs
-
-Maak:
-
-```rust,ignore
-Vec<Box<dyn Karakter>>
-```
-
-Stop verschillende typen karakters in de `Vec`.
-
-Loop erdoorheen en toon hun namen.
-
----
-
-### 20_trait_object_return.rs
-
-Maak:
-
-```rust,ignore
-fn maak_karakter(soort: &str) -> Box<dyn Karakter>
-```
-
-Laat de functie afhankelijk van `soort` een `Speler` of `Vijand` maken.
-
----
-
-## 46. Verschil tussen generic en trait object
-
-### 21_generic_vs_dyn.rs
-
-Maak twee functies:
-
-```rust,ignore
-fn toon_generic<T: Karakter>(karakter: &T)
-```
-
-en:
-
-```rust,ignore
-fn toon_dyn(karakter: &dyn Karakter)
-```
-
-Roep beide functies aan met een `Speler` en een `Vijand`.
-
-Schrijf in commentaar op wat het verschil is.
-
----
-
-### 22_dyn_collection.rs
-
-Maak drie verschillende typen die allemaal `Aanvaller` implementeren.
-
-Stop ze samen in:
-
-```rust,ignore
-Vec<Box<dyn Aanvaller>>
-```
-
-Bereken de totale aanvalskracht.
-
----
-
-## 47. Debugging
-
-### 23_generic_debug.rs
-
-De functie probeert een generiek type met `{waarde}` te printen.
-
-De code compileert niet.
-
-Bepaal welke trait bound nodig is.
-
----
-
-### 24_missing_bound.rs
-
-Een generieke functie probeert `.clone()` te gebruiken.
-
-Voeg de juiste trait bound toe.
-
----
-
-### 25_trait_object_debug.rs
-
-Een trait object probeert een methode aan te roepen die niet in de trait staat.
-
-Los de code op door het juiste gedrag aan de trait toe te voegen.
-
----
-
-### 26_mixed_vec.rs
-
-Een `Vec` probeert rechtstreeks een `Speler` en `Vijand` te bevatten.
-
-De code compileert niet.
-
-Gebruik een geschikt trait object.
-
----
-
-## 48. Gecombineerde oefeningen
-
-### 27_generic_attack.rs
-
-Maak:
-
-```rust,ignore
-fn aanval<T: Aanvaller>(aanvaller: &T) -> i32
-```
-
-De functie geeft de aanvalskracht terug.
-
-Test hem met meerdere typen.
-
----
-
-### 28_dyn_attackers.rs
-
-Maak:
-
-```rust,ignore
-Vec<Box<dyn Aanvaller>>
-```
-
-Laat ieder object aanvallen.
-
-Bereken daarna de totale aanvalskracht.
-
----
-
-### 29_factory.rs
-
-Maak een functie die verschillende soorten vijanden kan maken:
-
-```rust,ignore
-fn maak_vijand(soort: &str) -> Box<dyn Karakter>
-```
-
-Ondersteun bijvoorbeeld:
-
-```text
-goblin
-ork
-draak
-```
-
-Gebruik `Option` of `Result` voor een onbekende soort.
-
----
-
-### 30_final_generics.rs
-
-Maak een klein RPG-systeem waarin je:
-
-1. minstens één generieke struct gebruikt
-2. minstens één generieke functie gebruikt
-3. minstens één trait bound gebruikt
-4. minstens één `impl Trait` gebruikt
-5. minstens één functie met `&dyn Trait` gebruikt
-6. minstens één `Box<dyn Trait>` gebruikt
-7. verschillende concrete typen in één `Vec<Box<dyn Trait>>` bewaart
-8. automatische tests schrijft.
-
----
-
-## 49. Zelfstandige opdrachten
-
-## Opdracht 1 — Generieke schatkist
+### Opdracht 1 — Generieke schatkist
 
 Maak:
 
@@ -1991,7 +1562,7 @@ Schrijf een generieke functie om de inhoud terug te geven.
 
 ---
 
-## Opdracht 2 — Aanvallers
+### Opdracht 2 — Aanvallers
 
 Maak:
 
@@ -2027,7 +1598,7 @@ en gebruik beide.
 
 ---
 
-## Opdracht 3 — Gemengde groep
+### Opdracht 3 — Gemengde groep
 
 Maak:
 
@@ -2041,7 +1612,7 @@ Bereken de totale aanvalskracht.
 
 ---
 
-## Opdracht 4 — Karakterfabriek
+### Opdracht 4 — Karakterfabriek
 
 Maak:
 
@@ -2057,7 +1628,7 @@ Een `Result<Box<dyn Karakter>, String>` is hier een goede oplossing.
 
 ---
 
-## Opdracht 5 — Generic RPG-functie
+### Opdracht 5 — Generic RPG-functie
 
 Maak een generieke functie die met ieder type werkt dat:
 
@@ -2073,9 +1644,9 @@ De functie moet alleen aanvallers tonen die nog leven.
 
 ---
 
-## 50. Veelgemaakte fouten
+## 42. Veelgemaakte fouten
 
-## Fout 1 — denken dat `T` een concreet type is
+### Fout 1 — denken dat `T` een concreet type is
 
 Bij:
 
@@ -2089,7 +1660,7 @@ Het is een placeholder voor een type.
 
 ---
 
-## Fout 2 — een methode gebruiken zonder trait bound
+### Fout 2 — een methode gebruiken zonder trait bound
 
 Dit:
 
@@ -2113,7 +1684,7 @@ fn toon<T: std::fmt::Debug>(waarde: T) {
 
 ---
 
-## Fout 3 — `dyn Trait` verwarren met een generic
+### Fout 3 — `dyn Trait` verwarren met een generic
 
 Deze:
 
@@ -2135,7 +1706,7 @@ Bij een trait object verbergen we het concrete type bewust.
 
 ---
 
-## Fout 4 — verschillende typen rechtstreeks in één `Vec`
+### Fout 4 — verschillende typen rechtstreeks in één `Vec`
 
 Dit werkt niet als `Speler` en `Vijand` verschillende concrete typen zijn:
 
@@ -2153,7 +1724,7 @@ als je verschillende typen met hetzelfde gedrag samen wilt bewaren.
 
 ---
 
-## Fout 5 — `impl Trait` zien als `dyn Trait`
+### Fout 5 — `impl Trait` zien als `dyn Trait`
 
 Deze:
 
@@ -2175,7 +1746,7 @@ hebben een belangrijk verschil.
 
 ---
 
-## 51. Het belangrijkste mentale model
+## 43. Het belangrijkste mentale model
 
 Probeer generics niet te zien als een ingewikkelde speciale syntax.
 
@@ -2229,7 +1800,7 @@ Box<dyn Trait>
 
 ---
 
-## 52. Samenvatting
+## 44. Samenvatting
 
 We hebben in dit hoofdstuk geleerd dat generics code herbruikbaar maken voor verschillende typen.
 
@@ -2323,3 +1894,14 @@ En juist daardoor begint steeds duidelijker te worden waarom Rust veel van zijn 
 
 Maak daarna de oefeningen uit de [Rustlings-map van Artikel 24](https://github.com/keitv-codecraft/keitv-rust-basis-rustlings/tree/master/exercises/artikel_24/).
 
+---
+
+## Controlelijst
+
+Je bent klaar met dit artikel als je zonder hulp:
+
+- [ ] weet wat een generic type-parameter `T` is
+- [ ] een generieke functie en een generieke struct kunt schrijven
+- [ ] trait bounds kunt toepassen (`T: Debug + Clone`)
+- [ ] `where`-clausules kunt gebruiken voor overzichtelijke trait bounds
+- [ ] het verschil kent tussen statische dispatch (generics) en dynamische dispatch (`Box<dyn Trait>`).

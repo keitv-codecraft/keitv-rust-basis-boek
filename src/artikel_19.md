@@ -1,32 +1,16 @@
-﻿# Rust 19 — Modules en zichtbaarheid
+﻿# 19. Modules en zichtbaarheid
 
-Tot nu toe hebben we onze programma's meestal in één bestand geschreven.
+## Wat gaan we leren?
 
-Dat is handig wanneer een programma klein is:
+In dit artikel leren we hoe we een groeiend Rust-project opdelen in meerdere bestanden en modules, en hoe we zichtbaarheid beheren met `pub`.
 
-```text
-src/
-└── main.rs
-```
+We leren:
 
-Maar ons RPG-project begint inmiddels behoorlijk groot te worden.
-
-We hebben bijvoorbeeld:
-
-- spelers
-- vijanden
-- wapens
-- gevechten
-- functies
-- traits
-- tests
-- verschillende soorten game-logica.
-
-Als alles in één bestand staat, wordt het steeds moeilijker om te vinden waar iets staat.
-
-Rust heeft daarom **modules**.
-
-Met modules kunnen we code logisch opdelen.
+- waarom we code opdelen in modules (`mod`)
+- functies, structs en velden openbaar maken met `pub`
+- paden en het importeren van onderdelen met `use`
+- het verschil tussen publieke en private struct-velden
+- een RPG-project organiseren over meerdere bestanden (`speler.rs`, `vijand.rs`, etc.).
 
 ---
 
@@ -718,335 +702,7 @@ nodig.
 
 ---
 
-## 17. Rustlings
-
-Maak:
-
-```text
-exercises/modules/
-```
-
-## 01_module.rs
-
-Maak een module:
-
-```rust,ignore
-mod speler {
-    // ...
-}
-```
-
-Maak binnen de module een functie die `"Welkom!"` afdrukt.
-
-Roep de functie vanuit `main` aan.
-
----
-
-## 02_public_function.rs
-
-Maak een module met een openbare functie:
-
-```rust,ignore
-pub fn begroet() {
-    // ...
-}
-```
-
-Roep deze vanuit `main` aan.
-
----
-
-## 03_private_function.rs
-
-Maak een module met een privéfunctie.
-
-Probeer deze vanuit `main` aan te roepen.
-
-De code moet expres niet compileren.
-
-Lees de compilerfout en leg uit waarom.
-
-Maak daarna een tweede versie waarin het programma wel compileert.
-
----
-
-## 04_public_struct.rs
-
-Maak:
-
-```rust,ignore
-pub struct Speler {
-    pub naam: String,
-    pub gezondheid: i32,
-}
-```
-
-Maak vanuit `main` een speler.
-
----
-
-## 05_private_field.rs
-
-Maak:
-
-```rust,ignore
-pub struct Speler {
-    pub naam: String,
-    gezondheid: i32,
-}
-```
-
-Probeer vanuit `main` `gezondheid` rechtstreeks te veranderen.
-
-Onderzoek de compilerfout.
-
----
-
-## 06_use.rs
-
-Gebruik:
-
-```rust,ignore
-mod speler;
-```
-
-en:
-
-```rust,ignore
-use speler::Speler;
-```
-
-Maak daarna een speler zonder `speler::Speler` te schrijven.
-
----
-
-## 07_module_path.rs
-
-Gebruik bewust géén `use`.
-
-Maak een speler met:
-
-```rust,ignore
-speler::Speler
-```
-
-zodat je ziet hoe een modulepad werkt.
-
----
-
-## 08_two_modules.rs
-
-Maak twee modules:
-
-```text
-speler
-vijand
-```
-
-Elke module bevat een eigen struct.
-
-Maak in `main` één speler en één vijand.
-
----
-
-## 09_game_modules.rs
-
-Maak drie modules:
-
-```text
-speler
-wapen
-gevecht
-```
-
-Verdeel de bijbehorende structs en functies over deze modules.
-
----
-
-## 10_constructor.rs
-
-Maak in `speler.rs`:
-
-```rust,ignore
-impl Speler {
-    pub fn new(naam: &str) -> Self {
-        // ...
-    }
-}
-```
-
-Gebruik `Speler::new()` vanuit `main`.
-
----
-
-## 11_private_health.rs
-
-Maak `gezondheid` privé.
-
-Voeg toe:
-
-```rust,ignore
-pub fn gezondheid(&self) -> i32
-```
-
-en:
-
-```rust,ignore
-pub fn neem_schade(&mut self, schade: i32)
-```
-
-Test beide vanuit `main`.
-
----
-
-## 12_module_test.rs
-
-Voeg tests toe aan `speler.rs`.
-
-Test dat een nieuwe speler 100 gezondheid heeft.
-
-Gebruik:
-
-```rust,ignore
-#[cfg(test)]
-mod tests {
-    use super::*;
-}
-```
-
----
-
-## 13_debug_missing_pub.rs
-
-De volgende code is expres fout:
-
-```rust,ignore
-mod speler {
-    struct Speler {
-        pub naam: String,
-    }
-}
-
-fn main() {
-    let speler = speler::Speler {
-        naam: String::from("Arin"),
-    };
-
-    println!("{}", speler.naam);
-}
-```
-
-Gebruik de compiler om te ontdekken wat ontbreekt.
-
----
-
-## 14_debug_field_visibility.rs
-
-Maak de struct openbaar, maar laat één veld privé.
-
-Probeer beide velden vanuit `main` te gebruiken.
-
-Bepaal aan de hand van de compilerfout welk veld niet toegankelijk is.
-
----
-
-## 15_rpg_modules.rs
-
-Maak:
-
-```text
-src/
-├── main.rs
-├── speler.rs
-├── vijand.rs
-└── wapen.rs
-```
-
-Maak in ieder bestand de bijbehorende struct.
-
-Gebruik ze allemaal vanuit `main`.
-
----
-
-## 16_rpg_battle.rs
-
-Voeg een module `gevecht` toe.
-
-Maak daarin:
-
-```rust,ignore
-pub fn bereken_schade(kracht: i32, wapenschade: i32) -> i32
-```
-
-Gebruik deze vanuit `main`.
-
----
-
-## 17_module_tests.rs
-
-Voeg tests toe aan minimaal twee modules.
-
-Test bijvoorbeeld:
-
-- de standaardgezondheid van een speler
-- de schade van een wapen
-- de schadeberekening van een aanval.
-
----
-
-## 18_debug_module.rs
-
-Maak expres een programma waarin:
-
-- een module ontbreekt
-- een `pub` ontbreekt
-- een `use` ontbreekt.
-
-Laat de leerlingen de problemen één voor één oplossen.
-
----
-
-## 19_complete_rpg.rs
-
-Bouw een klein RPG-project met:
-
-```text
-speler.rs
-vijand.rs
-wapen.rs
-gevecht.rs
-main.rs
-```
-
-Het programma moet:
-
-1. een speler maken
-2. een vijand maken
-3. een wapen maken
-4. schade berekenen
-5. de vijand beschadigen
-6. de gezondheid tonen.
-
-Gebruik minimaal één private struct-field en een publieke methode om die waarde te lezen of wijzigen.
-
----
-
-## 20_final_modules.rs
-
-Maak een kleine, nette RPG-structuur waarin:
-
-- `Speler` in `speler.rs` staat
-- `Vijand` in `vijand.rs` staat
-- `Wapen` in `wapen.rs` staat
-- gevechtslogica in `gevecht.rs` staat
-- `main.rs` alleen het spel opstart
-- iedere module minimaal één test bevat.
-
-Probeer `main.rs` zo klein mogelijk te houden.
-
----
-
-## 18. Oefeningen zonder Rustlings
+## 17. Zelf oefenen met modules
 
 Naast de Rustlings-bestanden zijn de volgende oefeningen bedoeld om zelfstandig te ontwerpen.
 
@@ -1107,7 +763,7 @@ Maak hiervoor zelf een module met minimaal één struct, één publieke functie 
 
 ---
 
-## 19. Wat moet je na dit artikel kunnen?
+## 18. Samenvatting en vooruitblik
 
 Je moet nu begrijpen:
 
@@ -1144,3 +800,14 @@ Daarvoor hebben we `Option<T>`.
 
 Maak daarna de oefeningen uit de [Rustlings-map van Artikel 19](https://github.com/keitv-codecraft/keitv-rust-basis-rustlings/tree/master/exercises/artikel_19/).
 
+---
+
+## Controlelijst
+
+Je bent klaar met dit artikel als je zonder hulp:
+
+- [ ] een module kunt declareren met `mod`
+- [ ] weet wat `pub` doet en waarom niet alles openbaar hoeft te zijn
+- [ ] types en functies kunt importeren met `use`
+- [ ] begrijpt hoe je private velden beschermt en via publieke methods aanbiedt
+- [ ] een klein project over meerdere `.rs`-bestanden kunt verdelen.

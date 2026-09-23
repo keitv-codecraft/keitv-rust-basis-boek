@@ -1,58 +1,16 @@
-﻿# Rust 33 — Gevechten: van eenvoudige aanval tot volledig gevecht
+﻿# 33. Gevechten
 
-In de vorige artikelen hebben we een wereld en een spel-lus gemaakt. De speler kan rondlopen, locaties bezoeken en vijanden tegenkomen.
+## Wat gaan we leren?
 
-Nu gaan we een belangrijk onderdeel van een RPG bouwen:
+In dit artikel bouwen we een compleet turn-based gevechtssysteem voor onze RPG.
 
-**het gevecht.**
+We leren:
 
-We beginnen expres heel eenvoudig.
-
-Een speler heeft bijvoorbeeld:
-
-```text
-100 gezondheid
-10 aanvalskracht
-```
-
-Een vijand heeft:
-
-```text
-30 gezondheid
-5 aanvalskracht
-```
-
-De speler valt aan:
-
-```text
-vijand: 30 → 20
-```
-
-Daarna valt de vijand aan:
-
-```text
-speler: 100 → 95
-```
-
-En dat herhalen we totdat één van beiden verslagen is.
-
-Daarna gaan we stap voor stap uitbreiden:
-
-- wapens
-- verschillende aanvallers
-- schadeberekening
-- verdedigen
-- kritieke treffers
-- vluchten
-- potions
-- gevechtsrondes
-- verschillende acties
-- tests
-- en uiteindelijk de koppeling met de bestaande RPG.
-
-Het belangrijkste doel van dit artikel is echter niet het gevechtssysteem zelf.
-
-We willen leren hoe je een groter probleem **stap voor stap opbouwt**.
+- beurtelings schade toebrengen tussen speler en vijand met `&mut self`
+- ondergrens en bovengrens van gezondheid bewaken (veilig genezen en geen negatieve levens)
+- gevechtsacties zoals aanvallen, verdedigen, items gebruiken en vluchten implementeren
+- resultaten van gevechtsacties representeren met enums en structs
+- gevechtslogica grondig testen met unit tests.
 
 ---
 
@@ -1732,155 +1690,7 @@ Dat is precies de vaardigheid die we willen ontwikkelen.
 
 ---
 
-## 47. Rustlings — Gevechten
-
-Maak:
-
-```text id="e9x3qa"
-exercises/gevecht/
-```
-
-## Basis
-
-1. `01_schade.rs`  
-   Maak `doe_schade`.
-
-2. `02_schade_zero.rs`  
-   Zorg dat gezondheid niet onder nul komt.
-
-3. `03_schade_test.rs`  
-   Schrijf een test voor schade.
-
-4. `04_is_levend.rs`  
-   Maak `is_levend()`.
-
-5. `05_speler_aanval.rs`  
-   Laat de speler aanvallen.
-
-6. `06_vijand_aanval.rs`  
-   Laat de vijand aanvallen.
-
-## Gevechtslus
-
-7. `07_eenvoudig_gevecht.rs`  
-   Maak een automatisch gevecht.
-
-8. `08_gevecht_einde.rs`  
-   Stop wanneer iemand dood is.
-
-9. `09_gevechtsronde.rs`  
-   Toon de gezondheid na iedere ronde.
-
-10. `10_gevecht_test.rs`  
-    Test een eenvoudig gevecht.
-
-## Traits
-
-11. `11_aanvaller.rs`  
-    Implementeer `Aanvaller` voor `Speler`.
-
-12. `12_vijand_aanvaller.rs`  
-    Implementeer `Aanvaller` voor `Vijand`.
-
-13. `13_bereken_schade.rs`  
-    Maak een generieke functie met `T: Aanvaller`.
-
-14. `14_algemene_aanval.rs`  
-    Gebruik één algemene aanvalfunctie.
-
-## Wapens
-
-15. `15_wapen_schade.rs`  
-    Laat een wapen extra schade geven.
-
-16. `16_geen_wapen.rs`  
-    Handel `None` correct af.
-
-17. `17_wapen_veranderen.rs`  
-    Laat de speler van wapen veranderen.
-
-18. `18_wapen_test.rs`  
-    Test de invloed van een wapen.
-
-## Gevechtsacties
-
-19. `19_gevechtsactie.rs`  
-    Maak `Gevechtsactie`.
-
-20. `20_kies_actie.rs`  
-    Zet een getal om naar `Option<Gevechtsactie>`.
-
-21. `21_gevechtsmenu.rs`  
-    Maak een gevechtsmenu.
-
-22. `22_continue.rs`  
-    Gebruik `continue` bij ongeldige invoer.
-
-23. `23_vluchten.rs`  
-    Voeg vluchten toe.
-
-## Genezing
-
-24. `24_genezen.rs`  
-    Maak `genees()`.
-
-25. `25_max_gezondheid.rs`  
-    Zorg dat gezondheid niet boven het maximum komt.
-
-26. `26_potion.rs`  
-    Gebruik een potion tijdens een gevecht.
-
-27. `27_potion_test.rs`  
-    Test het gebruik van een potion.
-
-## Geavanceerder gevecht
-
-28. `28_kritieke_treffer.rs`  
-    Voeg kritieke treffers toe.
-
-29. `29_aanvalsresultaat.rs`  
-    Maak `Aanvalsresultaat`.
-
-30. `30_gevechtsresultaat.rs`  
-    Maak `Gevechtsresultaat`.
-
-31. `31_resultaat_verwerken.rs`  
-    Verwerk winst, verlies en vluchten.
-
-32. `32_vijand_verwijderen.rs`  
-    Verwijder een verslagen vijand uit een locatie.
-
-## Debug-oefeningen
-
-33. `33_debug_mut.rs`  
-    Los een ontbrekende `mut` op.
-
-34. `34_debug_borrow.rs`  
-    Los een borrow-probleem op.
-
-35. `35_debug_option.rs`  
-    Los een fout met `Option` op.
-
-36. `36_debug_match.rs`  
-    Maak een onvolledige `match` correct.
-
-37. `37_debug_lifetime_of_borrow.rs`  
-    Onderzoek hoe een block de levensduur van een borrow beperkt.
-
-## Integratie
-
-38. `38_gevecht_met_wapen.rs`  
-    Combineer speler, wapen en vijand.
-
-39. `39_gevecht_met_potion.rs`  
-    Combineer gevecht en inventaris.
-
-40. `40_final_gevecht.rs`  
-    Bouw een volledig gevecht.
-
----
-
-## 48. Zelfstandige oefening — Een trainingsgevecht
+## 47. Zelfstandige oefening — Een trainingsgevecht
 
 Maak een programma met:
 
@@ -1907,7 +1717,7 @@ Het programma eindigt wanneer één van beide dood is.
 
 ---
 
-## 49. Zelfstandige oefening — Een wapen
+## 48. Zelfstandige oefening — Een wapen
 
 Voeg een wapen toe:
 
@@ -1934,7 +1744,7 @@ De `Speler` moet dat zelf weten.
 
 ---
 
-## 50. Zelfstandige oefening — Gevechtsmenu
+## 49. Zelfstandige oefening — Gevechtsmenu
 
 Voeg deze keuzes toe:
 
@@ -1956,7 +1766,7 @@ Regels:
 
 ---
 
-## 51. Zelfstandige oefening — Kritieke treffers
+## 50. Zelfstandige oefening — Kritieke treffers
 
 Voeg een kans van 10% op een kritieke treffer toe.
 
@@ -1986,7 +1796,7 @@ Test niet of een willekeurige aanval precies 10% van de tijd kritisch is. Willek
 
 ---
 
-## 52. Eindopdracht — Het volledige gevechtssysteem
+## 51. Eindopdracht — Het volledige gevechtssysteem
 
 Integreer het gevechtssysteem in de RPG.
 
@@ -2063,7 +1873,7 @@ enum Gevechtsresultaat {
 
 ---
 
-## 53. Tests voor het gevechtssysteem
+## 52. Tests voor het gevechtssysteem
 
 Schrijf minimaal tests voor:
 
@@ -2090,7 +1900,7 @@ gezondheid wordt nooit hoger dan maximum
 
 ---
 
-## 54. Een belangrijke programmeerles
+## 53. Een belangrijke programmeerles
 
 Kijk nog eens naar hoe we begonnen.
 
@@ -2150,7 +1960,7 @@ Dat is een belangrijke manier van programmeren.
 
 ---
 
-## 55. Niet alles hoeft meteen perfect te zijn
+## 54. Niet alles hoeft meteen perfect te zijn
 
 De eerste versie van ons gevecht was:
 
@@ -2195,7 +2005,7 @@ Daarna verbeter je die stap voor stap.
 
 ---
 
-## 56. Wat hebben we geleerd?
+## 55. Wat hebben we geleerd?
 
 In dit artikel hebben we veel bestaande Rust-concepten gecombineerd.
 
@@ -2259,7 +2069,7 @@ Als je die vragen één voor één kunt beantwoorden, wordt een groot programma 
 
 ---
 
-## 57. Vooruitblik
+## 56. Vooruitblik
 
 We hebben nu een speelbaar gevechtssysteem.
 
@@ -2288,3 +2098,13 @@ Het doel blijft hetzelfde:
 
 Maak daarna de oefeningen uit de [Rustlings-map van Artikel 33](https://github.com/keitv-codecraft/keitv-rust-basis-rustlings/tree/master/exercises/artikel_33/).
 
+---
+
+## Controlelijst
+
+Je bent klaar met dit artikel als je zonder hulp:
+
+- [ ] een gevechtslus kunt programmeren waarin levenspunten correct worden bijgewerkt
+- [ ] methoden kunt schrijven die rekening houden met verdediging en kritieke treffers
+- [ ] gevechtsuitkomsten kunt modelleren en afhandelen met enums
+- [ ] unit tests kunt schrijven om gevechtsregels automatisch te valideren.

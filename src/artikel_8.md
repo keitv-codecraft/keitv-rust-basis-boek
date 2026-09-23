@@ -1,6 +1,6 @@
-﻿# Ownership: wie is de eigenaar?
+﻿# 8. Ownership: wie is de eigenaar?
 
-## 1. Wat gaan we leren?
+## Wat gaan we leren?
 
 Ownership is een van de belangrijkste ideeën van Rust.
 
@@ -21,7 +21,7 @@ We leren **nog niet** hoe we references (`&`) gebruiken. Dat komt in de volgende
 
 ---
 
-## 2. Waarom heeft Rust ownership?
+## 1. Waarom heeft Rust ownership?
 
 Programma's gebruiken geheugen.
 
@@ -56,7 +56,7 @@ Dat klinkt ingewikkeld, maar het basisidee is eigenlijk eenvoudig:
 
 ---
 
-## 3. Een eerste voorbeeld
+## 2. Een eerste voorbeeld
 
 Kijk naar:
 
@@ -89,7 +89,7 @@ Dat werkt gewoon.
 
 ---
 
-## 4. Wat gebeurt er met de eigenaar?
+## 3. Wat gebeurt er met de eigenaar?
 
 Kijk naar:
 
@@ -135,7 +135,7 @@ Je hoeft daar normaal gesproken niets voor te doen.
 
 ---
 
-## 5. Waarom is `String` interessant?
+## 4. Waarom is `String` interessant?
 
 Tot nu toe hebben we vaak gewerkt met:
 
@@ -169,7 +169,7 @@ Daarom wordt ownership bij `String` goed zichtbaar.
 
 ---
 
-## 6. Wat gebeurt er als we een `String` kopiëren?
+## 5. Wat gebeurt er als we een `String` kopiëren?
 
 Kijk naar:
 
@@ -223,7 +223,7 @@ Rust zegt in feite:
 
 ---
 
-## 7. Waarom doet Rust dit?
+## 6. Waarom doet Rust dit?
 
 Dit is een belangrijke vraag.
 
@@ -249,7 +249,7 @@ Bij een move verhuist het eigenaarschap.
 
 ---
 
-## 8. Een move is geen gewone kopie
+## 7. Een move is geen gewone kopie
 
 Dit:
 
@@ -270,7 +270,7 @@ Daarom is `naam` daarna niet meer bruikbaar.
 
 ---
 
-## 9. Maar waarom werkt dit dan wel?
+## 8. Maar waarom werkt dit dan wel?
 
 Kijk naar:
 
@@ -323,7 +323,7 @@ Daarna zijn beide variabelen nog bruikbaar.
 
 ---
 
-## 10. `String` versus `i32`
+## 9. `String` versus `i32`
 
 Dit verschil is belangrijk:
 
@@ -355,7 +355,7 @@ Rust moet daar heel zorgvuldig mee omgaan.
 
 ---
 
-## 11. Een echte kopie maken met `clone`
+## 10. Een echte kopie maken met `clone`
 
 Soms willen we wél twee zelfstandige strings.
 
@@ -383,7 +383,7 @@ Het zijn twee afzonderlijke waarden.
 
 ---
 
-## 12. Waarom niet altijd `clone()` gebruiken?
+## 11. Waarom niet altijd `clone()` gebruiken?
 
 Je zou misschien denken:
 
@@ -414,7 +414,7 @@ Daarmee kunnen we gegevens gebruiken zonder het eigenaarschap over te dragen of 
 
 ---
 
-## 13. Ownership en functies
+## 12. Ownership en functies
 
 Ownership wordt vooral interessant wanneer we waarden aan functies geven.
 
@@ -452,7 +452,7 @@ De oorspronkelijke variabele `naam` is daarna niet meer eigenaar.
 
 ---
 
-## 14. De functie neemt ownership over
+## 13. De functie neemt ownership over
 
 Je kunt dit zien als:
 
@@ -476,7 +476,7 @@ De `String` kan daarna worden opgeruimd.
 
 ---
 
-## 15. Ownership teruggeven
+## 14. Ownership teruggeven
 
 Een functie kan ownership ook weer teruggeven.
 
@@ -512,7 +512,7 @@ main
 
 ---
 
-## 16. Ownership in een game
+## 15. Ownership in een game
 
 Ownership wordt veel interessanter als we aan game-objecten denken.
 
@@ -564,7 +564,7 @@ Ownership kan dus helpen om na te denken over:
 
 ---
 
-## 17. Nog een gamevoorbeeld: een naam
+## 16. Nog een gamevoorbeeld: een naam
 
 Stel dat we een spelernaam hebben:
 
@@ -596,7 +596,7 @@ En precies daarom bestaat borrowing.
 
 ---
 
-## 18. Waarom borrowing nodig is
+## 17. Waarom borrowing nodig is
 
 Stel dat we alleen een naam willen **bekijken**.
 
@@ -636,7 +636,7 @@ Dit noemen we **borrowing**.
 
 ---
 
-## 19. References komen in de volgende les
+## 18. References komen in de volgende les
 
 We hebben hier expres alvast één voorbeeld laten zien:
 
@@ -681,7 +681,7 @@ In de volgende les gaan we precies leren:
 
 ---
 
-## 20. De belangrijkste regels
+## 19. De belangrijkste regels
 
 Voor nu zijn deze regels voldoende.
 
@@ -734,9 +734,9 @@ Een waarde wordt automatisch opgeruimd wanneer de eigenaar uit scope verdwijnt.
 
 ---
 
-## 21. Veelgemaakte fouten
+## 20. Veelgemaakte fouten
 
-## Fout 1 — denken dat `=` altijd kopieert
+### Fout 1 — denken dat `=` altijd kopieert
 
 Bij:
 
@@ -750,7 +750,7 @@ Bij een `String` wordt ownership verplaatst.
 
 ---
 
-## Fout 2 — een moved value opnieuw gebruiken
+### Fout 2 — een moved value opnieuw gebruiken
 
 Dit:
 
@@ -769,7 +769,7 @@ Hij voorkomt dat je programma onduidelijk of onveilig met geheugen omgaat.
 
 ---
 
-## Fout 3 — overal `clone()` gebruiken
+### Fout 3 — overal `clone()` gebruiken
 
 `clone()` is een nuttig hulpmiddel, maar het is niet automatisch de beste oplossing.
 
@@ -779,7 +779,7 @@ Dat leren we straks.
 
 ---
 
-## 22. Zelf proberen
+## 21. Zelf proberen
 
 ### Opdracht 1 — eigenaar
 
@@ -857,244 +857,7 @@ Probeer daarna de oorspronkelijke variabele opnieuw te gebruiken.
 
 ---
 
-## 23. Rustlings-opgaven
-
-We maken opnieuw veel kleine oefeningen.
-
-```text
-exercises/
-└── ownership/
-    ├── 01_scope.rs
-    ├── 02_string_move.rs
-    ├── 03_use_after_move.rs
-    ├── 04_integer_copy.rs
-    ├── 05_boolean_copy.rs
-    ├── 06_clone.rs
-    ├── 07_string_scope.rs
-    ├── 08_move_function.rs
-    ├── 09_return_string.rs
-    ├── 10_game_item.rs
-    ├── 11_game_transfer.rs
-    ├── 12_player_name.rs
-    ├── 13_debug_move.rs
-    ├── 14_debug_clone.rs
-    └── 15_game_inventory.rs
-```
-
-## ⭐ Niveau 1
-
-### 01 — Scope
-
-Maak een String binnen een blok en print hem daar.
-
----
-
-### 02 — String move
-
-Maak:
-
-```rust,ignore
-let naam = String::from("Arin");
-```
-
-Verplaats de String naar een tweede variabele.
-
-Print daarna alleen de tweede variabele.
-
----
-
-### 03 — Use after move
-
-In deze oefening staat expres een fout:
-
-```rust,ignore
-let naam = String::from("Arin");
-let andere_naam = naam;
-
-println!("{naam}");
-```
-
-Laat de code compileren.
-
-Je moet dus begrijpen waarom de eerste `println!` niet mag en de code aanpassen.
-
----
-
-### 04 — Integer copy
-
-Maak:
-
-```rust,ignore
-let score = 100;
-let andere_score = score;
-```
-
-Print beide scores.
-
----
-
-### 05 — Boolean copy
-
-Doe hetzelfde met een `bool`.
-
-Bijvoorbeeld:
-
-```rust,ignore
-let levend = true;
-```
-
----
-
-### 06 — Clone
-
-Maak twee zelfstandige Strings met `clone()`.
-
-Print beide.
-
----
-
-### 07 — Scope
-
-Maak binnen een scope een game-item:
-
-```rust,ignore
-let item = String::from("Gouden sleutel");
-```
-
-Print het item binnen de scope.
-
-Zorg ervoor dat je het item buiten de scope niet probeert te gebruiken.
-
----
-
-## ⭐⭐ Niveau 2
-
-### 08 — Ownership naar een functie
-
-Maak:
-
-```rust,ignore
-fn gebruik_item(item: String) {
-    println!("Je gebruikt: {item}");
-}
-```
-
-Geef een String aan deze functie.
-
----
-
-### 09 — String teruggeven
-
-Maak een functie die een String teruggeeft:
-
-```rust,ignore
-fn maak_item() -> String {
-    // ...
-}
-```
-
-Gebruik de teruggegeven String in `main`.
-
----
-
-### 10 — Game item
-
-Maak een programma waarin:
-
-1. een zwaard wordt gemaakt
-2. het zwaard ownership heeft in `main`
-3. het zwaard aan een functie wordt gegeven
-4. de functie het zwaard print.
-
----
-
-### 11 — Item overdragen
-
-Maak een functie:
-
-```rust,ignore
-fn geef_item(item: String) {
-    // ...
-}
-```
-
-Laat een speler een item aan een handelaar geven.
-
-Het oorspronkelijke item mag daarna niet meer gebruikt worden.
-
----
-
-### 12 — Spelernaam
-
-Maak een String met de naam van de speler.
-
-Geef de naam aan een functie die een welkomstbericht print.
-
-Bedenk vervolgens waarom je de naam daarna niet meer kunt gebruiken.
-
----
-
-## ⭐⭐⭐ Niveau 3
-
-### 13 — Debug: move
-
-Dit programma bevat een ownership-fout:
-
-```rust,ignore
-fn main() {
-    let wapen = String::from("Zwaard");
-    let ander_wapen = wapen;
-
-    println!("Wapen: {wapen}");
-    println!("Ander wapen: {ander_wapen}");
-}
-```
-
-Maak het programma correct.
-
-Probeer eerst op te lossen zonder `clone()` te gebruiken.
-
----
-
-### 14 — Debug: clone
-
-Dit programma moet beide namen printen:
-
-```rust,ignore
-fn main() {
-    let naam = String::from("Arin");
-    let andere_naam = naam;
-
-    println!("{naam}");
-    println!("{andere_naam}");
-}
-```
-
-Zorg ervoor dat beide variabelen bruikbaar zijn.
-
----
-
-### 15 — Game inventory
-
-Maak een klein programma waarin een speler een item bezit.
-
-Bijvoorbeeld:
-
-```text
-Speler bezit: IJzeren zwaard
-```
-
-Geef vervolgens het zwaard aan een functie die het overdraagt aan een handelaar.
-
-Probeer daarna het zwaard opnieuw vanuit `main` te gebruiken.
-
-De compiler moet je vertellen waarom dat niet mag.
-
-Pas daarna het programma aan zodat het gedrag logisch is.
-
----
-
-## 24. Eindopdracht — De eigenaar van het zwaard
+## 22. Eindopdracht — De eigenaar van het zwaard
 
 Maak een klein programma met een speler en een zwaard.
 
@@ -1131,28 +894,6 @@ Je hoeft hiervoor nog geen references te gebruiken.
 
 ---
 
-## 25. Wat moet je nu kunnen?
-
-Na deze les zou je moeten begrijpen:
-
-- [ ] wat ownership betekent
-- [ ] wat een eigenaar is
-- [ ] wat een scope is
-- [ ] waarom `String` anders werkt dan `i32`
-- [ ] wat een move is
-- [ ] waarom een variabele na een move niet meer gebruikt kan worden
-- [ ] waarom eenvoudige `Copy`-types anders werken
-- [ ] hoe `clone()` een zelfstandige kopie maakt
-- [ ] hoe ownership naar een functie kan worden verplaatst
-- [ ] hoe een functie ownership kan teruggeven
-- [ ] waarom borrowing handig kan zijn.
-
-Het belangrijkste dat je uit deze les moet onthouden is:
-
-> **Als je een waarde aan iets anders geeft, vraag jezelf dan af: wie is nu de eigenaar?**
-
----
-
 ## Vooruitblik: borrowing
 
 We hebben nu gezien dat dit:
@@ -1181,3 +922,16 @@ Dat is het onderwerp van de volgende les: **references en borrowing**.
 
 Maak daarna de oefeningen uit de [Rustlings-map van Artikel 8](https://github.com/keitv-codecraft/keitv-rust-basis-rustlings/tree/master/exercises/artikel_8/).
 
+---
+
+## Controlelijst
+
+Je bent klaar met dit artikel als je zonder hulp:
+
+- [ ] kunt uitleggen wat ownership betekent
+- [ ] begrijpt wat een eigenaar en een scope zijn
+- [ ] weet waarom `String` anders werkt dan `i32` (move vs copy)
+- [ ] begrijpt waarom een variabele na een move niet meer gebruikt kan worden
+- [ ] weet wanneer en hoe je `clone()` gebruikt
+- [ ] weet hoe ownership naar een functie verhuist en hoe een functie het kan teruggeven
+- [ ] kunt beredeneren wie op elk moment de eigenaar van een waarde is.

@@ -1,55 +1,16 @@
-﻿# Rust 30 — Wapens en inventaris
+﻿# 30. Wapens en inventaris
 
-Onze RPG kan inmiddels een gevecht uitvoeren.
+## Wat gaan we leren?
 
-We hebben:
+In dit artikel breiden we onze RPG uit met wapens en een inventarissysteem.
 
-```text
-Spel
-├── Speler
-├── Vijand
-└── Gevecht
-```
+We leren:
 
-De speler en vijand kunnen elkaar aanvallen en schade toebrengen.
-
-Maar onze speler is nog erg eenvoudig.
-
-Een echte RPG heeft meestal spullen.
-
-De speler kan bijvoorbeeld hebben:
-
-```text
-Zwaard
-Potion
-Brood
-Pijlen
-Goud
-```
-
-In dit hoofdstuk voegen we daarom twee belangrijke onderdelen toe:
-
-```text
-Wapens
-Inventaris
-```
-
-Daarbij gebruiken we veel Rust die we al kennen:
-
-- structs
-- enums
-- `impl`
-- ownership
-- borrowing
-- `Option`
-- `HashMap`
-- `Vec`
-- iterators
-- traits
-- tests
-- modules.
-
-We leren dus niet alleen nieuwe code. We leren vooral hoe eerder geleerde concepten samen een groter programma vormen.
+- een `Inventaris` struct bouwen met een `HashMap` voor itembeheer
+- een `Wapen` struct ontwerpen en toekennen aan een `Speler`
+- de `Aanvaller` trait toepassen zodat aanvalskracht dynamisch berekend wordt
+- items gebruiken (zoals potions) en verbruiken
+- een eenvoudige winkel (`Winkel`) opzetten met veilige ownership-regels.
 
 ---
 
@@ -1962,286 +1923,7 @@ Het helpt ons vooral om de verantwoordelijkheden te begrijpen.
 
 ---
 
-## 56. Rustlings — Wapens en inventaris
-
-Maak:
-
-```text
-exercises/rpg_items/
-```
-
-met:
-
-```text
-01_inventaris.rs
-02_item_toevoegen.rs
-03_item_aantal.rs
-04_item_gebruiken.rs
-05_item_verwijderen.rs
-06_hashmap_test.rs
-
-07_wapentype.rs
-08_wapen.rs
-09_wapen_nieuw.rs
-10_wapen_schade.rs
-11_wapen_clone.rs
-12_wapen_test.rs
-
-13_speler_option.rs
-14_speler_wapen.rs
-15_speler_zonder_wapen.rs
-16_speler_aanval.rs
-17_speler_trait.rs
-
-18_potion.rs
-19_potion_test.rs
-20_potion_grens.rs
-
-21_inventaris_iterator.rs
-22_inventaris_filter.rs
-23_inventaris_collect.rs
-
-24_winkel.rs
-25_winkel_kiezen.rs
-26_winkel_option.rs
-27_winkel_kopen.rs
-
-28_debug_ownership.rs
-29_debug_borrowing.rs
-30_final_items.rs
-```
-
----
-
-## 57. Rustlings 01–06 — Inventaris
-
-## 01 — lege inventaris
-
-Maak een `Inventaris`.
-
-## 02 — item toevoegen
-
-Gebruik `entry()`.
-
-## 03 — aantal opvragen
-
-Gebruik `get()` en `Option`.
-
-## 04 — item gebruiken
-
-Gebruik `get_mut()`.
-
-## 05 — item verwijderen
-
-Gebruik `remove()`.
-
-## 06 — testen
-
-Laat de gegeven tests slagen.
-
----
-
-## 58. Rustlings 07–12 — Wapens
-
-Maak:
-
-```text
-WapenType
-Wapen
-```
-
-Voeg toe:
-
-```text
-nieuw()
-schade()
-prijs()
-clone()
-```
-
-Oefening 11 moet bewust een fout bevatten:
-
-De code probeert een `Wapen` te kopiëren alsof het automatisch `Copy` is.
-
-De cursist moet ontdekken waarom `Clone` hier wel kan en `Copy` niet.
-
----
-
-## 59. Rustlings 13–17 — Wapen en `Option`
-
-Maak:
-
-```rust,ignore
-wapen: Option<Wapen>
-```
-
-Test:
-
-```text
-None
-Some(wapen)
-```
-
-Oefening 15 moet een speler zonder wapen verwerken.
-
-Oefening 16 maakt `aanvalskracht()` afhankelijk van het huidige wapen.
-
-Oefening 17 voegt de `Aanvaller`-trait toe.
-
----
-
-## 60. Rustlings 18–20 — Items gebruiken
-
-Maak een potion.
-
-De speler begint bijvoorbeeld met:
-
-```text
-2 Potions
-```
-
-Een potion:
-
-```text
-herstelt 20 HP
-```
-
-Maar nooit boven maximale gezondheid.
-
-Test daarom:
-
-```text
-80 → 100
-95 → 100
-40 → 60
-```
-
----
-
-## 61. Rustlings 21–23 — Iterators
-
-Gebruik de inventaris als bron.
-
-### 21
-
-Verzamel alle itemnamen.
-
-### 22
-
-Zoek items waarvan het aantal groter is dan 5.
-
-### 23
-
-Maak daar een `Vec<String>` van.
-
-Gebruik:
-
-```text
-iter()
-filter()
-map()
-collect()
-```
-
-waar dat logisch is.
-
----
-
-## 62. Rustlings 24–27 — Winkel
-
-Maak een winkel met meerdere wapens.
-
-De cursist moet:
-
-1. de winkel maken
-2. wapens tonen
-3. een wapen op index zoeken
-4. `Option` correct verwerken
-5. een gekocht wapen aan de speler geven.
-
-Een ongeldige index mag niet tot een panic leiden.
-
-Dus liever:
-
-```text
-None
-```
-
-dan:
-
-```text
-panic
-```
-
----
-
-## 63. Rustlings 28 — Ownership-debugging
-
-Geef code zoals:
-
-```rust,ignore
-let wapen = Wapen::nieuw(...);
-
-speler.geef_wapen(wapen);
-
-println!("{}", wapen.schade());
-```
-
-Laat de cursist de compilerfout onderzoeken.
-
-Wat is er gebeurd?
-
-`geef_wapen()` heeft ownership van het wapen gekregen.
-
-De oorspronkelijke variabele kan daarna niet meer worden gebruikt.
-
----
-
-## 64. Rustlings 29 — Borrowing-debugging
-
-Geef bijvoorbeeld code waarin tegelijkertijd een immutable en mutable borrow nodig is.
-
-De cursist moet bepalen:
-
-- welke waarde alleen gelezen wordt
-- welke waarde veranderd wordt
-- hoe lang de borrow nodig is.
-
-Het doel is niet alleen de code repareren.
-
-Het doel is de compiler als hulpmiddel gebruiken om ownership en borrowing beter te begrijpen.
-
----
-
-## 65. Rustlings 30 — Het volledige item-systeem
-
-De laatste oefening combineert:
-
-```text
-Speler
-Wapen
-Inventaris
-HashMap
-Option
-Trait
-Iterator
-Tests
-```
-
-De speler moet:
-
-```text
-een wapen hebben
-items kunnen bewaren
-een potion kunnen gebruiken
-aanvalskracht uit het wapen halen
-```
-
-De bestaande gevechtscode moet vervolgens automatisch het nieuwe wapen gebruiken.
-
----
-
-## 66. Zelfstandige opdracht 1 — Maak een nieuw item
+## 56. Zelfstandige opdracht 1 — Maak een nieuw item
 
 Voeg een item toe:
 
@@ -2267,7 +1949,7 @@ Schrijf tests.
 
 ---
 
-## 67. Zelfstandige opdracht 2 — Maak meerdere wapens
+## 57. Zelfstandige opdracht 2 — Maak meerdere wapens
 
 Voeg toe:
 
@@ -2284,7 +1966,7 @@ Controleer met tests dat de aanvalskracht correct verandert.
 
 ---
 
-## 68. Zelfstandige opdracht 3 — Wapen wisselen
+## 58. Zelfstandige opdracht 3 — Wapen wisselen
 
 Laat de speler:
 
@@ -2303,7 +1985,7 @@ ownership
 
 ---
 
-## 69. Zelfstandige opdracht 4 — Inventaris zoeken
+## 59. Zelfstandige opdracht 4 — Inventaris zoeken
 
 Maak:
 
@@ -2334,7 +2016,7 @@ Gebruik daarna deze functie in een test.
 
 ---
 
-## 70. Zelfstandige opdracht 5 — Winkel met betaalfunctie
+## 60. Zelfstandige opdracht 5 — Winkel met betaalfunctie
 
 Maak het mogelijk om een wapen te kopen.
 
@@ -2374,7 +2056,7 @@ wapen blijft hetzelfde
 
 ---
 
-## 71. Zelfstandige opdracht 6 — Volledige status
+## 61. Zelfstandige opdracht 6 — Volledige status
 
 Maak een methode:
 
@@ -2406,7 +2088,7 @@ Probeer niet alle interne velden van `Inventaris` vanuit `Speler` rechtstreeks t
 
 ---
 
-## 72. Ontwerpvraag — waar hoort logica?
+## 62. Ontwerpvraag — waar hoort logica?
 
 We hebben nu drie onderdelen:
 
@@ -2444,7 +2126,7 @@ Dat onderdeel is vaak een goede plaats voor de betreffende logica.
 
 ---
 
-## 73. Ontwerpvraag — wanneer gebruik je `Option`?
+## 63. Ontwerpvraag — wanneer gebruik je `Option`?
 
 We hebben nu:
 
@@ -2477,7 +2159,7 @@ Het beschrijft een echte mogelijkheid:
 
 ---
 
-## 74. Ontwerpvraag — wanneer gebruik je `Vec`?
+## 64. Ontwerpvraag — wanneer gebruik je `Vec`?
 
 We gebruiken:
 
@@ -2507,7 +2189,7 @@ Dat zijn verschillende gegevensstructuren voor verschillende behoeften.
 
 ---
 
-## 75. Ontwerpvraag — wanneer gebruik je `HashMap`?
+## 65. Ontwerpvraag — wanneer gebruik je `HashMap`?
 
 Stel dat we de inventaris als `Vec` zouden maken:
 
@@ -2547,7 +2229,7 @@ Het juiste type hangt af van wat je met de gegevens wilt doen.
 
 ---
 
-## 76. Wat hebben we toegevoegd?
+## 66. Wat hebben we toegevoegd?
 
 Onze RPG heeft nu een veel interessanter model:
 
@@ -2581,7 +2263,7 @@ Dit is een mooi voorbeeld van hoe een groter Rust-programma ontstaat uit kleiner
 
 ---
 
-## 77. Controleer je project
+## 67. Controleer je project
 
 Voer na iedere grote wijziging uit:
 
@@ -2621,7 +2303,7 @@ Maak er een gewoonte van om niet tientallen wijzigingen te maken voordat je opni
 
 ---
 
-## 78. Eindopdracht
+## 68. Eindopdracht
 
 Breid de RPG uit zodat een speler:
 
@@ -2674,7 +2356,7 @@ Dat is precies het soort hergebruik dat we willen bereiken.
 
 ---
 
-## 79. Vooruitblik
+## 69. Vooruitblik
 
 De RPG begint nu echt vorm te krijgen.
 
@@ -2711,3 +2393,13 @@ Zo verandert onze verzameling gevechten langzaam in een echte kleine RPG.
 
 Maak daarna de oefeningen uit de [Rustlings-map van Artikel 30](https://github.com/keitv-codecraft/keitv-rust-basis-rustlings/tree/master/exercises/artikel_30/).
 
+---
+
+## Controlelijst
+
+Je bent klaar met dit artikel als je zonder hulp:
+
+- [ ] een `Inventaris` struct kunt opzetten en items kunt toevoegen, opvragen en verwijderen
+- [ ] een `Wapen` struct kunt koppelen aan een `Speler` en schade kunt berekenen
+- [ ] de trait `Aanvaller` kunt implementeren voor zowel `Speler` als `Vijand`
+- [ ] veilige methods kunt schrijven voor het kopen en wisselen van uitrusting.

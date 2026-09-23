@@ -1,4 +1,4 @@
-﻿# 2. Cargo: Rust-projecten maken en dependencies gebruiken
+# 2. Cargo: Rust-projecten maken en dependencies gebruiken
 
 ## Wat gaan we leren?
 
@@ -902,10 +902,9 @@ Voeg de dependency daarna opnieuw toe.
 
 ---
 
-## Rustlings opgaven
+## Rustlings-oefeningen
 
-Doe nu de Rustlings opgaven die bij dit artikel horen.
-Deze oefeningen zijn minstens zo belangrijk als nieuwe code schrijven.
+Maak daarna de oefeningen uit de [Rustlings-map van Artikel 2](https://github.com/keitv-codecraft/keitv-rust-basis-rustlings/tree/master/exercises/artikel_2/).
 
 ---
 
@@ -929,8 +928,4 @@ Het belangrijkste is dat je weet:
 
 > [!TIP]
 > **Cargo helpt ons om van losse Rust-code een echt Rust-project te maken.**
-
-## Rustlings-oefeningen
-
-Maak daarna de oefeningen uit de [Rustlings-map van Artikel 2](https://github.com/keitv-codecraft/keitv-rust-basis-rustlings/tree/master/exercises/artikel_2/).
 

@@ -1,43 +1,17 @@
-﻿# Rust 23 — Iterators verder uitgediept: lazy evaluation en adaptors
+﻿# 23. Iterators verder uitgediept
 
-In het vorige hoofdstuk hebben we geleerd hoe we iterators kunnen gebruiken.
+## Wat gaan we leren?
 
-We hebben onder andere gezien:
+In dit artikel gaan we dieper in op de werking van iterators en ontdekken we de kracht van lazy evaluation en geavanceerde adaptors.
 
-```rust,ignore
-.iter()
-.map(...)
-.filter(...)
-.find(...)
-.collect()
-```
+We leren:
 
-We kunnen daarmee bijvoorbeeld alle levende vijanden vinden:
-
-```rust,ignore
-let levende: Vec<&Vijand> = vijanden
-    .iter()
-    .filter(|vijand| vijand.gezondheid > 0)
-    .collect();
-```
-
-In dit hoofdstuk gaan we een stap verder.
-
-We gaan begrijpen:
-
-- wat een iterator precies doet
-- waarom iterators **lui** zijn
-- wanneer iterator-code daadwerkelijk wordt uitgevoerd
-- wat een adaptor precies is
-- waarom `map()` en `filter()` nog geen resultaten maken
-- hoe `enumerate()` werkt
-- hoe `take()` en `skip()` werken
-- hoe `zip()` twee iterators combineert
-- hoe `flat_map()` geneste lijsten kan uitvouwen
-- hoe iterator-ketens stap voor stap werken
-- hoe ownership en borrowing daarbij een rol spelen.
-
-We gaan de `Iterator`-trait zelf nog **niet** implementeren. Dat komt later bij traits en generics.
+- wat lazy evaluation betekent en waarom iterators pas werken als je een consumer aanroept
+- het verschil tussen adaptors (zoals `map`, `filter`, `take`) en consumers (zoals `collect`, `count`, `sum`)
+- indexen toevoegen met `enumerate()`
+- delen selecteren met `take()` en `skip()`
+- twee stromen samenvoegen met `zip()`
+- geneste structuren afvlakken met `flat_map()` en `filter_map()`.
 
 ---
 
@@ -431,7 +405,7 @@ Een consumer gebruikt de iterator en vraagt de resultaten op.
 
 We kunnen de belangrijkste methodes voorlopig in twee groepen verdelen.
 
-## Adaptors
+### Adaptors
 
 Deze maken een nieuwe iterator:
 
@@ -452,7 +426,7 @@ iterator
     .map(...)
 ```
 
-## Consumers
+### Consumers
 
 Deze vragen daadwerkelijk waarden op:
 
@@ -1718,349 +1692,9 @@ We hoeven die syntax nu nog niet volledig te beheersen.
 
 ---
 
-## 38. Rustlings-oefeningen
+## 38. Zelfstandige opdrachten
 
-Maak voor dit hoofdstuk:
-
-```text
-exercises/iterator_adaptors/
-```
-
-De oefeningen bouwen langzaam op.
-
-## Basis van lazy evaluation
-
-### 01_lazy.rs
-
-Maak een iterator met `map()` waarin een `println!` staat.
-
-Controleer wanneer de tekst wordt afgedrukt.
-
-Laat daarna de iterator consumeren met `collect()`.
-
----
-
-### 02_lazy_for.rs
-
-Maak een iterator met `map()` en gebruik daarna een `for`-lus.
-
-Observeer wanneer de closure wordt uitgevoerd.
-
----
-
-### 03_lazy_find.rs
-
-Gebruik:
-
-```text
-filter()
-find()
-```
-
-en voeg een `println!` toe aan de closures.
-
-Controleer dat `find()` stopt zodra een passende waarde is gevonden.
-
----
-
-### 04_count.rs
-
-Gebruik `count()` om het aantal elementen te bepalen.
-
----
-
-## `enumerate()`
-
-### 05_enumerate.rs
-
-Print iedere naam met zijn index.
-
----
-
-### 06_numbered_enemies.rs
-
-Maak een lijst vijanden en print:
-
-```text
-1. Goblin
-2. Ork
-3. Draak
-```
-
-Gebruik `enumerate()`.
-
----
-
-### 07_enumerate_map.rs
-
-Gebruik `enumerate()` en `map()` om een `Vec<String>` met genummerde namen te maken.
-
----
-
-## `take()` en `skip()`
-
-### 08_take.rs
-
-Neem alleen de eerste drie getallen.
-
----
-
-### 09_skip.rs
-
-Sla de eerste twee getallen over.
-
----
-
-### 10_skip_take.rs
-
-Gebruik:
-
-```text
-skip()
-take()
-```
-
-om een bepaald gedeelte van een lijst te selecteren.
-
----
-
-### 11_first_enemies.rs
-
-Laat maximaal drie vijanden zien.
-
-Gebruik `take()`.
-
----
-
-## `zip()`
-
-### 12_zip.rs
-
-Combineer een lijst met namen en een lijst met leeftijden.
-
-Print:
-
-```text
-Aria is 25
-Borin is 31
-```
-
----
-
-### 13_zip_damage.rs
-
-Combineer een lijst met vijanden met een lijst met schade.
-
-Print hoeveel schade iedere vijand krijgt.
-
----
-
-### 14_zip_debug.rs
-
-De twee lijsten hebben verschillende lengtes.
-
-Onderzoek hoeveel resultaten `zip()` oplevert en leg in een commentaar uit waarom.
-
----
-
-## `flat_map()`
-
-### 15_flat_map.rs
-
-Maak:
-
-```rust,ignore
-let groepen = vec![
-    vec![1, 2],
-    vec![3],
-    vec![4, 5],
-];
-```
-
-Gebruik `flat_map()` om:
-
-```text
-1, 2, 3, 4, 5
-```
-
-te krijgen.
-
----
-
-### 16_flat_map_items.rs
-
-Maak meerdere inventarissen.
-
-Gebruik `flat_map()` om alle items in één iterator te krijgen.
-
----
-
-### 17_flat_map_filter.rs
-
-Gebruik `flat_map()` en `filter()` om bepaalde items uit alle inventarissen te selecteren.
-
----
-
-## `filter_map()`
-
-### 18_filter_map.rs
-
-Maak een lijst met positieve en negatieve getallen.
-
-Gebruik `filter_map()` om alleen positieve getallen te behouden en ze te verdubbelen.
-
----
-
-### 19_filter_map_option.rs
-
-Maak een `Vec<Option<i32>>`.
-
-Gebruik `filter_map()` om alleen de waarden uit `Some(...)` te verzamelen.
-
----
-
-### 20_find_optional_item.rs
-
-Maak een lijst met optionele items.
-
-Gebruik `filter_map()` om alleen bestaande items te verzamelen.
-
----
-
-## Ownership
-
-### 21_iter_borrow.rs
-
-Gebruik `iter()` om door een `Vec<String>` te lopen.
-
-Laat zien dat de oorspronkelijke `Vec` daarna nog gebruikt kan worden.
-
----
-
-### 22_into_iter_move.rs
-
-Gebruik `into_iter()` met een `Vec<String>`.
-
-Probeer daarna de oorspronkelijke `Vec` nog te gebruiken.
-
-De code compileert bewust niet.
-
-Los de oefening op en bepaal of `iter()` of `into_iter()` de bedoeling is.
-
----
-
-### 23_iter_mut.rs
-
-Gebruik `iter_mut()` om alle gezondheidspunten van vijanden met 10 te verlagen.
-
----
-
-### 24_iterator_borrow_debug.rs
-
-Deze oefening bevat bewust een borrow-probleem in een iterator-keten.
-
-Lees de compilerfout en los het probleem op.
-
----
-
-## Complete iterator-ketens
-
-### 25_chain.rs
-
-Maak een iterator-keten die:
-
-1. alleen positieve getallen houdt
-2. ze verdubbelt
-3. maximaal vijf resultaten gebruikt
-4. ze verzamelt in een `Vec<i32>`.
-
----
-
-### 26_enemy_chain.rs
-
-Maak een lijst vijanden.
-
-Gebruik één iterator-keten om:
-
-1. dode vijanden weg te filteren
-2. de namen te pakken
-3. maximaal drie namen te nemen
-4. de namen te verzamelen.
-
----
-
-### 27_enemy_numbers.rs
-
-Maak een lijst levende vijanden.
-
-Gebruik:
-
-```text
-filter()
-enumerate()
-map()
-collect()
-```
-
-om genummerde namen te maken.
-
----
-
-### 28_enemy_health.rs
-
-Bereken met een iterator-keten de totale gezondheid van alle levende vijanden.
-
-Gebruik:
-
-```text
-filter()
-map()
-sum()
-```
-
----
-
-## Lazy evaluation testen
-
-### 29_lazy_battle.rs
-
-Maak een lijst vijanden.
-
-Gebruik `filter()` en `find()` om de eerste vijand met meer dan 100 gezondheid te vinden.
-
-Plaats `println!` in de closure zodat zichtbaar wordt welke vijanden bekeken worden.
-
----
-
-### 30_final_iterator.rs
-
-Maak een klein RPG-gevecht.
-
-Gebruik minimaal:
-
-- `iter()`
-- `filter()`
-- `map()`
-- `enumerate()`
-- `take()`
-- `find()`
-- `sum()`.
-
-Schrijf daarnaast minstens vijf automatische tests.
-
-Test onder andere:
-
-- geen levende vijanden
-- één levende vijand
-- meerdere levende vijanden
-- meer dan drie vijanden
-- zoeken naar een bestaande en niet-bestaande vijand.
-
----
-
-## 39. Zelfstandige opdrachten
-
-## Opdracht 1 — Vijandenlijst
+### Opdracht 1 — Vijandenlijst
 
 Maak een functie:
 
@@ -2087,7 +1721,7 @@ collect()
 
 ---
 
-## Opdracht 2 — Levende vijanden
+### Opdracht 2 — Levende vijanden
 
 Maak:
 
@@ -2101,7 +1735,7 @@ Schrijf tests.
 
 ---
 
-## Opdracht 3 — Eerste drie
+### Opdracht 3 — Eerste drie
 
 Maak een functie die maximaal drie levende vijanden teruggeeft.
 
@@ -2115,7 +1749,7 @@ collect()
 
 ---
 
-## Opdracht 4 — Totaal gevecht
+### Opdracht 4 — Totaal gevecht
 
 Bereken de totale resterende gezondheid van alle levende vijanden.
 
@@ -2129,7 +1763,7 @@ sum()
 
 ---
 
-## Opdracht 5 — Kamers
+### Opdracht 5 — Kamers
 
 Maak een spelwereld met kamers:
 
@@ -2145,7 +1779,7 @@ Filter daarna alle Goblins eruit.
 
 ---
 
-## 40. Belangrijkste begrippen
+## 39. Belangrijkste begrippen
 
 Je moet na dit hoofdstuk vooral deze begrippen herkennen:
 
@@ -2200,7 +1834,7 @@ Dat verklaart waarom iterator-ketens zowel krachtig als efficiënt kunnen zijn.
 
 ---
 
-## 41. Vooruitblik
+## 40. Vooruitblik
 
 We hebben nu veel van de praktische kant van iterators gezien.
 
@@ -2239,3 +1873,15 @@ en stap voor stap kunt uitleggen wat iedere regel doet, dan beheers je de belang
 
 Maak daarna de oefeningen uit de [Rustlings-map van Artikel 23](https://github.com/keitv-codecraft/keitv-rust-basis-rustlings/tree/master/exercises/artikel_23/).
 
+---
+
+## Controlelijst
+
+Je bent klaar met dit artikel als je zonder hulp:
+
+- [ ] kunt uitleggen wat lazy evaluation is en waarom iterators lui zijn
+- [ ] het verschil kent tussen adaptors en consumers
+- [ ] `enumerate()` kunt gebruiken om een element met zijn volgnummer te koppelen
+- [ ] `take()` en `skip()` kunt gebruiken om bereiken te selecteren
+- [ ] `zip()` kunt gebruiken om twee lijsten te combineren
+- [ ] `flat_map()` of `filter_map()` kunt inzetten om data te filteren en transformeren.

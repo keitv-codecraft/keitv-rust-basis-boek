@@ -1,6 +1,6 @@
-﻿# Rust 14 — Derive: automatisch gedrag toevoegen
+﻿# 14. Derive-attributen
 
-## 1. Wat gaan we leren?
+## Wat gaan we leren?
 
 We hebben inmiddels gezien dat Rust soms extra informatie nodig heeft over een type.
 
@@ -42,7 +42,7 @@ We behandelen niet alle mogelijke derives. Het doel is dat je begrijpt **waarom*
 
 ---
 
-## 2. Eerst een probleem
+## 1. Eerst een probleem
 
 Stel dat we deze struct hebben:
 
@@ -90,7 +90,7 @@ Rust kan dan automatisch een debugweergave van de struct maken.
 
 ---
 
-## 3. `Debug`
+## 2. `Debug`
 
 `Debug` is vooral bedoeld om tijdens het programmeren te kijken wat er in een waarde zit.
 
@@ -129,7 +129,7 @@ Je hoeft dus niet zelf een speciale `println!` te schrijven voor ieder veld.
 
 ---
 
-## 4. `{:?}`
+## 3. `{:?}`
 
 Je hebt eerder gezien:
 
@@ -173,7 +173,7 @@ Dat is vooral handig wanneer een struct veel velden heeft.
 
 ---
 
-## 5. Waarom is `Debug` handig?
+## 4. Waarom is `Debug` handig?
 
 Stel dat je game opeens vreemd gedrag vertoont.
 
@@ -214,7 +214,7 @@ een handige gewoonte voor structs die je tijdens het programmeren wilt kunnen on
 
 ---
 
-## 6. `Clone`
+## 5. `Clone`
 
 We hebben in het artikel over ownership al `clone()` gezien.
 
@@ -254,7 +254,7 @@ We hebben nu twee afzonderlijke waarden.
 
 ---
 
-## 7. Wat gebeurt er bij `clone()`?
+## 6. Wat gebeurt er bij `clone()`?
 
 Stel:
 
@@ -294,7 +294,7 @@ blijven beide bruikbaar.
 
 ---
 
-## 8. `Clone` moet door de onderdelen ondersteund worden
+## 7. `Clone` moet door de onderdelen ondersteund worden
 
 Kijk naar:
 
@@ -321,7 +321,7 @@ Voor nu hoef je vooral te onthouden:
 
 ---
 
-## 9. `Copy`
+## 8. `Copy`
 
 We hebben bij ownership al gezien dat sommige eenvoudige waarden gekopieerd worden:
 
@@ -365,7 +365,7 @@ Dit werkt.
 
 ---
 
-## 10. Waarom staat daar ook `Clone`?
+## 9. Waarom staat daar ook `Clone`?
 
 Je ziet vaak:
 
@@ -393,7 +393,7 @@ Daarom kan Rust hem eenvoudig kopiëren.
 
 ---
 
-## 11. `String` en `Copy`
+## 10. `String` en `Copy`
 
 Dit werkt niet:
 
@@ -431,7 +431,7 @@ kan wel.
 
 ---
 
-## 12. `PartialEq`
+## 11. `PartialEq`
 
 We hebben deze al gezien.
 
@@ -478,7 +478,7 @@ Zonder `PartialEq` weet Rust niet automatisch hoe het twee `Wapen`-waarden met e
 
 ---
 
-## 13. `PartialEq` bij structs
+## 12. `PartialEq` bij structs
 
 `PartialEq` werkt ook bij structs.
 
@@ -523,7 +523,7 @@ dus zijn ze gelijk.
 
 ---
 
-## 14. `Eq`
+## 13. `Eq`
 
 Je kunt ook:
 
@@ -557,7 +557,7 @@ Je hoeft de precieze theoretische verschillen tussen `PartialEq` en `Eq` nu nog 
 
 ---
 
-## 15. `Default`
+## 14. `Default`
 
 Soms willen we een standaardwaarde voor een type.
 
@@ -612,7 +612,7 @@ Dat komt doordat `bool` en `i32` hun eigen standaardwaarde hebben.
 
 ---
 
-## 16. Een eigen `Default`-implementatie
+## 15. Een eigen `Default`-implementatie
 
 Voor een game willen we misschien andere standaardwaarden.
 
@@ -670,7 +670,7 @@ schrijft zelf hoe de standaardwaarde eruitziet.
 
 ---
 
-## 17. Meerdere derives tegelijk
+## 16. Meerdere derives tegelijk
 
 Je kunt meerdere derives combineren.
 
@@ -711,7 +711,7 @@ Dit is heel gebruikelijk in Rust.
 
 ---
 
-## 18. Een enum met meerdere derives
+## 17. Een enum met meerdere derives
 
 Ook enums kunnen derives gebruiken.
 
@@ -754,7 +754,7 @@ let ander_wapen = wapen.clone();
 
 ---
 
-## 19. Een praktisch gamevoorbeeld
+## 18. Een praktisch gamevoorbeeld
 
 We maken een `Item`:
 
@@ -810,7 +810,7 @@ heeft dus behoorlijk veel functionaliteit toegevoegd.
 
 ---
 
-## 20. Derive en compilerfouten
+## 19. Derive en compilerfouten
 
 `derive` is geen magie die alles kan.
 
@@ -836,7 +836,7 @@ Dat is opnieuw een voorbeeld van iets belangrijks:
 
 ---
 
-## 21. Waarom bestaat `derive`?
+## 20. Waarom bestaat `derive`?
 
 Zonder `derive` zouden we sommige dingen zelf moeten schrijven.
 
@@ -872,9 +872,9 @@ Dat bespaart veel code.
 
 ---
 
-## 22. Zelf proberen
+## 21. Zelf proberen
 
-## Opdracht 1 — Debug
+### Opdracht 1 — Debug
 
 Maak een struct:
 
@@ -895,7 +895,7 @@ println!("{:?}", speler);
 
 ---
 
-## Opdracht 2 — Mooie debugweergave
+### Opdracht 2 — Mooie debugweergave
 
 Gebruik:
 
@@ -907,7 +907,7 @@ Kijk naar het verschil.
 
 ---
 
-## Opdracht 3 — Clone
+### Opdracht 3 — Clone
 
 Maak een `Wapen`.
 
@@ -921,7 +921,7 @@ let kopie = wapen.clone();
 
 ---
 
-## Opdracht 4 — Vergelijken
+### Opdracht 4 — Vergelijken
 
 Maak een `Wapen` met `PartialEq`.
 
@@ -937,7 +937,7 @@ if wapen1 == wapen2 {
 
 ---
 
-## Opdracht 5 — Positie
+### Opdracht 5 — Positie
 
 Maak:
 
@@ -959,7 +959,7 @@ Print ze met `Debug`.
 
 ---
 
-## Opdracht 6 — Game item
+### Opdracht 6 — Game item
 
 Maak:
 
@@ -981,280 +981,7 @@ PartialEq
 
 ---
 
-## 23. Rustlings-opgaven
-
-Maak:
-
-```text
-exercises/
-└── derive/
-    ├── 01_debug.rs
-    ├── 02_debug_struct.rs
-    ├── 03_debug_enum.rs
-    ├── 04_debug_pretty.rs
-    ├── 05_clone.rs
-    ├── 06_clone_struct.rs
-    ├── 07_partial_eq.rs
-    ├── 08_partial_eq_struct.rs
-    ├── 09_copy.rs
-    ├── 10_copy_position.rs
-    ├── 11_default.rs
-    ├── 12_multiple_derives.rs
-    ├── 13_game_item.rs
-    ├── 14_debug_error.rs
-    ├── 15_clone_error.rs
-    ├── 16_copy_error.rs
-    ├── 17_eq.rs
-    └── 18_game_inventory.rs
-```
-
-## ⭐ Niveau 1 — `Debug`
-
-### 1. Eerste `Debug`
-
-Voeg `Debug` toe aan een `Speler`.
-
-Print hem met:
-
-```rust,ignore
-println!("{:?}", speler);
-```
-
-### 2. Struct debuggen
-
-Maak een struct met drie velden.
-
-Print hem.
-
-### 3. Enum debuggen
-
-Maak:
-
-```rust,ignore
-enum Wapen {
-    Zwaard,
-    Boog,
-    Staf,
-}
-```
-
-Voeg `Debug` toe en print een wapen.
-
-### 4. Mooie debugweergave
-
-Gebruik:
-
-```rust,ignore
-println!("{:#?}", waarde);
-```
-
-en bekijk het resultaat.
-
----
-
-## ⭐⭐ Niveau 2 — `Clone`, `Copy` en `PartialEq`
-
-### 5. Clone
-
-Maak een `Wapen` dat `Clone` ondersteunt.
-
-Maak een kopie.
-
-### 6. Clone van een struct
-
-Maak:
-
-```text
-Item
-├── naam
-└── waarde
-```
-
-Clone het item.
-
-### 7. Vergelijken
-
-Voeg `PartialEq` toe aan `Wapen`.
-
-Vergelijk twee wapens.
-
-### 8. Structs vergelijken
-
-Maak twee gelijke `Positie`-structs.
-
-Controleer met `==`.
-
-### 9. Copy
-
-Maak:
-
-```rust,ignore
-#[derive(Copy, Clone)]
-struct Positie {
-    x: i32,
-    y: i32,
-}
-```
-
-Kopieer een positie door hem toe te wijzen aan een andere variabele.
-
-Controleer daarna of beide nog bruikbaar zijn.
-
-### 10. Posities vergelijken
-
-Combineer:
-
-```text
-Debug
-Copy
-Clone
-PartialEq
-```
-
-voor `Positie`.
-
----
-
-## ⭐⭐⭐ Niveau 3 — combineren
-
-### 11. Default
-
-Maak een struct waarvoor:
-
-```rust,ignore
-#[derive(Default)]
-```
-
-kan worden gebruikt.
-
-Maak een waarde met:
-
-```rust,ignore
-StructNaam::default()
-```
-
----
-
-### 12. Meerdere derives
-
-Maak:
-
-```rust,ignore
-#[derive(Debug, Clone, PartialEq)]
-struct Wapen {
-    naam: String,
-    schade: i32,
-}
-```
-
-Test alle drie de mogelijkheden.
-
----
-
-### 13. Game item
-
-Maak:
-
-```rust,ignore
-#[derive(Debug, Clone, PartialEq)]
-struct Item {
-    naam: String,
-    waarde: i32,
-}
-```
-
-Maak een kleine verzameling items en test:
-
-- debuggen
-- clonen
-- vergelijken.
-
----
-
-### 14. Debugfout
-
-Je krijgt code waarin:
-
-```rust,ignore
-println!("{:?}", speler);
-```
-
-wordt gebruikt, maar `Speler` heeft geen `Debug`.
-
-Zoek de fout.
-
----
-
-### 15. Clonefout
-
-Je krijgt code waarin:
-
-```rust,ignore
-let kopie = speler.clone();
-```
-
-wordt gebruikt, maar `Speler` kan niet worden gecloned.
-
-Zoek uit wat ontbreekt.
-
----
-
-### 16. Copyfout
-
-Je krijgt:
-
-```rust,ignore
-#[derive(Copy, Clone)]
-struct Speler {
-    naam: String,
-}
-```
-
-Zoek uit waarom dit niet werkt.
-
-Probeer vervolgens uit te leggen waarom `Clone` hier wel kan werken.
-
----
-
-### 17. `Eq`
-
-Maak een eenvoudige enum of struct die:
-
-```rust,ignore
-#[derive(PartialEq, Eq)]
-```
-
-gebruikt.
-
-Test `==` en `!=`.
-
----
-
-### 18. Eindopdracht — inventaris
-
-Maak:
-
-```rust,ignore
-#[derive(Debug, Clone, PartialEq)]
-struct Item {
-    naam: String,
-    waarde: i32,
-}
-```
-
-Maak meerdere items.
-
-Print ze.
-
-Clone een item.
-
-Maak een tweede item met dezelfde gegevens.
-
-Controleer of ze gelijk zijn.
-
----
-
-## 24. Kleine eindopdracht — een game-item
+## 22. Kleine eindopdracht — een game-item
 
 We bouwen verder aan onze RPG.
 
@@ -1306,46 +1033,18 @@ Je hebt dan een kleine verzameling gameobjecten waarop je automatisch verschille
 
 ---
 
-## 25. Wat moet je nu kunnen?
-
-Na dit artikel zou je moeten kunnen:
-
-- [ ] uitleggen wat `derive` doet
-- [ ] `#[derive(Debug)]` gebruiken
-- [ ] een struct of enum met `Debug` printen
-- [ ] `#[derive(Clone)]` gebruiken
-- [ ] begrijpen wat `clone()` doet
-- [ ] begrijpen waarom `Clone` anders is dan `Copy`
-- [ ] `#[derive(Copy, Clone)]` gebruiken bij eenvoudige types
-- [ ] `#[derive(PartialEq)]` gebruiken
-- [ ] structs en enums met `==` vergelijken
-- [ ] begrijpen waarvoor `Default` bedoeld is
-- [ ] meerdere derives combineren.
-
-Het belangrijkste om te onthouden is:
-
-```rust,ignore
-#[derive(Debug, Clone, PartialEq)]
-```
-
-Dit betekent ongeveer:
-
-> Rust, maak deze standaardmogelijkheden automatisch voor mijn type.
-
-En daarna kunnen we bijvoorbeeld:
-
-```rust,ignore
-println!("{:?}", item);
-let kopie = item.clone();
-
-if item == kopie {
-    println!("De items zijn gelijk.");
-}
-```
-
-gebruiken zonder deze functionaliteit zelf helemaal te hoeven programmeren.
-
 ## Rustlings-oefeningen
 
 Maak daarna de oefeningen uit de [Rustlings-map van Artikel 14](https://github.com/keitv-codecraft/keitv-rust-basis-rustlings/tree/master/exercises/artikel_14/).
 
+---
+
+## Controlelijst
+
+Je bent klaar met dit artikel als je zonder hulp:
+
+- [ ] weet wat het `#[derive(...)]` attribuut doet
+- [ ] `Debug` kunt toevoegen en structs met `{:?}` kunt printen
+- [ ] weet wat `Clone` en `Copy` doen en waarom `String` geen `Copy` kan zijn
+- [ ] `PartialEq` kunt gebruiken om structs te vergelijken met `==`
+- [ ] `Default` kunt gebruiken om standaardwaarden in te stellen.

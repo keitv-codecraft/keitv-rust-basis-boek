@@ -1,4 +1,4 @@
-﻿# Artikel 6 — Control flow: beslissingen maken met `if` en `else`
+# 6. Beslissingen met if en else
 
 ## Wat gaan we leren?
 
@@ -479,7 +479,7 @@ if gezondheid > 50 {
 
 We kunnen alle vergelijkingsoperatoren gebruiken.
 
-## Groter dan
+### Groter dan
 
 ```rust,ignore
 if score > 100 {
@@ -487,7 +487,7 @@ if score > 100 {
 }
 ```
 
-## Kleiner dan
+### Kleiner dan
 
 ```rust,ignore
 if gezondheid < 20 {
@@ -495,7 +495,7 @@ if gezondheid < 20 {
 }
 ```
 
-## Groter dan of gelijk aan
+### Groter dan of gelijk aan
 
 ```rust,ignore
 if score >= 100 {
@@ -503,7 +503,7 @@ if score >= 100 {
 }
 ```
 
-## Kleiner dan of gelijk aan
+### Kleiner dan of gelijk aan
 
 ```rust,ignore
 if gezondheid <= 0 {
@@ -511,7 +511,7 @@ if gezondheid <= 0 {
 }
 ```
 
-## Gelijk aan
+### Gelijk aan
 
 ```rust,ignore
 if score == 100 {
@@ -519,7 +519,7 @@ if score == 100 {
 }
 ```
 
-## Niet gelijk aan
+### Niet gelijk aan
 
 ```rust,ignore
 if score != 0 {
@@ -917,7 +917,7 @@ Dit begint al behoorlijk op echte game-logica te lijken.
 
 ## 23. Veelgemaakte fouten
 
-## Fout 1 — `=` gebruiken in plaats van `==`
+### Fout 1 — `=` gebruiken in plaats van `==`
 
 Fout:
 
@@ -939,7 +939,7 @@ if score == 100 {
 
 ---
 
-## Fout 2 — Een getal gebruiken als voorwaarde
+### Fout 2 — Een getal gebruiken als voorwaarde
 
 Fout:
 
@@ -961,7 +961,7 @@ if gezondheid > 0 {
 
 ---
 
-## Fout 3 — Een `if` zonder blok
+### Fout 3 — Een `if` zonder blok
 
 Rust gebruikt `{}`:
 
@@ -980,7 +980,7 @@ if gezondheid > 0
 
 ---
 
-## Fout 4 — Verkeerde volgorde bij `else if`
+### Fout 4 — Verkeerde volgorde bij `else if`
 
 Denk goed na over welke voorwaarden eerst gecontroleerd moeten worden.
 
@@ -988,7 +988,7 @@ Bij bereiken van waarden is het vaak logisch om van hoog naar laag te werken.
 
 ---
 
-## Fout 5 — `&&` en `||` door elkaar halen
+### Fout 5 — `&&` en `||` door elkaar halen
 
 ```rust,ignore
 if heeft_sleutel && heeft_zwaard {
@@ -1010,397 +1010,7 @@ betekent:
 
 ---
 
-## 24. Rustlings — Oefeningen
-
-Voor dit onderdeel kunnen we de volgende structuur gebruiken:
-
-```text
-exercises/
-└── control_flow/
-    ├── 01_if.rs
-    ├── 02_if_else.rs
-    ├── 03_greater.rs
-    ├── 04_less.rs
-    ├── 05_equal.rs
-    ├── 06_not_equal.rs
-    ├── 07_health.rs
-    ├── 08_else_if.rs
-    ├── 09_score.rs
-    ├── 10_function_if.rs
-    ├── 11_if_expression.rs
-    ├── 12_and.rs
-    ├── 13_or.rs
-    ├── 14_not.rs
-    ├── 15_game_door.rs
-    ├── 16_game_combat.rs
-    ├── 17_debug_if.rs
-    └── 18_debug_logic.rs
-```
-
-## ⭐ Oefening 1 — Je eerste `if`
-
-Maak een programma met:
-
-```rust,ignore
-let gezondheid = 100;
-```
-
-Print:
-
-```text
-Je leeft!
-```
-
-als de gezondheid groter dan 0 is.
-
----
-
-## ⭐ Oefening 2 — Game over
-
-Maak een programma waarin:
-
-```rust,ignore
-let gezondheid = 0;
-```
-
-staat.
-
-Gebruik `if` en `else` om te bepalen of de speler leeft.
-
-Verwachte uitvoer:
-
-```text
-Game over!
-```
-
----
-
-## ⭐ Oefening 3 — Hoge score
-
-Gebruik:
-
-```rust,ignore
-let score = 150;
-```
-
-Print:
-
-```text
-Hoge score!
-```
-
-als de score minstens 100 is.
-
----
-
-## ⭐ Oefening 4 — Lage gezondheid
-
-Gebruik:
-
-```rust,ignore
-let gezondheid = 15;
-```
-
-Print:
-
-```text
-Pas op!
-```
-
-als de gezondheid lager dan 20 is.
-
----
-
-## ⭐ Oefening 5 — Precies goed
-
-Gebruik:
-
-```rust,ignore
-let score = 100;
-```
-
-Print:
-
-```text
-Precies 100!
-```
-
-alleen als de score exact 100 is.
-
----
-
-## ⭐ Oefening 6 — Niet nul
-
-Print:
-
-```text
-Je hebt punten.
-```
-
-als de score niet gelijk is aan 0.
-
----
-
-## ⭐⭐ Oefening 7 — Gezondheid beoordelen
-
-Maak vier categorieën:
-
-```text
-> 75     → Gezond
-51..75   → Gewond
-1..50    → Ernstig gewond
-<= 0     → Dood
-```
-
-Gebruik `if`, `else if` en `else`.
-
-Test verschillende waarden.
-
----
-
-## ⭐⭐ Oefening 8 — Scorecategorie
-
-Maak:
-
-```text
-0–99       → Beginner
-100–499    → Gevorderd
-500–999    → Expert
-1000+      → Legende
-```
-
-Gebruik `else if`.
-
----
-
-## ⭐⭐ Oefening 9 — Functie gebruiken
-
-Maak:
-
-```rust,ignore
-fn is_levend(gezondheid: i32) -> bool {
-    // ...
-}
-```
-
-Gebruik vervolgens `if` om te bepalen wat er op het scherm komt.
-
----
-
-## ⭐⭐ Oefening 10 — Bonus berekenen
-
-Maak:
-
-```rust,ignore
-fn bereken_bonus(score: i32) -> i32 {
-    // ...
-}
-```
-
-Geef:
-
-- `500` bonus bij een score van 1000 of hoger
-- `100` bonus bij een lagere score.
-
-Gebruik daarna het resultaat in `main`.
-
----
-
-## ⭐⭐ Oefening 11 — De schatkist
-
-Een speler kan een schatkist openen als hij:
-
-- leeft
-- een sleutel heeft
-- minstens 10 goud heeft.
-
-Gebruik:
-
-```rust,ignore
-let gezondheid = 50;
-let heeft_sleutel = true;
-let goud = 20;
-```
-
-Gebruik `&&`.
-
----
-
-## ⭐⭐ Oefening 12 — De vlucht
-
-Een speler kan vluchten als hij:
-
-- een paard heeft
-- óf een teleportatie-item heeft.
-
-Gebruik `||`.
-
----
-
-## ⭐⭐ Oefening 13 — Niet vergiftigd
-
-Gebruik:
-
-```rust,ignore
-let is_vergiftigd = false;
-```
-
-Gebruik `!` om te controleren of de speler niet vergiftigd is.
-
----
-
-## ⭐⭐⭐ Oefening 14 — De winkel
-
-Een speler kan een item kopen als:
-
-- hij minstens 100 goud heeft
-- én hij nog leeft.
-
-Gebruik:
-
-```rust,ignore
-let goud = 150;
-let gezondheid = 80;
-```
-
-Laat het programma aangeven of de aankoop mogelijk is.
-
----
-
-## ⭐⭐⭐ Oefening 15 — Sleutel of kracht
-
-Een magische deur gaat open als:
-
-- de speler een sleutel heeft
-- óf de speler minstens 20 kracht heeft.
-
-Gebruik:
-
-```rust,ignore
-let heeft_sleutel = false;
-let kracht = 25;
-```
-
----
-
-## ⭐⭐⭐ Oefening 16 — Gevecht
-
-Gebruik de functies:
-
-```rust,ignore
-fn bereken_schade(kracht: i32, wapen: i32) -> i32 {
-    // ...
-}
-
-fn is_levend(gezondheid: i32) -> bool {
-    // ...
-}
-```
-
-Maak een gevecht waarin:
-
-1. de speler aanvalt
-2. schade wordt berekend
-3. de vijand gezondheid verliest
-4. wordt gecontroleerd of de vijand nog leeft
-5. een passende tekst wordt afgedrukt.
-
----
-
-## 25. Rustlings — Debuggen
-
-## Debug 1
-
-```rust,ignore
-fn main() {
-    let gezondheid = 50;
-
-    if gezondheid {
-        println!("Levend!");
-    }
-}
-```
-
-Waarom werkt dit niet?
-
----
-
-## Debug 2
-
-```rust,ignore
-fn main() {
-    let score = 100;
-
-    if score = 100 {
-        println!("Je hebt 100 punten!");
-    }
-}
-```
-
-Welke operator hoort hier?
-
----
-
-## Debug 3
-
-```rust
-fn main() {
-    let gezondheid = 0;
-
-    if gezondheid > 0 {
-        println!("Levend!");
-    } else if gezondheid > 50 {
-        println!("Veel gezondheid!");
-    } else {
-        println!("Dood!");
-    }
-}
-```
-
-Het programma compileert, maar de logica klopt niet.
-
-Waarom?
-
----
-
-## Debug 4
-
-```rust,ignore
-fn main() {
-    let score = 100;
-
-    let bonus = if score >= 100 {
-        500
-    } else {
-        "geen bonus"
-    };
-
-    println!("{bonus}");
-}
-```
-
-Waarom kan Rust hier geen datatype voor `bonus` bepalen?
-
----
-
-## Debug 5
-
-```rust,ignore
-fn main() {
-    let sleutel = true;
-    let goud = 50;
-
-    if sleutel && goud {
-        println!("De deur gaat open!");
-    }
-}
-```
-
-Wat is er mis met deze voorwaarde?
-
----
-
-## 26. Kleine eindopdracht — De eerste echte gamebeslissing
+## 24. Kleine eindopdracht — De eerste echte gamebeslissing
 
 Maak een klein programma waarin een speler probeert een schatkamer binnen te gaan.
 
@@ -1457,27 +1067,6 @@ Daarvoor heb je meerdere `if`/`else if`-takken nodig.
 
 ---
 
-## 27. Wat moet je nu kunnen?
-
-Na dit artikel zou je moeten begrijpen:
-
-- [ ] wat control flow betekent
-- [ ] wat `if` doet
-- [ ] dat een `if` een `bool` nodig heeft
-- [ ] wat `==` betekent
-- [ ] wat `!=` betekent
-- [ ] wat `>`, `<`, `>=` en `<=` betekenen
-- [ ] hoe `else` werkt
-- [ ] hoe `else if` werkt
-- [ ] waarom de volgorde van voorwaarden belangrijk kan zijn
-- [ ] hoe `&&` werkt
-- [ ] hoe `||` werkt
-- [ ] hoe `!` werkt
-- [ ] dat een `if` zelf een waarde kan opleveren
-- [ ] hoe functies en `if` samenwerken
-- [ ] hoe je eenvoudige gamebeslissingen maakt
-- [ ] hoe je logische fouten in voorwaarden kunt opsporen.
-
 ## De belangrijkste gedachte
 
 Tot nu toe vertelden we de computer vooral:
@@ -1508,3 +1097,17 @@ In het volgende artikel leren we hoe we met **lussen** herhaaldelijk code kunnen
 
 Maak daarna de oefeningen uit de [Rustlings-map van Artikel 6](https://github.com/keitv-codecraft/keitv-rust-basis-rustlings/tree/master/exercises/artikel_6/).
 
+---
+
+## Controlelijst
+
+Je bent klaar met dit artikel als je zonder hulp:
+
+- [ ] wat control flow betekent
+- [ ] wat `if` doet en waarom het een `bool` nodig heeft
+- [ ] vergelijkingsoperatoren (`==`, `!=`, `<`, `>`, `<=`, `>=`) kunt gebruiken
+- [ ] hoe `else` en `else if` werken
+- [ ] waarom de volgorde van voorwaarden belangrijk is
+- [ ] logische operatoren (`&&`, `||`, `!`) kunt combineren
+- [ ] dat een `if`/`else` als expressie een waarde kan teruggeven
+- [ ] `if` kunt combineren met functies en gamebeslissingen.

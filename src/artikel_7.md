@@ -1,6 +1,6 @@
-﻿# Lussen: iets steeds opnieuw doen
+﻿# 7. Lussen
 
-## 1. Wat gaan we leren?
+## Wat gaan we leren?
 
 In dit artikel leren we hoe we een stukje code **meerdere keren kunnen uitvoeren**.
 
@@ -20,7 +20,7 @@ Aan het einde kunnen we bijvoorbeeld een countdown maken, een aantal vijanden aa
 
 ---
 
-## 2. Waarom hebben we lussen nodig?
+## 1. Waarom hebben we lussen nodig?
 
 Stel dat we drie keer iets willen afdrukken:
 
@@ -64,7 +64,7 @@ Lussen zijn overal in games te vinden:
 
 ---
 
-## 3. De eenvoudigste lus: `loop`
+## 2. De eenvoudigste lus: `loop`
 
 Rust heeft een heel eenvoudige lus:
 
@@ -97,7 +97,7 @@ Het programma print `Hallo!` en stopt daarna met de lus.
 
 ---
 
-## 4. Een lus meerdere keren laten lopen
+## 3. Een lus meerdere keren laten lopen
 
 We kunnen een teller gebruiken:
 
@@ -137,7 +137,7 @@ Let goed op: wanneer `teller` 5 wordt, voeren we de `println!` niet nog een keer
 
 ---
 
-## 5. `break` kan ook een waarde teruggeven
+## 4. `break` kan ook een waarde teruggeven
 
 Een interessante eigenschap van `loop` is dat we met `break` ook een waarde kunnen teruggeven.
 
@@ -173,7 +173,7 @@ Voorlopig hoef je deze mogelijkheid nog niet veel te gebruiken. Het belangrijkst
 
 ---
 
-## 6. `while`: zolang iets waar is
+## 5. `while`: zolang iets waar is
 
 Een andere soort lus is `while`.
 
@@ -220,7 +220,7 @@ De lus stopt dus.
 
 ---
 
-## 7. `while` in een game
+## 6. `while` in een game
 
 Dit lijkt al behoorlijk op een echte game.
 
@@ -244,7 +244,7 @@ De speler wordt steeds aangevallen totdat zijn gezondheid op is.
 
 ---
 
-## 8. `for`: iets een bepaald aantal keer doen
+## 7. `for`: iets een bepaald aantal keer doen
 
 Vaak weten we vooraf hoeveel keer iets moet gebeuren.
 
@@ -304,7 +304,7 @@ Je kunt dit onthouden als:
 
 ---
 
-## 9. Wat betekent `getal in`?
+## 8. Wat betekent `getal in`?
 
 Kijk nog eens naar:
 
@@ -342,7 +342,7 @@ Hier is `ronde` waarschijnlijk duidelijker dan `getal`.
 
 ---
 
-## 10. Een `for`-lus in een game
+## 9. Een `for`-lus in een game
 
 Stel dat een speler vijf pijlen krijgt:
 
@@ -376,7 +376,7 @@ Aanval 5: HP = 50
 
 ---
 
-## 11. Een variabele die we niet gebruiken
+## 10. Een variabele die we niet gebruiken
 
 Soms willen we iets een bepaald aantal keer doen, maar hebben we het nummer helemaal niet nodig.
 
@@ -396,7 +396,7 @@ We gebruiken `_` vaak bij lussen waarvan we alleen het aantal herhalingen belang
 
 ---
 
-## 12. Lussen en `if`
+## 11. Lussen en `if`
 
 Lussen worden vaak gecombineerd met beslissingen.
 
@@ -426,7 +426,7 @@ herhaal iets
 
 ---
 
-## 13. Een vijand aanvallen
+## 12. Een vijand aanvallen
 
 We kunnen de kennis uit de vorige lessen combineren.
 
@@ -466,7 +466,7 @@ break;
 
 ---
 
-## 14. Een countdown
+## 13. Een countdown
 
 Een klassieke toepassing van een lus is een countdown.
 
@@ -499,7 +499,7 @@ Dit is een eerste klein voorbeeld van iets dat we later uitgebreider zullen tege
 
 ---
 
-## 15. Welke lus gebruik je wanneer?
+## 14. Welke lus gebruik je wanneer?
 
 Er zijn drie belangrijke vormen die we nu kennen.
 
@@ -548,9 +548,9 @@ Er zijn situaties waarin meerdere keuzes mogelijk zijn. Het gaat dus niet om een
 
 ---
 
-## 16. Veelgemaakte fouten
+## 15. Veelgemaakte fouten
 
-## Fout 1 — vergeten de teller te veranderen
+### Fout 1 — vergeten de teller te veranderen
 
 ```rust,ignore
 let mut teller = 0;
@@ -575,7 +575,7 @@ while teller < 5 {
 
 ---
 
-## Fout 2 — `..` en `..=` door elkaar halen
+### Fout 2 — `..` en `..=` door elkaar halen
 
 ```rust,ignore
 for nummer in 1..5 {
@@ -595,7 +595,7 @@ for nummer in 1..=5 {
 
 ---
 
-## Fout 3 — vergeten `mut` te gebruiken
+### Fout 3 — vergeten `mut` te gebruiken
 
 Dit werkt niet:
 
@@ -617,7 +617,7 @@ let mut gezondheid = 100;
 
 ---
 
-## Fout 4 — een `loop` zonder `break`
+### Fout 4 — een `loop` zonder `break`
 
 ```rust,ignore
 loop {
@@ -631,7 +631,7 @@ Dat kan soms precies de bedoeling zijn, maar meestal vergeten beginners gewoon d
 
 ---
 
-## 17. Zelf proberen
+## 16. Zelf proberen
 
 Probeer eerst zelf deze kleine opdrachten te maken.
 
@@ -683,301 +683,7 @@ Gebruik een lus en stop zodra de eindbaas verslagen is.
 
 ---
 
-## 18. Rustlings-opgaven
-
-Net als bij de vorige lessen gebruiken we meerdere kleine oefeningen. De bedoeling is dat je niet alleen leest, maar daadwerkelijk programmeert.
-
-Een mogelijke map:
-
-```text
-exercises/
-└── lussen/
-    ├── 01_loop.rs
-    ├── 02_loop_break.rs
-    ├── 03_teller.rs
-    ├── 04_while.rs
-    ├── 05_health.rs
-    ├── 06_for.rs
-    ├── 07_range.rs
-    ├── 08_range_inclusive.rs
-    ├── 09_countdown.rs
-    ├── 10_underscore.rs
-    ├── 11_if_in_loop.rs
-    ├── 12_break.rs
-    ├── 13_game_rounds.rs
-    ├── 14_enemy.rs
-    ├── 15_boss_fight.rs
-    ├── 16_debug_while.rs
-    ├── 17_debug_range.rs
-    └── 18_debug_loop.rs
-```
-
-## ⭐ Niveau 1 — rustig beginnen
-
-### 01 — `loop`
-
-Maak een programma dat één keer:
-
-```text
-Hallo!
-```
-
-print met behulp van `loop`.
-
-De lus moet daarna stoppen.
-
----
-
-### 02 — `loop` en `break`
-
-Maak een lus die:
-
-```text
-Start!
-```
-
-print en daarna stopt.
-
----
-
-### 03 — Teller
-
-Gebruik een `while`-lus om te tellen van 1 tot en met 5.
-
----
-
-### 04 — `while`
-
-Begin met:
-
-```rust,ignore
-let mut gezondheid = 50;
-```
-
-Verminder de gezondheid steeds met 10.
-
-Stop wanneer de gezondheid 0 is.
-
----
-
-### 05 — Gezondheid
-
-Print bij iedere stap de gezondheid:
-
-```text
-HP: 100
-HP: 80
-HP: 60
-HP: 40
-HP: 20
-```
-
----
-
-### 06 — `for`
-
-Print de getallen 1 tot en met 10 met een `for`-lus.
-
----
-
-### 07 — Bereik
-
-Maak een lus die precies deze waarden print:
-
-```text
-3
-4
-5
-6
-7
-```
-
----
-
-### 08 — Inclusief
-
-Maak een lus die de waarden 1 tot en met 5 print.
-
-Gebruik `..=`.
-
----
-
-### 09 — Countdown
-
-Maak:
-
-```text
-5...
-4...
-3...
-2...
-1...
-START!
-```
-
----
-
-### 10 — `_`
-
-Print vijf keer:
-
-```text
-BAM!
-```
-
-Gebruik:
-
-```rust,ignore
-for _ in ... {
-```
-
-Je hoeft het nummer van de herhaling niet te gebruiken.
-
----
-
-## ⭐⭐ Niveau 2 — lussen combineren
-
-### 11 — `if` in een lus
-
-Print de getallen 1 tot en met 10.
-
-Print bij getallen groter dan 5:
-
-```text
-Groot!
-```
-
-en bij de andere getallen:
-
-```text
-Klein!
-```
-
----
-
-### 12 — `break`
-
-Maak een lus die getallen blijft tellen.
-
-Stop zodra de teller 7 bereikt.
-
----
-
-### 13 — Game-rondes
-
-Maak tien spelrondes:
-
-```text
-Ronde 1
-Ronde 2
-...
-Ronde 10
-```
-
-Bij ronde 5 moet daarnaast verschijnen:
-
-```text
-Een nieuwe vijand verschijnt!
-```
-
----
-
-### 14 — Vijand
-
-Een vijand heeft 60 HP.
-
-Elke aanval doet 15 schade.
-
-Print na iedere aanval de resterende HP.
-
-Stop zodra de vijand dood is.
-
----
-
-### 15 — Eindbaas
-
-Maak een eindbaasgevecht.
-
-De eindbaas begint met 100 HP.
-
-Elke aanval doet 20 schade.
-
-Print bijvoorbeeld:
-
-```text
-Aanval 1: 80 HP
-Aanval 2: 60 HP
-...
-```
-
-Wanneer de eindbaas dood is:
-
-```text
-De eindbaas is verslagen!
-```
-
----
-
-## ⭐⭐⭐ Niveau 3 — nadenken en combineren
-
-### 16 — Debuggen: oneindige lus
-
-In dit programma zit een fout:
-
-```rust,ignore
-let mut teller = 0;
-
-while teller < 5 {
-    println!("{teller}");
-}
-```
-
-Waarom stopt het programma niet?
-
-Maak het programma werkend.
-
----
-
-### 17 — Debuggen: bereik
-
-In dit programma:
-
-```rust,ignore
-for nummer in 1..5 {
-    println!("{nummer}");
-}
-```
-
-moeten de getallen 1 tot en met 5 worden geprint.
-
-Pas het programma aan.
-
----
-
-### 18 — Debuggen: game over
-
-In dit programma zit een fout:
-
-```rust,ignore
-let mut gezondheid = 100;
-
-while gezondheid > 0 {
-    println!("HP: {gezondheid}");
-
-    if gezondheid <= 0 {
-        println!("Game over!");
-        break;
-    }
-}
-```
-
-Het programma moet gezondheid steeds met 25 verminderen en uiteindelijk stoppen.
-
-Zoek uit wat er ontbreekt.
-
----
-
-## 19. Eindopdracht — Het eerste echte gevecht
+## 17. Eindopdracht — Het eerste echte gevecht
 
 Maak een klein gevechtssysteem.
 
@@ -1036,37 +742,6 @@ Je hebt dus nog **geen structs, ownership of borrowing** nodig.
 
 ---
 
-## 20. Wat moet je nu kunnen?
-
-Na deze les zou je moeten begrijpen:
-
-- wat een lus is
-- waarvoor `loop` wordt gebruikt
-- hoe `break` een lus stopt
-- hoe `while` werkt
-- hoe `for` werkt
-- wat `1..5` betekent
-- wat `1..=5` betekent
-- waarvoor `_` bij een `for`-lus kan worden gebruikt
-- hoe je `if` binnen een lus gebruikt
-- hoe je een lus gebruikt voor een gamegevecht
-- hoe je een oneindige lus kunt herkennen.
-
-### Checklist
-
-Je kunt nu:
-
-- [ ] een `loop` schrijven
-- [ ] een `loop` stoppen met `break`
-- [ ] een `while`-lus schrijven
-- [ ] een `for`-lus schrijven
-- [ ] een bereik gebruiken
-- [ ] een countdown maken
-- [ ] een lus combineren met `if`
-- [ ] een eenvoudig gevecht programmeren.
-
----
-
 ## Vooruitblik
 
 We hebben nu een belangrijke stap gezet: onze programma's kunnen **beslissingen nemen én dingen herhalen**.
@@ -1081,3 +756,16 @@ Dat verklaart onder andere waarom Rust soms zegt dat je een variabele niet meer 
 
 Maak daarna de oefeningen uit de [Rustlings-map van Artikel 7](https://github.com/keitv-codecraft/keitv-rust-basis-rustlings/tree/master/exercises/artikel_7/).
 
+---
+
+## Controlelijst
+
+Je bent klaar met dit artikel als je zonder hulp:
+
+- [ ] een `loop` kunt schrijven en stoppen met `break`
+- [ ] een `while`-lus kunt gebruiken
+- [ ] een `for`-lus met een bereik (`1..5` of `1..=5`) kunt schrijven
+- [ ] begrijpt waarvoor `_` dient in een `for`-lus
+- [ ] een countdown kunt maken
+- [ ] een lus kunt combineren met `if`
+- [ ] een eenvoudig gevecht kunt programmeren waarin rondes worden herhaald.

@@ -1,4 +1,4 @@
-﻿# 1. Kennismaken met programmeren en Rust
+# 1. Kennismaken met programmeren en Rust
 
 ## Wat gaan we leren?
 
@@ -525,6 +525,12 @@ Wanneer je aangekomen bent bij de eerste oefening van het volgende artikel kom j
 
 ---
 
+## Rustlings-oefeningen
+
+Maak daarna de oefeningen uit de [Rustlings-map van Artikel 1](https://github.com/keitv-codecraft/keitv-rust-basis-rustlings/tree/master/exercises/artikel_1/).
+
+---
+
 ## Controlelijst
 
 Je bent klaar met dit artikel als je zonder hulp:
@@ -538,8 +544,4 @@ Je bent klaar met dit artikel als je zonder hulp:
 - [ ] zelf kleine veranderingen in een programma durft te maken.
 
 Als iets nog niet lukt, is dat geen probleem. Herhaal vooral de oefeningen waarbij je nog hulp nodig hebt.
-
-## Rustlings-oefeningen
-
-Maak daarna de oefeningen uit de [Rustlings-map van Artikel 1](https://github.com/keitv-codecraft/keitv-rust-basis-rustlings/tree/master/exercises/artikel_1/).
 

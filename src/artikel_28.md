@@ -1,28 +1,16 @@
-﻿# Rust 28 — Het RPG-project ontwerpen
+﻿# 28. Een RPG ontwerpen
 
-We hebben inmiddels veel Rust geleerd:
+## Wat gaan we leren?
 
-- variabelen en functies
-- `if`, `while`, `for` en `loop`
-- ownership en borrowing
-- structs en methoden
-- enums en traits
-- arrays en `Vec`
-- closures en iterators
-- tests
-- `String` en `&str`
-- modules
-- `Option` en `Result`
-- generics
-- `HashMap`
-- bestanden lezen en schrijven
-- en het structureren van een groter project.
+In dit artikel leren we hoe we een groter softwareproject — onze eigen command-line RPG — methodisch ontwerpen voordat we beginnen met bouwen.
 
-Tot nu toe waren onze voorbeelden meestal klein. Nu gaan we die kennis combineren in één groter programma: **ons eigen tekstgebaseerde RPG**.
+We leren:
 
-We gaan niet proberen het hele spel in één keer te programmeren. Eerst ontwerpen we wat we willen bouwen. Daarna implementeren we het stap voor stap.
-
-Dat is belangrijk: bij een groter programma is het vaak verstandiger om eerst na te denken over de onderdelen en hun verantwoordelijkheden.
+- de entiteiten van het spel in kaart brengen (`Speler`, `Vijand`, `Wapen`, `Inventaris`)
+- datastructuren en verantwoordelijkheden definiëren
+- eigenaarschap (ownership) van gegevens vastleggen
+- een modulaire architectuur opzetten met een centrale `SpelStatus`
+- een stapsgewijze ontwikkelstrategie hanteren: klein beginnen, testen en geleidelijk uitbreiden.
 
 ---
 
@@ -1486,254 +1474,7 @@ Het doel is leren nadenken over de gegevens die een programma nodig heeft.
 
 ---
 
-## 31. Rustlings — ontwerp en projectstructuur
-
-Omdat we nu een groter project gaan bouwen, verschuiven de oefeningen iets.
-
-Maak:
-
-```text
-exercises/rpg_ontwerp/
-```
-
-Daarin:
-
-```text
-01_speler.rs
-02_vijand.rs
-03_wapen.rs
-04_spelstatus.rs
-05_spel.rs
-06_relatie.rs
-07_inventaris.rs
-08_gevecht.rs
-09_modules.rs
-10_eindontwerp.rs
-```
-
----
-
-## Oefening 1 — Speler
-
-Maak:
-
-```rust,ignore
-struct Speler {
-    naam: String,
-    gezondheid: i32,
-    goud: i32,
-}
-```
-
-Maak vervolgens een speler en print de gegevens.
-
----
-
-## Oefening 2 — Vijand
-
-Maak:
-
-```rust,ignore
-struct Vijand {
-    naam: String,
-    gezondheid: i32,
-    aanvalskracht: i32,
-}
-```
-
-Maak een Goblin.
-
----
-
-## Oefening 3 — Wapen
-
-Maak:
-
-```rust,ignore
-enum WapenType {
-    Zwaard,
-    Boog,
-    Staf,
-}
-```
-
-Maak vervolgens:
-
-```rust,ignore
-struct Wapen {
-    naam: String,
-    soort: WapenType,
-    schade: i32,
-}
-```
-
----
-
-## Oefening 4 — Spelstatus
-
-Maak:
-
-```rust,ignore
-enum SpelStatus {
-    Menu,
-    Gevecht,
-    GameOver,
-}
-```
-
-Gebruik `match` om een tekst af te drukken voor iedere toestand.
-
----
-
-## Oefening 5 — Spel
-
-Maak:
-
-```rust,ignore
-struct Spel {
-    speler: Speler,
-    status: SpelStatus,
-}
-```
-
-Maak een nieuw spel.
-
----
-
-## Oefening 6 — Ownership
-
-Beantwoord eerst zonder code:
-
-> Wie is eigenaar van de `Speler`?
-
-En:
-
-> Wie is eigenaar van `SpelStatus`?
-
-Schrijf daarna code waarin een `Spel` beide waarden bezit.
-
----
-
-## Oefening 7 — Inventaris
-
-Maak:
-
-```rust,ignore
-struct Inventaris {
-    items: HashMap<String, i32>,
-}
-```
-
-Voeg drie items toe.
-
----
-
-## Oefening 8 — Gevecht
-
-Schrijf:
-
-```rust,ignore
-fn aanval(speler: &Speler, vijand: &mut Vijand) {
-    // ...
-}
-```
-
-De functie moet de vijand schade geven.
-
----
-
-## Oefening 9 — Modules
-
-Verdeel je ontwerp over minimaal drie bestanden:
-
-```text
-speler.rs
-vijand.rs
-spel.rs
-```
-
-Gebruik:
-
-```rust,ignore
-mod speler;
-mod vijand;
-mod spel;
-```
-
----
-
-## Oefening 10 — Eindontwerp
-
-Maak uiteindelijk een schema van jouw RPG:
-
-```text
-Spel
-├── ...
-├── ...
-└── ...
-```
-
-En schrijf bij iedere module in één zin wat zijn verantwoordelijkheid is.
-
----
-
-## 32. Bewust kapotte code
-
-Bij een groter project zullen fouten onvermijdelijk ontstaan.
-
-Dat is geen probleem.
-
-Sterker nog: compilerfouten zijn een hulpmiddel.
-
-Probeer bijvoorbeeld expres:
-
-```rust,ignore
-struct Speler {
-    naam: String,
-}
-
-fn main() {
-    let speler = Speler {
-        naam: String::from("Arin"),
-    };
-
-    println!("{}", speler.goud);
-}
-```
-
-De compiler vertelt dat `Speler` geen veld `goud` heeft.
-
-Dat is precies de informatie die we nodig hebben.
-
-Een andere oefening:
-
-```rust,ignore
-struct Speler {
-    naam: String,
-}
-
-fn toon_naam(speler: &Speler) {
-    println!("{}", speler.naam);
-}
-
-fn main() {
-    let speler = Speler {
-        naam: String::from("Arin"),
-    };
-
-    toon_naam(speler);
-
-    println!("{}", speler.naam);
-}
-```
-
-Hier komen we weer bij ownership en borrowing uit.
-
-De compiler vertelt ons dat we moeten nadenken over wat de functie met de waarde doet.
-
----
-
-## 33. Eindopdracht
+## 31. Eindopdracht — Ontwerp je eigen RPG
 
 Ontwerp voordat je programmeert jouw eerste versie van het RPG.
 
@@ -1782,7 +1523,7 @@ Je hoeft het volledige spel nog niet te programmeren.
 
 ---
 
-## 34. Wat hebben we hiermee geleerd?
+## 32. Wat hebben we hiermee geleerd?
 
 Een groter programma begint niet met honderden regels code.
 
@@ -1816,3 +1557,13 @@ In de volgende stap gaan we het ontwerp daadwerkelijk omzetten naar een **eerste
 
 Maak daarna de oefeningen uit de [Rustlings-map van Artikel 28](https://github.com/keitv-codecraft/keitv-rust-basis-rustlings/tree/master/exercises/artikel_28/).
 
+---
+
+## Controlelijst
+
+Je bent klaar met dit artikel als je zonder hulp:
+
+- [ ] een complex spel kunt ontleden in afzonderlijke structs en enums
+- [ ] kunt beargumenteren wie de eigenaar van welke spelgegevens is
+- [ ] een overzichtelijk moduleschema kunt tekenen voor een RPG
+- [ ] een ontwikkelvolgorde kunt opstellen (eerst klein, dan iteratief uitbreiden).

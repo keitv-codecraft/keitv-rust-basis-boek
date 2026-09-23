@@ -1,24 +1,17 @@
-﻿# Rust 15 — Arrays en Vecs: werken met groepen waarden
+﻿# 15. Arrays en Vecs
 
-Tot nu toe hebben we meestal met één waarde tegelijk gewerkt:
+## Wat gaan we leren?
 
-```rust,ignore
-let gezondheid = 100;
-let score = 500;
-let naam = String::from("Arin");
-```
+In dit artikel leren we hoe we groepen waarden bij elkaar bewaren.
 
-Maar in een spel hebben we vaak meerdere dingen van hetzelfde soort:
+We leren:
 
-- meerdere vijanden
-- meerdere spelers
-- meerdere wapens
-- meerdere scores
-- meerdere items.
-
-Daarvoor kunnen we een **verzameling waarden** gebruiken.
-
-Rust heeft hiervoor onder andere **arrays** en **Vecs**.
+- wat een array is en wanneer je arrays gebruikt
+- elementen benaderen met een index (`[0]`)
+- wat een `Vec` (vector) is en waarom die dynamisch kan groeien
+- elementen toevoegen aan een `Vec` met `push`
+- over een verzameling itereren met een `for`-lus
+- groepen spelobjecten (zoals vijanden en items) beheren in een game.
 
 ---
 
@@ -722,25 +715,25 @@ Voor ons RPG-project zullen we daarom **veel vaker `Vec` gebruiken dan arrays**.
 
 ## 24. Oefeningen
 
-## Oefening 1 — Getallen
+### Oefening 1 — Getallen
 
 Maak een array met vijf getallen.
 
 Print alle getallen met een `for`-lus.
 
-## Oefening 2 — Namen
+### Oefening 2 — Namen
 
 Maak een array met vijf namen.
 
 Print iedere naam.
 
-## Oefening 3 — Scores
+### Oefening 3 — Scores
 
 Maak een array met vijf scores.
 
 Bereken hoeveel elementen de array bevat.
 
-## Oefening 4 — Gezondheid
+### Oefening 4 — Gezondheid
 
 Maak een mutable array:
 
@@ -750,25 +743,25 @@ Maak een mutable array:
 
 Verminder iedere waarde met 10.
 
-## Oefening 5 — Eerste Vec
+### Oefening 5 — Eerste Vec
 
 Maak een `Vec` met drie namen.
 
 Voeg daarna met `push` een vierde naam toe.
 
-## Oefening 6 — Aantal vijanden
+### Oefening 6 — Aantal vijanden
 
 Maak een `Vec` met vier vijandenamen.
 
 Print het aantal vijanden met `.len()`.
 
-## Oefening 7 — Nieuwe vijand
+### Oefening 7 — Nieuwe vijand
 
 Begin met twee vijanden.
 
 Voeg daarna drie nieuwe vijanden toe met `push`.
 
-## Oefening 8 — Vijanden
+### Oefening 8 — Vijanden
 
 Maak een `struct Vijand` met:
 
@@ -781,17 +774,17 @@ Maak vervolgens een `Vec<Vijand>` met drie vijanden.
 
 Print hun namen en gezondheid.
 
-## Oefening 9 — AoE
+### Oefening 9 — AoE
 
 Geef alle vijanden 10 schade met een `for`-lus.
 
-## Oefening 10 — Genezing
+### Oefening 10 — Genezing
 
 Geef alle vijanden per ongeluk 20 gezondheid terug.
 
 Gebruik daarna dezelfde techniek om dit weer te veranderen in schade.
 
-## Oefening 11 — Nieuwe vijand
+### Oefening 11 — Nieuwe vijand
 
 Maak een groep vijanden.
 
@@ -799,7 +792,7 @@ Voeg tijdens het programma een nieuwe vijand toe.
 
 Print daarna alle vijanden.
 
-## Oefening 12 — Eindopdracht
+### Oefening 12 — Eindopdracht
 
 Maak een kleine groep van vijf vijanden.
 
@@ -809,59 +802,7 @@ Print daarna de gezondheid van iedere vijand.
 
 ---
 
-## 25. Rustlings
-
-Maak:
-
-```text
-exercises/vecs/
-```
-
-met bijvoorbeeld:
-
-```text
-01_array.rs
-02_array_index.rs
-03_array_for.rs
-04_array_mut.rs
-05_vec.rs
-06_vec_push.rs
-07_vec_len.rs
-08_vec_for.rs
-09_vec_mut.rs
-10_vec_empty.rs
-11_enemies.rs
-12_enemy_damage.rs
-13_enemy_heal.rs
-14_spawn_enemy.rs
-15_aoe.rs
-16_game_enemies.rs
-17_debug_vec.rs
-18_game_battle.rs
-```
-
-Bij `17_debug_vec.rs` kan bijvoorbeeld bewust deze fout staan:
-
-```rust,ignore
-let mut vijanden = vec![
-    "Goblin",
-    "Ork",
-];
-
-vijanden.push(42);
-```
-
-Laat de leerlingen de compiler uitleggen waarom dit niet kan.
-
-Het doel is niet om foutmeldingen te vermijden.
-
-Het doel is leren denken:
-
-> **Wat probeert de compiler mij hier te vertellen?**
-
----
-
-## 26. Eindopdracht — Het slagveld
+## 25. Eindopdracht — Het slagveld
 
 Maak een programma met:
 
@@ -904,3 +845,15 @@ Dat is expres een beetje vreemd: de programmeertechniek is belangrijker dan de s
 
 Maak daarna de oefeningen uit de [Rustlings-map van Artikel 15](https://github.com/keitv-codecraft/keitv-rust-basis-rustlings/tree/master/exercises/artikel_15/).
 
+---
+
+## Controlelijst
+
+Je bent klaar met dit artikel als je zonder hulp:
+
+- [ ] het verschil tussen een array (vaste lengte) en een `Vec` (groeiend) kunt uitleggen
+- [ ] een array kunt aanmaken en elementen met een index `[i]` kunt benaderen
+- [ ] een `Vec` kunt maken met `vec![...]` of `Vec::new()`
+- [ ] elementen aan een `Vec` kunt toevoegen met `push`
+- [ ] het aantal elementen kunt opvragen met `.len()`
+- [ ] met een `for`-lus (`&vijand` of `&mut vijand`) door een verzameling kunt lopen.

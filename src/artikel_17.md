@@ -1,23 +1,17 @@
-﻿# Rust 17 — Automatische tests
+﻿# 17. Automatische tests
 
-Tot nu toe hebben we onze programma's vooral getest door ze uit te voeren en te kijken wat er gebeurt.
+## Wat gaan we leren?
 
-Bijvoorbeeld:
+In dit artikel leren we hoe we automatische tests schrijven om te controleren of onze code correct werkt.
 
-```rust,ignore
-fn main() {
-    let schade = bereken_schade(10, 5);
-    println!("Schade: {schade}");
-}
-```
+We leren:
 
-We kijken dan zelf of er `15` op het scherm verschijnt.
-
-Dat werkt prima voor kleine programma's.
-
-Maar grotere programma's bevatten steeds meer onderdelen. Dan willen we liever dat Rust automatisch controleert of onze code doet wat we verwachten.
-
-Daarvoor hebben we **tests**.
+- wat automatische tests zijn en waarom ze een belangrijk vangnet vormen
+- het `#[test]` attribuut gebruiken
+- controleren met `assert_eq!`, `assert_ne!` en `assert!`
+- tests uitvoeren met `cargo test`
+- tests organiseren in een `tests`-module met `#[cfg(test)]` en `use super::*;`
+- hoe falende tests ons helpen bugs snel en gericht op te lossen.
 
 ---
 
@@ -799,207 +793,7 @@ Alle drie de tests zouden moeten slagen.
 
 ---
 
-## 23. Rustlings
-
-Maak:
-
-```text id="q3j7vn"
-exercises/tests/
-```
-
-met bijvoorbeeld:
-
-```text id="z7r2cx"
-01_first_test.rs
-02_assert_eq.rs
-03_assert_ne.rs
-04_assert.rs
-05_multiple_tests.rs
-06_damage_test.rs
-07_heal_test.rs
-08_alive_test.rs
-09_dead_test.rs
-10_player_test.rs
-11_enemy_test.rs
-12_vec_test.rs
-13_aoe_test.rs
-14_boundary_test.rs
-15_debug_test.rs
-16_fix_bug.rs
-17_regression.rs
-18_game_tests.rs
-```
-
-### `01_first_test.rs`
-
-Maak een functie:
-
-```rust,ignore
-fn dubbel(x: i32) -> i32 {
-    x * 2
-}
-```
-
-Schrijf een test die controleert dat:
-
-```text id="y2v6da"
-dubbel(5) == 10
-```
-
----
-
-### `02_assert_eq.rs`
-
-Test meerdere waarden met `assert_eq!`.
-
----
-
-### `03_assert_ne.rs`
-
-Test dat twee verschillende waarden niet gelijk zijn.
-
----
-
-### `04_assert.rs`
-
-Maak een functie:
-
-```rust,ignore
-fn is_positief(x: i32) -> bool {
-    x > 0
-}
-```
-
-Test zowel positieve als niet-positieve waarden.
-
----
-
-### `05_multiple_tests.rs`
-
-Maak minimaal drie tests voor dezelfde functie.
-
----
-
-### `06_damage_test.rs`
-
-Test:
-
-```text id="8k5m1x"
-100 gezondheid
-25 schade
-75 over
-```
-
----
-
-### `07_heal_test.rs`
-
-Test een genezingsfunctie.
-
----
-
-### `08_alive_test.rs`
-
-Test dat een speler met gezondheid `1` leeft.
-
----
-
-### `09_dead_test.rs`
-
-Test dat een speler met gezondheid `0` dood is.
-
----
-
-### `10_player_test.rs`
-
-Maak een `Speler` en test één van zijn methods.
-
----
-
-### `11_enemy_test.rs`
-
-Maak een `Vijand` en test `neem_schade`.
-
----
-
-### `12_vec_test.rs`
-
-Maak een `Vec<Vijand>` en test dat de groep het juiste aantal vijanden bevat.
-
----
-
-### `13_aoe_test.rs`
-
-Test dat een AoE-aanval alle vijanden raakt.
-
-Controleer de gezondheid van iedere vijand.
-
----
-
-### `14_boundary_test.rs`
-
-Test de grenswaarden:
-
-```text id="d6k9se"
-1 gezondheid
-0 gezondheid
-```
-
----
-
-### `15_debug_test.rs`
-
-Hier zit expres een fout in de test:
-
-```rust,ignore
-#[test]
-fn schade() {
-    assert_eq!(bereken_schade(10, 5), 20);
-}
-```
-
-De functie geeft volgens de bestaande regels iets anders terug.
-
-Gebruik de testuitvoer om te ontdekken wat er aan de hand is.
-
----
-
-### `16_fix_bug.rs`
-
-De test klopt.
-
-De functie bevat een bug.
-
-Gebruik `cargo test` om de bug te vinden en pas vervolgens de functie aan.
-
----
-
-### `17_regression.rs`
-
-Maak eerst een functie en een test.
-
-Verander daarna de functie bewust zodat de test faalt.
-
-Herstel de functie.
-
-Het doel is ervaren hoe een test voorkomt dat een oude functionaliteit per ongeluk kapotgaat.
-
----
-
-### `18_game_tests.rs`
-
-Maak een kleine RPG-testset.
-
-Test minimaal:
-
-- schade
-- genezing
-- leven/dood
-- AoE-schade.
-
----
-
-## 24. Eindopdracht — Test je RPG
+## 23. Eindopdracht — Test je RPG
 
 Maak een klein RPG-programma met:
 
@@ -1042,7 +836,7 @@ Herstel daarna de test of de code.
 
 ---
 
-## 25. Een belangrijke nieuwe manier van werken
+## 24. Een belangrijke nieuwe manier van werken
 
 Tot nu toe was onze werkwijze vaak:
 
@@ -1078,7 +872,7 @@ Een test kan je helpen bepalen wat je programma eigenlijk moet doen.
 
 ---
 
-## 26. Wat moet je onthouden?
+## 25. Wat moet je onthouden?
 
 Een test begint met:
 
@@ -1128,3 +922,14 @@ Een test vertelt ons of onze code doet wat wij verwachten.
 
 Maak daarna de oefeningen uit de [Rustlings-map van Artikel 17](https://github.com/keitv-codecraft/keitv-rust-basis-rustlings/tree/master/exercises/artikel_17/).
 
+---
+
+## Controlelijst
+
+Je bent klaar met dit artikel als je zonder hulp:
+
+- [ ] weet wat een testfunctie is en hoe je die markeert met `#[test]`
+- [ ] beweringen kunt doen met `assert_eq!`, `assert_ne!` en `assert!`
+- [ ] tests kunt uitvoeren met `cargo test` in de terminal
+- [ ] begrijpt hoe je tests structureert met `#[cfg(test)]` en `use super::*;`
+- [ ] een falende test kunt analyseren en de bijbehorende fout kunt oplossen.

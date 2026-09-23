@@ -1,23 +1,16 @@
-﻿# Rust 34 — De wereld verkennen: locaties, ontmoetingen, XP en beloningen
+﻿# 34. Ontmoetingen en beloningen
 
-In de vorige artikelen hebben we steeds grotere onderdelen van ons RPG gebouwd. We hebben onder andere spelers, vijanden, wapens, inventarissen en gevechten gemaakt.
+## Wat gaan we leren?
 
-Tot nu toe gebeurde er echter nog weinig **buiten het gevecht**.
+In dit artikel breiden we de spelwereld uit met ontmoetingen, beloningen, ervaringspunten (XP) en level-ups.
 
-Een RPG bestaat natuurlijk uit meer dan alleen vechten. De speler moet bijvoorbeeld:
+We leren:
 
-- door een wereld kunnen reizen
-- verschillende plaatsen kunnen bezoeken
-- vijanden tegenkomen
-- gevechten winnen
-- ervaring krijgen
-- sterker worden
-- voorwerpen vinden
-- beslissingen nemen.
-
-In dit artikel gaan we daarom een klein stuk van die wereld bouwen.
-
-We gebruiken daarbij vooral dingen die we al kennen. Het doel is niet om veel nieuwe Rust-syntax te leren, maar om te ervaren hoe bekende onderdelen samen een groter programma vormen.
+- een wereld van meerdere locaties modelleren en doorzoeken
+- ervaringspunten en goud toekennen na het verslaan van een vijand
+- een levelsysteem ontwerpen waarmee de speler sterker wordt bij een level-up
+- buit (loot) toevoegen aan de inventaris van de speler
+- verslagen vijanden netjes opruimen uit de spellocatie.
 
 ---
 
@@ -1609,286 +1602,7 @@ Het doel is om bestaande onderdelen goed met elkaar te verbinden.
 
 ---
 
-## 38. Rustlings
-
-Maak:
-
-```text
-exercises/wereld/
-```
-
-Gebruik daarin de volgende opgaven.
-
-## Locaties
-
-### `01_locatie.rs`
-
-Maak een `Locatie` met naam en beschrijving.
-
-### `02_locatie_nieuw.rs`
-
-Schrijf:
-
-```rust,ignore
-Locatie::nieuw(...)
-```
-
-### `03_locatie_tonen.rs`
-
-Schrijf een methode `toon`.
-
-### `04_veilige_locatie.rs`
-
-Maak een locatie met:
-
-```rust,ignore
-vijand: None
-```
-
-### `05_locatie_vijand.rs`
-
-Maak een locatie met:
-
-```rust,ignore
-vijand: Some(...)
-```
-
----
-
-## Option en borrowing
-
-### `06_option_match.rs`
-
-Gebruik `match` om een mogelijke vijand te tonen.
-
-### `07_option_if_let.rs`
-
-Doe hetzelfde met `if let`.
-
-### `08_borrow_vijand.rs`
-
-Bekijk een vijand zonder ownership over te nemen.
-
-### `09_mut_vijand.rs`
-
-Wijzig de gezondheid van een vijand via een mutable reference.
-
-### `10_verwijder_vijand.rs`
-
-Verwijder een verslagen vijand door:
-
-```rust,ignore
-None
-```
-
-te gebruiken.
-
----
-
-## Wereld
-
-### `11_vec_locaties.rs`
-
-Maak een `Vec<Locatie>` met drie locaties.
-
-### `12_loop_locaties.rs`
-
-Toon alle locaties met een `for`-loop.
-
-### `13_vind_locatie.rs`
-
-Gebruik:
-
-```rust,ignore
-iter()
-find()
-```
-
-om een locatie te zoeken.
-
-### `14_vind_onbekende_locatie.rs`
-
-Zorg dat een onbekende locatie `None` oplevert.
-
-### `15_locatie_naam.rs`
-
-Gebruik een closure om op de naam van een locatie te zoeken.
-
----
-
-## XP en levels
-
-### `16_ervaring.rs`
-
-Voeg ervaring toe aan een speler.
-
-### `17_ervaring_test.rs`
-
-Schrijf tests voor ervaring.
-
-### `18_level.rs`
-
-Bereken het level op basis van ervaring.
-
-### `19_level_grens.rs`
-
-Test de grenzen:
-
-```text
-99
-100
-199
-200
-```
-
-### `20_meerdere_levels.rs`
-
-Laat een speler meerdere levels stijgen.
-
----
-
-## Beloningen
-
-### `21_goud.rs`
-
-Voeg goud toe aan een speler.
-
-### `22_goud_beloning.rs`
-
-Geef de speler het goud van een vijand.
-
-### `23_buit.rs`
-
-Maak de struct `Buit`.
-
-### `24_vijand_buit.rs`
-
-Geef een vijand een `Vec<Buit>`.
-
-### `25_verzamel_buit.rs`
-
-Voeg alle buit toe aan de inventaris.
-
----
-
-## Combineren
-
-### `26_ontmoeting.rs`
-
-Maak een functie voor een ontmoeting met een vijand.
-
-### `27_gevecht_beloning.rs`
-
-Geef XP en goud na een gewonnen gevecht.
-
-### `28_level_na_gevecht.rs`
-
-Controleer het level na een gewonnen gevecht.
-
-### `29_locatie_bezoeken.rs`
-
-Combineer locatie, vijand en gevecht.
-
-### `30_verslagen_vijand.rs`
-
-Zorg dat een verslagen vijand uit de locatie verdwijnt.
-
----
-
-## Verbindingen
-
-### `31_buren.rs`
-
-Voeg `buren: Vec<String>` toe aan `Locatie`.
-
-### `32_verbonden.rs`
-
-Controleer of een locatie verbonden is.
-
-### `33_reizen.rs`
-
-Maak een functie waarmee de speler naar een verbonden locatie kan reizen.
-
-### `34_ongeldige_reis.rs`
-
-Een speler mag niet naar een niet-verbonden locatie reizen.
-
----
-
-## Debug-opgaven
-
-### `35_debug_borrow.rs`
-
-De code probeert een locatie te wijzigen terwijl een deel ervan nog geleend wordt.
-
-Laat de compilerfout zien.
-
-Los daarna het probleem op door de scope van de borrow goed te gebruiken.
-
-### `36_debug_move.rs`
-
-Een `String` wordt per ongeluk verplaatst voordat hij opnieuw gebruikt wordt.
-
-Gebruik borrowing of `clone()` om het probleem op te lossen.
-
-### `37_debug_mut.rs`
-
-Een functie moet een speler wijzigen, maar ontvangt alleen een immutable reference.
-
-Maak de reference mutable.
-
-### `38_debug_option.rs`
-
-De code probeert rechtstreeks een waarde uit een `Option` te gebruiken.
-
-Gebruik `match` of `if let`.
-
-### `39_debug_find.rs`
-
-Een functie zoekt een locatie met `find`, maar probeert een gewone `Locatie` terug te geven.
-
-Maak de returnwaarde passend bij `find`.
-
----
-
-## Eindopgave
-
-### `40_final_wereld.rs`
-
-Maak een kleine speelbare wereld.
-
-De speler moet:
-
-- vijf locaties hebben
-- tussen verbonden locaties kunnen reizen
-- minstens drie vijanden kunnen tegenkomen
-- gevechten kunnen voeren
-- XP ontvangen
-- levels kunnen stijgen
-- goud ontvangen
-- buit verzamelen
-- verslagen vijanden niet opnieuw tegenkomen.
-
-Schrijf daarnaast minimaal vijf tests.
-
-Test bijvoorbeeld:
-
-```text
-Een locatie zonder vijand.
-Een locatie met een vijand.
-Een bestaande locatie zoeken.
-Een onbekende locatie zoeken.
-XP toevoegen.
-Een level omhoog gaan.
-Goud ontvangen.
-Buit verzamelen.
-Een vijand verwijderen na winst.
-Niet naar een onbereikbare locatie kunnen reizen.
-```
-
----
-
-## 40. Extra uitdaging
+## 38. Extra uitdaging
 
 Als de basis werkt, kun je zelf uitbreidingen bedenken.
 
@@ -1935,7 +1649,7 @@ Laat de speler met het verdiende goud naar de winkel gaan.
 
 ---
 
-## 41. Wat je hier eigenlijk geleerd hebt
+## 39. Wat je hier eigenlijk geleerd hebt
 
 Dit artikel introduceerde bewust weinig nieuwe Rust.
 
@@ -2000,3 +1714,13 @@ De volgende stap is om die kennis steeds zelfstandiger te gaan combineren.
 
 Maak daarna de oefeningen uit de [Rustlings-map van Artikel 34](https://github.com/keitv-codecraft/keitv-rust-basis-rustlings/tree/master/exercises/artikel_34/).
 
+---
+
+## Controlelijst
+
+Je bent klaar met dit artikel als je zonder hulp:
+
+- [ ] ervaringspunten (XP) en goud kunt toekennen na een gewonnen gevecht
+- [ ] een level-up mechanisme kunt programmeren met verhoogde statistieken
+- [ ] buit (loot) vanuit een verslagen vijand aan de inventaris kunt toevoegen
+- [ ] verslagen vijanden veilig kunt verwijderen met behulp van `Option::take()` of vergelijkbare patronen.

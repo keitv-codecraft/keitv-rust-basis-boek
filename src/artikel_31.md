@@ -1,26 +1,16 @@
-﻿# Rust 31 — De wereld verkennen
+﻿# 31. De spelwereld
 
-Tot nu toe hebben we vooral gebouwd aan de **onderdelen van onze RPG**: spelers, vijanden, wapens, inventaris en winkels.
+## Wat gaan we leren?
 
-Nu gaan we deze onderdelen gebruiken om iets nieuws te bouwen: **een wereld waarin de speler kan rondlopen**.
+In dit artikel bouwen we een spelwereld met verbonden locaties waarin de speler kan rondreizen en vijanden kan tegenkomen.
 
-De speler krijgt verschillende locaties om te bezoeken. Op sommige locaties vindt hij een vijand, op andere een winkel of een gebeurtenis. De speler moet keuzes kunnen maken en de wereld moet kunnen reageren op die keuzes.
+We leren:
 
-We gaan daarbij veel gebruiken wat we al kennen:
-
-- `struct`
-- `enum`
-- `Vec`
-- `Option`
-- `match`
-- functies en methodes
-- `for`-lussen
-- iterators
-- `Result`
-- modules
-- ownership en borrowing
-
-We voegen dus niet zomaar nieuwe Rust-syntax toe. We gaan vooral leren hoe we bestaande onderdelen samenbrengen tot een groter programma.
+- een `Locatie` struct ontwerpen met een naam, beschrijving en verbindingen
+- een `Wereld` beheren met een verzameling locaties in een `Vec`
+- reizen tussen locaties met veilige foutafhandeling via `Option` en `Result`
+- locaties voorzien van optionele vijanden (`Option<Vijand>`)
+- een verkenningslus koppelen aan de spelersinvoer.
 
 ---
 
@@ -1130,123 +1120,7 @@ Het is het resultaat van het combineren van de concepten die we al hebben geleer
 
 ---
 
-## 27. Rustlings — De wereld
-
-Maak:
-
-```text
-exercises/wereld/
-```
-
-Gebruik daar de volgende oefeningen.
-
-### Basis
-
-1. `01_locatie.rs`  
-   Maak een `Locatie` struct.
-
-2. `02_locatie_nieuw.rs`  
-   Maak een constructor `nieuw`.
-
-3. `03_locatie_toon.rs`  
-   Voeg een `toon`-methode toe.
-
-4. `04_locatie_type.rs`  
-   Maak `LocatieType`.
-
-5. `05_match_locatie.rs`  
-   Gebruik `match` op `LocatieType`.
-
-### Wereld
-
-6. `06_wereld_vec.rs`  
-   Maak een `Vec<Locatie>`.
-
-7. `07_wereld_tonen.rs`  
-   Toon alle locaties met een `for`-lus.
-
-8. `08_find_locatie.rs`  
-   Zoek een locatie met `iter().find()`.
-
-9. `09_find_none.rs`  
-   Handel een ontbrekende locatie af met `Option`.
-
-10. `10_verbindingen.rs`  
-    Voeg verbindingen toe aan een locatie.
-
-11. `11_any_verbinding.rs`  
-    Gebruik `any()` om te controleren of een verbinding bestaat.
-
-### Speler en wereld
-
-12. `12_huidige_locatie.rs`  
-    Voeg een huidige locatie toe aan `Speler`.
-
-13. `13_verplaats.rs`  
-    Laat de speler van locatie veranderen.
-
-14. `14_verplaats_controle.rs`  
-    Controleer of de bestemming bereikbaar is.
-
-15. `15_verplaats_result.rs`  
-    Laat verplaatsen `Result<(), String>` teruggeven.
-
-16. `16_ok_or.rs`  
-    Zet een `Option` om naar een `Result` met `ok_or`.
-
-### Ontmoetingen
-
-17. `17_vijand_option.rs`  
-    Voeg `Option<Vijand>` toe aan een locatie.
-
-18. `18_vijand_bekijken.rs`  
-    Bekijk een aanwezige vijand zonder ownership over te nemen.
-
-19. `19_vijand_take.rs`  
-    Gebruik `take()` om een vijand uit een locatie te halen.
-
-20. `20_take_mut.rs`  
-    Los een compilerfout op doordat een locatie niet mutable is.
-
-### Willekeurige gebeurtenissen
-
-21. `21_ontmoeting_enum.rs`  
-    Maak een `Ontmoeting` enum.
-
-22. `22_willekeurige_ontmoeting.rs`  
-    Maak een willekeurige ontmoeting met `rand`.
-
-23. `23_match_ontmoeting.rs`  
-    Reageer met `match` op een ontmoeting.
-
-24. `24_test_ontmoeting.rs`  
-    Test functies die een ontmoeting verwerken.
-
-### Invoer
-
-25. `25_lees_tekst.rs`  
-    Lees een regel van de gebruiker.
-
-26. `26_trim.rs`  
-    Verwijder witruimte met `trim()`.
-
-27. `27_parse_keuze.rs`  
-    Zet invoer om naar `u32`.
-
-28. `28_parse_fout.rs`  
-    Laat expres een invoerfout ontstaan en onderzoek de `Result`.
-
-### Integratie
-
-29. `29_reis.rs`  
-    Maak een klein programma waarin de speler tussen twee locaties kan reizen.
-
-30. `30_final_wereld.rs`  
-    Bouw een kleine speelbare wereld.
-
----
-
-## 28. Opzettelijke compilerfouten
+## 27. Opzettelijke compilerfouten
 
 Bij enkele oefeningen moet de code expres niet compileren.
 
@@ -1282,7 +1156,7 @@ Ze leren je juist wat Rust van je programma verwacht.
 
 ---
 
-## 29. Zelfstandig project
+## 28. Zelfstandig project
 
 Maak een kleine wereld met minimaal vijf locaties.
 
@@ -1320,7 +1194,7 @@ De speler moet:
 
 ---
 
-## 30. Eindopdracht — De eerste speelbare wereld
+## 29. Eindopdracht — De eerste speelbare wereld
 
 Bouw nu een eerste versie van de RPG waarin de speler daadwerkelijk kan spelen.
 
@@ -1399,7 +1273,7 @@ Schrijf minimaal tests voor:
 
 ---
 
-## Wat je hiermee hebt geleerd
+## 30. Wat je hiermee hebt geleerd
 
 In dit hoofdstuk hebben we vooral geleerd hoe bestaande Rust-onderdelen samenkomen in een groter programma.
 
@@ -1451,3 +1325,13 @@ De volgende stap is daarom niet simpelweg nóg een Rust-concept, maar het **uitw
 
 Maak daarna de oefeningen uit de [Rustlings-map van Artikel 31](https://github.com/keitv-codecraft/keitv-rust-basis-rustlings/tree/master/exercises/artikel_31/).
 
+---
+
+## Controlelijst
+
+Je bent klaar met dit artikel als je zonder hulp:
+
+- [ ] een `Locatie` struct kunt maken met eigenschappen en verbindingen
+- [ ] locaties kunt doorzoeken met iterators zoals `find()`
+- [ ] de speler veilig kunt laten reizen naar geldige bestemmingen
+- [ ] een locatie kunt inspecteren op de aanwezigheid van vijanden en interactie kunt starten.

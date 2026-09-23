@@ -1,6 +1,6 @@
-﻿# Rust 11 — `impl`-blokken en methods
+﻿# 11. Impl-blokken en methods
 
-## 1. Wat gaan we leren?
+## Wat gaan we leren?
 
 In het vorige artikel leerden we **structs** gebruiken om gegevens bij elkaar te bewaren.
 
@@ -42,7 +42,7 @@ Na dit artikel kun je:
 
 ---
 
-## 2. Waarom hebben we dit nodig?
+## 1. Waarom hebben we dit nodig?
 
 Stel dat we een speler hebben:
 
@@ -110,7 +110,7 @@ Dat leest veel meer alsof we tegen de speler zeggen:
 
 ---
 
-## 3. Het eenvoudigste voorbeeld
+## 2. Het eenvoudigste voorbeeld
 
 We beginnen met een heel eenvoudige struct:
 
@@ -176,7 +176,7 @@ De punt `.` betekent hier:
 
 ---
 
-## 4. Wat betekent `&self`?
+## 3. Wat betekent `&self`?
 
 Dit is waarschijnlijk het belangrijkste nieuwe onderdeel.
 
@@ -228,11 +228,11 @@ Omdat we de speler alleen willen bekijken en niet aanpassen, gebruiken we:
 
 ---
 
-## 5. `&self`, `&mut self` en `self`
+## 4. `&self`, `&mut self` en `self`
 
 Er zijn drie belangrijke varianten.
 
-## `&self`
+### `&self`
 
 We willen de struct alleen bekijken.
 
@@ -246,7 +246,7 @@ De eigenaar blijft gewoon eigenaar.
 
 ---
 
-## `&mut self`
+### `&mut self`
 
 We willen de struct veranderen.
 
@@ -284,7 +284,7 @@ Omdat `neem_schade` de speler verandert.
 
 ---
 
-## `self`
+### `self`
 
 Je kunt ook schrijven:
 
@@ -323,7 +323,7 @@ Voorlopig zul je vooral deze twee gebruiken:
 
 ---
 
-## 6. Methods die iets teruggeven
+## 5. Methods die iets teruggeven
 
 Een method hoeft niet alleen iets te printen.
 
@@ -373,7 +373,7 @@ Beide kunnen hetzelfde doen. De eerste vorm maakt duidelijk dat `is_levend` een 
 
 ---
 
-## 7. Methods met parameters
+## 6. Methods met parameters
 
 Een method kan natuurlijk ook extra informatie krijgen.
 
@@ -411,7 +411,7 @@ wordt `25` de waarde van `schade`.
 
 ---
 
-## 8. Een complete speler
+## 7. Een complete speler
 
 We kunnen nu een iets uitgebreidere `Speler` maken:
 
@@ -480,7 +480,7 @@ Dit begint al behoorlijk op echte gamecode te lijken.
 
 ---
 
-## 9. Waarom is dit beter dan losse functies?
+## 8. Waarom is dit beter dan losse functies?
 
 Vergelijk:
 
@@ -536,7 +536,7 @@ impl Wapen {
 
 ---
 
-## 10. Een gamevoorbeeld
+## 9. Een gamevoorbeeld
 
 We maken een eenvoudige RPG-strijd.
 
@@ -633,7 +633,7 @@ Dit is precies de borrowing die we in het vorige artikel hebben geleerd.
 
 ---
 
-## 11. Methods kunnen ook andere structs gebruiken
+## 10. Methods kunnen ook andere structs gebruiken
 
 Dit is een belangrijk inzicht.
 
@@ -675,7 +675,7 @@ Later zullen we deze systemen steeds verder uitbreiden.
 
 ---
 
-## 12. Een method die een waarde berekent
+## 11. Een method die een waarde berekent
 
 Methods zijn ook handig voor berekeningen.
 
@@ -721,7 +721,7 @@ en geeft vervolgens een waarde terug.
 
 ---
 
-## 13. Methods en `mut`
+## 12. Methods en `mut`
 
 Een veelgemaakte fout is vergeten dat een method de struct verandert.
 
@@ -775,7 +775,7 @@ Dan moet de instantie ook veranderbaar zijn.
 
 ---
 
-## 14. Meerdere `impl`-blokken
+## 13. Meerdere `impl`-blokken
 
 Je kunt meerdere `impl`-blokken voor hetzelfde type hebben:
 
@@ -813,7 +813,7 @@ Meerdere blokken kunnen later nuttig worden wanneer een project groter wordt.
 
 ---
 
-## 15. Gewone functie of method?
+## 14. Gewone functie of method?
 
 Een gewone functie:
 
@@ -864,7 +864,7 @@ We leren later nog uitgebreidere manieren om gedrag aan types te koppelen.
 
 ---
 
-## 16. Veelgemaakte fouten
+## 15. Veelgemaakte fouten
 
 ### Fout 1 — `self` vergeten
 
@@ -950,11 +950,11 @@ De method verwacht immers nog een parameter.
 
 ---
 
-## 17. Zelf proberen
+## 16. Zelf proberen
 
 Probeer de volgende opdrachten eerst zelf te maken.
 
-## Opdracht 1 — Hallo
+### Opdracht 1 — Hallo
 
 Maak:
 
@@ -978,7 +978,7 @@ Hallo, ik ben Arin!
 
 ---
 
-## Opdracht 2 — Gezondheid
+### Opdracht 2 — Gezondheid
 
 Maak:
 
@@ -998,7 +998,7 @@ die de gezondheid afdrukt.
 
 ---
 
-## Opdracht 3 — Schade
+### Opdracht 3 — Schade
 
 Voeg een method toe:
 
@@ -1010,7 +1010,7 @@ De gezondheid moet worden verminderd.
 
 ---
 
-## Opdracht 4 — Genezen
+### Opdracht 4 — Genezen
 
 Voeg toe:
 
@@ -1022,7 +1022,7 @@ Hiermee wordt de gezondheid verhoogd.
 
 ---
 
-## Opdracht 5 — Levend?
+### Opdracht 5 — Levend?
 
 Maak:
 
@@ -1042,7 +1042,7 @@ if speler.is_levend() {
 
 ---
 
-## Opdracht 6 — Goud
+### Opdracht 6 — Goud
 
 Voeg een veld toe:
 
@@ -1058,7 +1058,7 @@ verdien_goud(hoeveelheid)
 
 ---
 
-## Opdracht 7 — Vijand
+### Opdracht 7 — Vijand
 
 Maak een struct:
 
@@ -1077,7 +1077,7 @@ is_levend()
 
 ---
 
-## Opdracht 8 — Aanvallen
+### Opdracht 8 — Aanvallen
 
 Laat `Speler` een method krijgen:
 
@@ -1089,214 +1089,7 @@ De aanval moet de gezondheid van de vijand verminderen.
 
 ---
 
-## 18. Rustlings-opgaven
-
-Deze oefeningen horen bij dit artikel:
-
-```text
-exercises/
-└── impl/
-    ├── 01_first_method.rs
-    ├── 02_self.rs
-    ├── 03_show_health.rs
-    ├── 04_damage.rs
-    ├── 05_heal.rs
-    ├── 06_is_alive.rs
-    ├── 07_add_gold.rs
-    ├── 08_return_value.rs
-    ├── 09_multiple_methods.rs
-    ├── 10_enemy.rs
-    ├── 11_attack.rs
-    ├── 12_weapon.rs
-    ├── 13_debug_self.rs
-    ├── 14_debug_mut_self.rs
-    ├── 15_debug_mut_variable.rs
-    └── 16_game_character.rs
-```
-
-### ⭐ Niveau 1 — `self` leren kennen
-
-### 1. Eerste method
-
-Maak een `Speler` met een `zeg_hoi()` method.
-
-### 2. `&self`
-
-Maak een method die de naam van de speler afdrukt.
-
-### 3. Gezondheid
-
-Maak een `toon_gezondheid()` method.
-
-### 4. Returnwaarde
-
-Maak:
-
-```text
-is_levend()
-```
-
-die een `bool` teruggeeft.
-
-### 5. Meerdere methods
-
-Maak een speler met:
-
-```text
-toon_naam()
-toon_gezondheid()
-is_levend()
-```
-
----
-
-### ⭐⭐ Niveau 2 — veranderen met `&mut self`
-
-### 6. Schade
-
-Maak:
-
-```text
-neem_schade(10)
-```
-
-waardoor de gezondheid met 10 afneemt.
-
-### 7. Genezen
-
-Maak:
-
-```text
-genees(20)
-```
-
-waardoor de gezondheid met 20 toeneemt.
-
-### 8. Goud
-
-Maak:
-
-```text
-verdien_goud(50)
-```
-
-### 9. Wapen
-
-Maak:
-
-```rust,ignore
-struct Wapen {
-    naam: String,
-    schade: i32,
-}
-```
-
-Voeg een method toe die de informatie over het wapen afdrukt.
-
-### 10. Schade berekenen
-
-Maak:
-
-```text
-totale_schade(kracht)
-```
-
-die de schade van het wapen plus de kracht teruggeeft.
-
----
-
-### ⭐⭐⭐ Niveau 3 — gamegedrag
-
-### 11. Vijand
-
-Maak een `Vijand` met:
-
-```text
-naam
-gezondheid
-schade
-```
-
-Voeg `is_levend()` toe.
-
-### 12. Aanvallen
-
-Laat `Speler` een `Vijand` aanvallen:
-
-```text
-speler.aanval(&mut vijand)
-```
-
-### 13. Vijand valt terug aan
-
-Geef `Vijand` een method:
-
-```text
-aanval(&mut speler)
-```
-
-De vijand doet zijn eigen hoeveelheid schade.
-
-### 14. Debuggen
-
-Je krijgt een programma waarin:
-
-```rust,ignore
-fn neem_schade(&self, schade: i32)
-```
-
-staat, maar de functie probeert de gezondheid te veranderen.
-
-Zoek de fout.
-
-### 15. Debuggen
-
-Een speler wordt zo gemaakt:
-
-```rust,ignore
-let speler = Speler {
-    gezondheid: 100,
-};
-```
-
-Daarna wordt:
-
-```rust,ignore
-speler.neem_schade(20);
-```
-
-aangeroepen.
-
-Zoek uit waarom de compiler klaagt.
-
-### 16. Eindopdracht — karakter
-
-Maak een compleet karakter:
-
-```text
-Speler
-├── naam
-├── gezondheid
-├── goud
-└── schade
-```
-
-Maak minstens deze methods:
-
-```text
-toon_status()
-neem_schade()
-genees()
-verdien_goud()
-is_levend()
-aanval()
-```
-
-Maak daarna een kleine strijd tegen een vijand.
-
----
-
-## 19. Kleine eindopdracht — een gevecht
+## 17. Kleine eindopdracht — een gevecht
 
 Maak een programma waarin:
 
@@ -1320,43 +1113,19 @@ in plaats van losse code die rechtstreeks de velden van `vijand` aanpast.
 
 ---
 
-## 20. Wat moet je nu kunnen?
-
-Na dit artikel zou je moeten begrijpen:
-
-- [ ] wat een `impl`-blok is
-- [ ] hoe je een method maakt
-- [ ] wat `self` betekent
-- [ ] wat `&self` betekent
-- [ ] wat `&mut self` betekent
-- [ ] wanneer een method een `&mut self` nodig heeft
-- [ ] hoe je een method aanroept met `.`
-- [ ] hoe je parameters aan een method geeft
-- [ ] hoe je een waarde uit een method teruggeeft
-- [ ] hoe methods samenwerken met borrowing
-- [ ] waarom methods handig zijn voor gameobjecten.
-
-Het belangrijkste nieuwe patroon is:
-
-```rust,ignore
-impl Speler {
-    fn neem_schade(&mut self, schade: i32) {
-        self.gezondheid -= schade;
-    }
-}
-```
-
-waardoor je vervolgens kunt schrijven:
-
-```rust,ignore
-speler.neem_schade(20);
-```
-
-Je hebt hiermee een belangrijke stap gezet richting object-georiënteerde programmeerideeën, zonder dat Rust zelf traditionele classes gebruikt.
-
-In het volgende artikel kunnen we verdergaan met **enums**. Daarmee kunnen we bijvoorbeeld dingen modelleren als verschillende soorten wapens, speltoestanden of acties: `Zwaard`, `Boog`, `Magie`, enzovoort.
-
 ## Rustlings-oefeningen
 
 Maak daarna de oefeningen uit de [Rustlings-map van Artikel 11](https://github.com/keitv-codecraft/keitv-rust-basis-rustlings/tree/master/exercises/artikel_11/).
 
+---
+
+## Controlelijst
+
+Je bent klaar met dit artikel als je zonder hulp:
+
+- [ ] weet wat een method is en hoe een method verschilt van een gewone functie
+- [ ] een `impl`-blok kunt schrijven voor een struct
+- [ ] begrijpt wat `self`, `&self` en `&mut self` betekenen
+- [ ] methods met parameters en returnwaarden kunt schrijven
+- [ ] methods kunt aanroepen met de punt-notatie (`speler.neem_schade(...)`)
+- [ ] begrijpt waarom methods helpen om spelobjecten logisch te organiseren.
