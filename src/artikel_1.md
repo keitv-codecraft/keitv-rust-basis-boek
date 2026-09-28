@@ -514,7 +514,7 @@ De repository is ook te vinden op [github.com/keitv-codecraft/keitv-rust-basis-r
 Navigeer naar de KeiTV Rustlings map en start vanuit daar VsCodium en `rustlings`.
 
 ```bash
-cd C:\\projects\\keitv-rustlings
+cd C:\\projects\\keitv-rust-basis-rustlings
 codium .
 rustlings
 ```
