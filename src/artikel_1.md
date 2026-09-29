@@ -487,31 +487,17 @@ Aan het einde van ieder artikel vind je oefeningen. Probeer deze allemaal te doe
 
 Kom je er niet uit? Kijk dan terug of vraag om hulp.
 
-## Opzet
+Omdat dit de eerste keer is dat je oefeningen gaat doen moet je eerst Rust op je computer installeren. Volg de stappen in [dit artikel](./artikel_39.md) om je op weg te helpen.
 
-### Rustlings
+Niet alle Rustlings opgaven bevatten een fout die je moet corrigeren. Rustlings controleert alleen op fouten, dus deze opgaven worden standaard als opgelost gemarkeerd. Voer in dat geval zelf de opgave uit door code te schrijven. Wanneer je een foutje maakt zal rustlings je weer helpen om deze op te lossen.
 
-Voor de oefeningen gebruiken we [Rustlings](https://rustlings.rust-lang.org/). Als je dit nog niet gedaan hebt kun je het installeren met
+---
 
-```bash
-cargo install rustlings
-```
+## Tips
 
-### KeiTV Rustlings oefeningen
+### Rustlings opstarten
 
-Haal om te beginnen alle Rustlings opgaven op van alle artikelen. Dit hoef je dus ook maar één keer te doen.
-Navigeer eerst naar je projectmap en gebruik daarna `git` om de oefeningen naar een nieuwe map te downloaden.
-
-```bash
-cd C:\\projects
-git clone git@github.com:keitv-codecraft/keitv-rust-basis-rustlings.git
-```
-
-De repository is ook te vinden op [github.com/keitv-codecraft/keitv-rust-basis-rustlings](https://github.com/keitv-codecraft/keitv-rust-basis-rustlings).
-
-## Aan de slag met de oefeningen
-
-Navigeer naar de KeiTV Rustlings map en start vanuit daar VsCodium en `rustlings`.
+Navigeer naar de KeiTV Rustlings map en start vanuit daar zowel VsCodium als `rustlings`.
 
 ```bash
 cd C:\\projects\\keitv-rust-basis-rustlings
@@ -519,15 +505,67 @@ codium .
 rustlings
 ```
 
-Je kunt nu werken aan de oefeningen bij dit artikel, zoals je gewend bent van de standaard Rustlings oefeningen.
+Je kunt nu werken aan de oefeningen bij dit artikel [Rustlings-map van Artikel 1](https://github.com/keitv-codecraft/keitv-rust-basis-rustlings/tree/master/exercises/artikel_1/)
 
-Wanneer je aangekomen bent bij de eerste oefening van het volgende artikel kom je hier terug en lees je het volgende artikel. Zo ga je door tot alle artikelen zijn gedaan.
+### Terminal problemen oplossen
 
----
+Stel je ziet het volgende bij het uitvoeren van een commando:
 
-## Rustlings-oefeningen
+```powershell
+> ikbestaniet
+ikbestaniet : The term 'ikbestaniet' is not recognized as the name of a cmdlet, function, script file, or operable program.
+Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+At line:1 char:1
++ ikbestaniet
++ ~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (ikbestaniet:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+```
 
-Maak daarna de oefeningen uit de [Rustlings-map van Artikel 1](https://github.com/keitv-codecraft/keitv-rust-basis-rustlings/tree/master/exercises/artikel_1/).
+Dit betekent dat het commando, dat je probeert uit te voeren, niet bestaat. Kijk in de volgende lijst voor de oplossing.
+
+- `cargo` Heb je Rust goed geïnstalleerd? Kijk of je `rustup-init.exe` goed hebt uitgevoerd en Rust beschikbaar is voor alle gebruikers. Start eventueel Powershell opnieuw op om de omgeving te vernieuwen.
+- `rustlings` Heb je rustlings goed geïnstalleerd? Voer `cargo install rustlings` uit of start Powershell opnieuw op om de omgeving te vernieuwen.
+- `codium` Heb je VsCodium goed geïnstalleerd? Voor de installer opnieuw uit en controleer of VsCodium in het Start-menu staat.
+
+### Verkeerde map
+
+Stel je ziet het volgende bij het opstarten van Rustlings:
+
+```powershell
+> rustlings
+
+       Welcome to...
+                 _   _ _
+  _ __ _   _ ___| |_| (_)_ __   __ _ ___
+ | '__| | | / __| __| | | '_ \ / _` / __|
+ | |  | |_| \__ \ |_| | | | | | (_| \__ \
+ |_|   \__,_|___/\__|_|_|_| |_|\__, |___/
+                               |___/
+
+The `exercises/` directory couldn't be found in the current directory.
+If you are just starting with Rustlings, run the command `rustlings init` to initialize it.
+```
+
+Dit betekent dat je rustlings probeert uit te voeren vanuit de verkeerde plek. Ga eerst naar de map met de oefeningen en voer vanuit daar rustlings uit.
+
+```powershell
+cd C:\projects\keitv-rustlings
+rustlings
+```
+
+### VsCodium is leeg
+
+Wanneer je VsCodium start, dan open hij standaard de map die het laatst geopend had. Om de map met alle Rustlings opgaven te openen zijn er twee manieren:
+
+1. Start VsCodium vanuit de Rustlings map
+
+```powershell
+cd C:\projects\keitv-rustlings
+codium .
+```
+
+2. Open de map vanuit VsCodium. Ga naar **File** -> **Open Folder...**. Navigeer naar de `C:\projects\keitv-rustlings` map en klik op **Select folder**.
 
 ---
 
@@ -544,4 +582,3 @@ Je bent klaar met dit artikel als je zonder hulp:
 - [ ] zelf kleine veranderingen in een programma durft te maken.
 
 Als iets nog niet lukt, is dat geen probleem. Herhaal vooral de oefeningen waarbij je nog hulp nodig hebt.
-

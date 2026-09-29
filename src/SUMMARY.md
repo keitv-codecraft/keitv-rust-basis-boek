@@ -38,3 +38,4 @@
 - [Consolideren](./artikel_36.md)
 - [Refactoring](./artikel_37.md)
 - [Eindproject](./artikel_38.md)
+- [Rust installeren](./artikel_39.md)
